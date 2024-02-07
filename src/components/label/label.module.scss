@@ -1,0 +1,20 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  font-size: inherit;
+  font-family: inherit;
+  color: inherit;
+
+  > svg {
+    min-width: 1rem;
+    min-height: 1rem;
+  }
+
+  > .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
