@@ -1,0 +1,20 @@
+@import "~/styles/theme";
+
+.button {
+  appearance: none;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  gap: 0.25em;
+
+  padding: 0.3em 0.75em;
+  border-radius: map-get($borderRadii, "sm");
+  &.isIconOnly {
+    padding: 0.5em;
+    border-radius: 50%;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}

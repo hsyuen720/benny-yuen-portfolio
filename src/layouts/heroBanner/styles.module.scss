@@ -1,0 +1,30 @@
+@import "~/styles/theme";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75em;
+  font-size: map-get($fontSizes, "xl");
+  > * {
+    margin-block: 0;
+  }
+  > .greeting {
+    font-size: 1em;
+  }
+
+  > .introduction {
+    font-size: 1em * $goldenRatio;
+  }
+
+  > .briefDescription {
+    font-size: 1em;
+  }
+
+  > .socialMedia {
+    display: flex;
+    flex-direction: row;
+    gap: inherit;
+    font-size: 0.75em;
+  }
+}

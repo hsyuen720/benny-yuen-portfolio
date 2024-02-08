@@ -5,7 +5,7 @@ import { useEffect, type ReactNode } from "react";
 
 import useInView from "~/hooks/useInView";
 
-import styles from "./section.module.scss";
+import styles from "./styles.module.scss";
 
 export type SectionProps<T extends string = string> = {
   className?: string;

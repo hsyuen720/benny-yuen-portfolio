@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { createElement, type HTMLAttributes, type ComponentPropsWithoutRef } from "react";
 import type { IconType } from "react-icons";
 
-import styles from "./label.module.scss";
+import styles from "./styles.module.scss";
 
 export type LabelProps<T extends keyof JSX.IntrinsicElements> = {
   tag?: T;

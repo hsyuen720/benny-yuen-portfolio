@@ -1,0 +1,13 @@
+@import "~/styles/theme";
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  padding: 0 map-get($sectionPaddingHorizontal, "md");
+}
+
+@media (max-width: $breakpoint) {
+  .section {
+    padding: 0 map-get($sectionPaddingHorizontal, "sm");
+  }
+}

@@ -1,0 +1,58 @@
+@import "~/styles/theme";
+
+.container {
+  border-width: 0.25em;
+  border-style: solid;
+  border-color: black;
+  border-radius: map_get($borderRadii, "sm");
+  display: flex;
+  flex-direction: column;
+
+  > .header {
+    padding: 0.5em 0.75em;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 0.25em;
+    background-color: black;
+
+    > .dots {
+      display: flex;
+      gap: 0.5em;
+      > span {
+        margin: auto 0;
+        width: 0.75em;
+        height: 0.75em;
+        border-radius: 50%;
+        &:nth-of-type(1) {
+          background-color: #ed594a;
+        }
+        &:nth-of-type(2) {
+          background-color: #fdd800;
+        }
+        &:nth-of-type(3) {
+          background-color: #5ac05a;
+        }
+      }
+    }
+
+    > input {
+      border: 0.1em solid black;
+      border-radius: map-get($borderRadii, "md");
+      width: 70%;
+      margin: 0 auto;
+      outline: none;
+      line-height: 1.5;
+      font-family: inherit;
+      text-overflow: ellipsis;
+    }
+
+    > .setting {
+      cursor: default;
+    }
+  }
+
+  > .content {
+    flex: 1;
+  }
+}

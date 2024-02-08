@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Quantico } from "next/font/google";
-import "~/styles/global.scss";
+import "./global.scss";
 
 export const metadata: Metadata = {
   title: "Benny Yuen | Frontend Developer",
