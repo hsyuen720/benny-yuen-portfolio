@@ -1,0 +1,11 @@
+@import "~/styles/theme";
+
+.footer {
+  padding: 1em map-get($sectionPaddingHorizontal, "md");
+}
+
+@media (max-width: $breakpoint) {
+  .footer {
+    padding: 1em map-get($sectionPaddingHorizontal, "sm");
+  }
+}

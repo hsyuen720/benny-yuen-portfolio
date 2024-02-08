@@ -1,0 +1,20 @@
+@import "~/styles/theme";
+
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-size: map-get($fontSizes, "sm");
+  > .description {
+    opacity: 0.8;
+    font-size: 1em;
+  }
+  > .title {
+    margin-block: 0;
+    font-size: 1em * $goldenRatio;
+    text-transform: uppercase;
+    &::after {
+      content: ".";
+    }
+  }
+}

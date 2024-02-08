@@ -1,0 +1,12 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5em;
+  .content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5em;
+    margin: 2rem;
+  }
+}
