@@ -1,10 +1,8 @@
-"use client";
-
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import Button from "~/components/button";
-import Section from "~/components/section";
 import TypingWords from "~/components/typingWords";
+import Section from "~/layouts/section";
 import { PortfolioSections } from "~/settings/constants";
 
 import styles from "./styles.module.scss";

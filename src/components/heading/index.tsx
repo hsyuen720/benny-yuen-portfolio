@@ -9,7 +9,7 @@ export type SectionTitleProps = {
   description?: string;
 };
 
-const SectionTitle = (props: SectionTitleProps) => {
+const Heading = (props: SectionTitleProps) => {
   const { title, description } = props;
   return (
     <div className={styles.sectionTitle}>
@@ -18,4 +18,4 @@ const SectionTitle = (props: SectionTitleProps) => {
     </div>
   );
 };
-export default SectionTitle;
+export default Heading;

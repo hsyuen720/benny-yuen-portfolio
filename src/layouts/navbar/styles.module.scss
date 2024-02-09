@@ -8,8 +8,25 @@
   z-index: map-get($zIndices, "header");
   padding: 1em map-get($sectionPaddingHorizontal, "md");
 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   > .logo {
     cursor: pointer;
+  }
+
+  > .menu {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+
+    > .menuItem {
+      cursor: pointer;
+
+      &.active {
+        font-weight: bold;
+      }
+    }
   }
 }
 

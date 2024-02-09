@@ -1,0 +1,44 @@
+@import "~/styles/theme";
+
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.experienceItem {
+  display: grid;
+  grid-template-columns: 15em 1fr;
+  grid-template-areas: "period positions" "period descriptions";
+  gap: 1em;
+  overflow: hidden;
+  font-size: map-get($fontSizes, "md");
+
+  > .period {
+    grid-area: period;
+    font-size: 1em;
+    align-self: flex-start;
+    justify-self: flex-end;
+  }
+
+  > .positions {
+    grid-area: positions;
+    display: flex;
+    flex-direction: column;
+  }
+
+  > .descriptions {
+    grid-area: descriptions;
+
+    > .description {
+      text-align: justify;
+    }
+  }
+}
+
+@media (max-width: $breakpoint) {
+  .experienceItem {
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "positions period" "descriptions descriptions";
+  }
+}

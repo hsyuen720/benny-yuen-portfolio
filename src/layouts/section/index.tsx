@@ -3,20 +3,23 @@
 import clsx from "clsx";
 import { useEffect, type ReactNode } from "react";
 
+import useHome from "~/contexts/home/useHome";
 import useInView from "~/hooks/useInView";
+import { PortfolioSections } from "~/settings/constants";
+import type { ValueOf } from "~/utils/type";
 
 import styles from "./styles.module.scss";
 
-export type SectionProps<T extends string = string> = {
+export type SectionProps<T extends ValueOf<typeof PortfolioSections>> = {
   className?: string;
   id: T;
   children: ReactNode;
-  focus?: (id: T) => void;
 };
 
 const Section = <T extends string>(props: SectionProps<T>) => {
-  const { className, id, focus, children } = props;
+  const { className, id, children } = props;
   const { el, isInView } = useInView<HTMLElement>({ threshold: 0.5 });
+  const { focus } = useHome();
 
   useEffect(() => {
     if (isInView && focus) {

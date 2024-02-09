@@ -1,12 +1,43 @@
+@import "~/styles/theme";
+
 .about {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 0.5em;
-  .content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 0.5em;
-    margin: 2rem;
+
+  .browser {
+    > div:nth-of-type(2) {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0.5em;
+      margin: 2em;
+      font-size: map-get($fontSizes, "lg");
+
+      > .photo {
+        justify-self: center;
+      }
+
+      > .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: inherit;
+
+        > .introduction {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $breakpoint) {
+  .about {
+    .browser {
+      > div:nth-of-type(2) {
+        grid-template-columns: 1fr;
+        margin: 1em;
+      }
+    }
   }
 }

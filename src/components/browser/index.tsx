@@ -6,13 +6,12 @@ import styles from "./styles.module.scss";
 
 export type BrowserProps = {
   className?: string;
-  contentClassName?: string;
   title?: string;
   children: ReactNode;
 };
 
 const Browser = (props: BrowserProps) => {
-  const { className, contentClassName, title, children } = props;
+  const { className, title, children } = props;
 
   return (
     <div className={clsx(styles.container, className)}>
@@ -25,7 +24,7 @@ const Browser = (props: BrowserProps) => {
         <input type="text" value={title} readOnly />
         <FaEllipsisV className={styles.setting} />
       </div>
-      <div className={clsx(styles.content, contentClassName)}>{children}</div>
+      <div className={styles.content}>{children}</div>
     </div>
   );
 };

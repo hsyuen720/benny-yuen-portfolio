@@ -49,10 +49,12 @@
 
     > .setting {
       cursor: default;
+      color: white;
     }
   }
 
   > .content {
     flex: 1;
+    overflow: hidden;
   }
 }

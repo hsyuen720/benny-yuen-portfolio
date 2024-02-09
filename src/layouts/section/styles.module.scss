@@ -2,8 +2,10 @@
 
 .section {
   position: relative;
-  min-height: 100vh;
+  height: max(1000px, 100vh);
   padding: 0 map-get($sectionPaddingHorizontal, "md");
+
+  font-size: map-get($fontSizes, "md");
 }
 
 @media (max-width: $breakpoint) {
