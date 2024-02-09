@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Quantico } from "next/font/google";
+
 import "./global.scss";
 
 export const metadata: Metadata = {
@@ -12,13 +13,13 @@ const inter = Quantico({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang={"en"}>
       <body className={inter.className}>{children}</body>
     </html>
   );
