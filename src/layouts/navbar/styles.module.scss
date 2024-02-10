@@ -9,7 +9,7 @@
   z-index: map-get($zIndices, "header");
   padding: 1em map-get($sectionPaddingHorizontal, "md");
 
-  background-color: rgba($backgroundColor, 0.7);
+  background-color: rgba($primaryColor, 0.7);
   backdrop-filter: blur(10px);
 
   display: flex;
@@ -26,13 +26,12 @@
 
     > .menuItem {
       cursor: pointer;
-
+      @include transition("normal", "color");
       &.active {
-        font-weight: bold;
-        color: $fillColor;
+        color: $highlightColor;
       }
       &:hover {
-        color: $fillColor;
+        color: $highlightColor;
       }
     }
   }
@@ -41,5 +40,9 @@
 @media (max-width: $breakpoint) {
   .navbar {
     padding: 1em map-get($sectionPaddingHorizontal, "sm");
+
+    > .menu {
+      display: none;
+    }
   }
 }

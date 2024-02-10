@@ -3,8 +3,8 @@
 .about {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 0.5em;
-
   .browser {
     > div:nth-of-type(2) {
       display: grid;

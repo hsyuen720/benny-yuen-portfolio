@@ -1,4 +1,5 @@
 @import "~/styles/theme";
+@import "~/styles/colors";
 
 .button {
   appearance: none;
@@ -9,10 +10,17 @@
 
   padding: 0.3em 0.75em;
   border-radius: map-get($borderRadii, "sm");
+
   &.isIconOnly {
+    @include transition("slow", "background-color, color");
     padding: 0.5em;
     border-radius: 50%;
     background-color: transparent;
+
+    &:hover {
+      background-color: $highlightColor;
+      color: $primaryColor;
+    }
   }
 
   &:disabled {

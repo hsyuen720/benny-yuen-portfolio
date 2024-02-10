@@ -1,14 +1,18 @@
 {
-  "common": {},
+  "common": {
+    "test": ["test1", "test2"]
+  },
   "portfolio": {
     "title": "Benny Yuen | Frontend Developer",
+    "description": "Benny Yuen' Personal Website",
+
     "navigation": {
       "about": "About",
       "experience": "Experience",
       "projects": "Projects"
     },
     "footer": {
-      "copyright": "Copyright @{{year}} {{name}}. All rights reserved."
+      "copyright": "Copyright @{year} {name}. All rights reserved."
     }
   }
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import Browser from "~/components/browser";
+import Button from "~/components/button";
 import Heading from "~/components/heading";
 import Section from "~/layouts/section";
 import { AppTranslation, PortfolioSection } from "~/settings/constants";
@@ -29,6 +30,9 @@ const About = () => {
             <span>#React Native</span>
             <span>#NextJS</span>
             <span>#Remix</span>
+          </div>
+          <div>
+            <Button>Resume</Button>
           </div>
         </div>
       </Browser>

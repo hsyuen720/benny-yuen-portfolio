@@ -1,11 +1,17 @@
 @import "~/styles/theme";
+@import "~/styles/colors";
 
 .footer {
-  padding: 1em map-get($sectionPaddingHorizontal, "md");
+  padding: 1.25em map-get($sectionPaddingHorizontal, "md");
+  border-top: 0.25rem solid $highlightColor;
+  font-size: map-get($fontSizes, "sm");
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
 }
 
 @media (max-width: $breakpoint) {
   .footer {
-    padding: 1em map-get($sectionPaddingHorizontal, "sm");
+    padding: 1.25em map-get($sectionPaddingHorizontal, "sm");
   }
 }

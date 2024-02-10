@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Quantico } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
-import { Languages } from "~/settings/constants";
+import { AppTranslation, Languages } from "~/settings/constants";
 import type { ValueOf } from "~/utils/type";
 
 import "./global.scss";
@@ -11,10 +12,17 @@ export function generateStaticParams() {
   return Object.values(Languages).map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-  title: "Benny Yuen | Frontend Developer",
-  description: "Hello I am a Frontend Developer",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: ValueOf<typeof Languages> };
+}) {
+  const t = await getTranslations({ locale: params.locale, namespace: AppTranslation.Portfolio });
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
 
 const inter = Quantico({
   weight: ["400", "700"],
@@ -27,6 +35,7 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export default function RootLayout({ children, params }: RootLayoutProps) {
+  unstable_setRequestLocale(params.locale);
   const messages = useMessages();
   return (
     <html lang={params.locale}>

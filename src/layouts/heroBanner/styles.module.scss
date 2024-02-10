@@ -2,26 +2,34 @@
 @import "~/styles/colors";
 
 .container {
+  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
+
+  > .background {
+    opacity: 0.6;
+    filter: blur(2.5px) grayscale(40%);
+    object-fit: cover;
+    user-select: none;
+    z-index: -1;
+  }
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.75em;
-  font-size: map-get($fontSizes, "xl") !important;
   > * {
     margin-block: 0;
   }
   > .greeting {
-    font-size: 1em;
-    color: $fillColor;
+    font-size: 1.25em;
+    color: $highlightColor;
   }
 
   > .introduction {
-    font-size: 1em * $ratio;
+    font-size: 1.25em * $ratio;
   }
 
   > .briefDescription {
-    font-size: 1em;
-    text-align: justify;
+    font-size: 1.25em;
   }
 
   > .socialMedia {

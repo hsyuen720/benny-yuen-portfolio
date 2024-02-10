@@ -25,6 +25,22 @@ $ratio: 1.618;
 $breakpoint: 900px;
 
 $sectionPaddingHorizontal: (
-  sm: 1rem,
-  md: 6rem,
+  sm: 2rem,
+  md: 6.5rem,
 );
+
+@mixin transition($duration, $property) {
+  $durations: (
+    slowest: 500ms,
+    slower: 400ms,
+    slow: 300ms,
+    normal: 200ms,
+    fast: 150ms,
+    faster: 100ms,
+    fastest: 50ms,
+  );
+
+  transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+  transition-duration: map-get($durations, $duration);
+  transition-property: $property;
+}

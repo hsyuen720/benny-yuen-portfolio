@@ -1,9 +1,11 @@
 @import "~/styles/theme";
 
+$browserColor: #f1f1f1;
+
 .container {
   border-width: 0.25em;
   border-style: solid;
-  border-color: black;
+  border-color: $browserColor;
   border-radius: map_get($borderRadii, "sm");
   display: flex;
   flex-direction: column;
@@ -14,7 +16,7 @@
     grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 0.25em;
-    background-color: black;
+    background-color: $browserColor;
 
     > .dots {
       display: flex;
@@ -37,7 +39,7 @@
     }
 
     > input {
-      border: 0.1em solid black;
+      border: 0.1em solid $browserColor;
       border-radius: map-get($borderRadii, "md");
       width: 70%;
       margin: 0 auto;
@@ -49,7 +51,7 @@
 
     > .setting {
       cursor: default;
-      color: white;
+      color: black;
     }
   }
 
