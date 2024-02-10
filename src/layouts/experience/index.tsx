@@ -1,7 +1,7 @@
 import Heading from "~/components/heading";
 import ExperienceItem from "~/layouts/experience/experienceItem";
 import Section from "~/layouts/section";
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 
 import styles from "./styles.module.scss";
 
@@ -31,7 +31,7 @@ const experiences = [
 
 const Experience = () => {
   return (
-    <Section id={PortfolioSections.Experience} className={styles.experience}>
+    <Section id={PortfolioSection.Experience} className={styles.experience}>
       <Heading title="Experience" description="I started for journey for 5 years 🤓" />
       <div>
         {experiences.map((experience, index) => (

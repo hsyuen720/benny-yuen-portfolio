@@ -3,14 +3,14 @@ import Image from "next/image";
 import Browser from "~/components/browser";
 import Heading from "~/components/heading";
 import Section from "~/layouts/section";
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 
 import image from "./benny.jpeg";
 import styles from "./styles.module.scss";
 
 const About = () => {
   return (
-    <Section id={PortfolioSections.About} className={styles.about}>
+    <Section id={PortfolioSection.About} className={styles.about}>
       <Heading title="About" description="A bit about me" />
       <Browser className={styles.browser} title="Benny Yuen| Frontend Developer">
         <Image className={styles.photo} src={image} alt="Benny Yuen" width={300} height={500} />

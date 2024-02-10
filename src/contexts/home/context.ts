@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
-import type { PortfolioSections } from "~/settings/constants";
+import type { PortfolioSection } from "~/settings/constants";
 import type { ValueOf } from "~/utils/type";
 
-export interface HomeContextValue<T = ValueOf<typeof PortfolioSections>> {
+export interface HomeContextValue<T = ValueOf<typeof PortfolioSection>> {
   currentView: T;
   focus(view: T): void;
   scroll(target: T): void;

@@ -3,13 +3,13 @@ import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import Button from "~/components/button";
 import TypingWords from "~/components/typingWords";
 import Section from "~/layouts/section";
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 
 import styles from "./styles.module.scss";
 
 const HeroBanner = () => {
   return (
-    <Section id={PortfolioSections.HeroBanner} className={styles.container}>
+    <Section id={PortfolioSection.HeroBanner} className={styles.container}>
       <h2 className={styles.greeting}>HELLO👋. I am Benny!</h2>
       <h1 className={styles.introduction}>
         I am a <TypingWords words={["Frontend Developer!", "Mobile Developer!"]} />

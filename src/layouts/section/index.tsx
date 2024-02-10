@@ -5,12 +5,12 @@ import { useEffect, type ReactNode } from "react";
 
 import useHome from "~/contexts/home/useHome";
 import useInView from "~/hooks/useInView";
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 import type { ValueOf } from "~/utils/type";
 
 import styles from "./styles.module.scss";
 
-export type SectionProps<T extends ValueOf<typeof PortfolioSections>> = {
+export type SectionProps<T extends ValueOf<typeof PortfolioSection>> = {
   className?: string;
   id: T;
   children: ReactNode;

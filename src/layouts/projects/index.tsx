@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import Heading from "~/components/heading";
 import Section from "~/layouts/section";
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 
 import styles from "./styles.module.scss";
 import testImage from "../about/benny.jpeg";
@@ -31,7 +31,7 @@ const projects = [
 
 const Projects = () => {
   return (
-    <Section id={PortfolioSections.Projects} className={styles.projects}>
+    <Section id={PortfolioSection.Projects} className={styles.projects}>
       <Heading title="Projects" description="I am fine" />
       <div className={styles.content}>
         {projects.map((project, index) => (

@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 
-import { PortfolioSections } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 import type { WrapperProps } from "~/utils/type";
 
 import { type HomeContextValue, HomeContext } from "./context";
@@ -10,7 +10,7 @@ import { type HomeContextValue, HomeContext } from "./context";
 const HomeProvider = (props: WrapperProps) => {
   const { children } = props;
   const [currentView, setCurrentView] = useState<HomeContextValue["currentView"]>(
-    PortfolioSections.HeroBanner,
+    PortfolioSection.HeroBanner,
   );
 
   const focus = useCallback<HomeContextValue["focus"]>((view) => setCurrentView(view), []);
