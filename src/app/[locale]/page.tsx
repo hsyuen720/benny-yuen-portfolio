@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+
 import HomeProvider from "~/contexts/home/provider";
 import About from "~/layouts/about";
 import Experience from "~/layouts/experience";
@@ -7,6 +9,7 @@ import Navbar from "~/layouts/navbar";
 import Projects from "~/layouts/projects";
 
 const Home = () => {
+  const t = useTranslations("common");
   return (
     <HomeProvider>
       <Navbar />

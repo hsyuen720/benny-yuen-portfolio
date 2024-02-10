@@ -1,19 +1,20 @@
 "use client";
 
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 import Label from "~/components/label";
 import Logo from "~/components/logo";
-import { PortfolioSection } from "~/settings/constants";
+import useHome from "~/contexts/home/useHome";
+import { AppTranslation, PortfolioSection } from "~/settings/constants";
 
 import styles from "./styles.module.scss";
-
-import useHome from "~/contexts/home/useHome";
 
 const menuItems = [PortfolioSection.About, PortfolioSection.Experience, PortfolioSection.Projects];
 
 const Navbar = () => {
   const { scroll, currentView } = useHome();
+  const t = useTranslations(AppTranslation.Portfolio);
   return (
     <header id="navbar" className={styles.navbar}>
       <Logo className={styles.logo} onClick={() => scroll(PortfolioSection.HeroBanner)} />
@@ -21,7 +22,7 @@ const Navbar = () => {
         {menuItems.map((item) => (
           <Label
             className={clsx(styles.menuItem, { [styles.active]: currentView === item })}
-            title={item}
+            title={t(`navigation.${item}`)}
             key={item}
             onClick={() => scroll(item)}
           />

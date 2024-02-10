@@ -1,0 +1,14 @@
+{
+  "common": {},
+  "portfolio": {
+    "title": "Benny Yuen | Frontend Developer",
+    "navigation": {
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects"
+    },
+    "footer": {
+      "copyright": "Copyright @{{year}} {{name}}. All rights reserved."
+    }
+  }
+}
