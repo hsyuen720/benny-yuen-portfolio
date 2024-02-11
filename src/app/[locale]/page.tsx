@@ -23,9 +23,9 @@ const Home = ({ params }: HomeProps) => {
       <Navbar />
       <HeroBanner />
       <About />
-      <Experience />
+      {/* <Experience />
       <Projects />
-      <Footer />
+      <Footer /> */}
     </HomeProvider>
   );
 };

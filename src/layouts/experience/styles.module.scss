@@ -1,4 +1,4 @@
-@import "~/styles/theme";
+@use "~/styles/theme";
 
 .experience {
   display: flex;
@@ -12,7 +12,7 @@
   grid-template-areas: "period positions" "period descriptions";
   gap: 1em;
   overflow: hidden;
-  font-size: map-get($fontSizes, "md");
+  font-size: map-get(theme.$font-sizes, "md");
 
   > .period {
     grid-area: period;
@@ -36,7 +36,7 @@
   }
 }
 
-@media (max-width: $breakpoint) {
+@media (max-width: theme.$breakpoint) {
   .experienceItem {
     grid-template-columns: auto 1fr;
     grid-template-areas: "positions period" "descriptions descriptions";

@@ -1,6 +1,6 @@
-@import "~/styles/theme";
+@use "~/styles/theme";
 
 .logo {
-  font-size: map-get($fontSizes, "xl");
+  font-size: map-get(theme.$font-sizes, "xl");
   user-select: none;
 }

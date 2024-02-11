@@ -1,6 +1,8 @@
-@import "~/styles/theme";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .about {
+  background-color: colors.$primary-color-light;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +13,7 @@
       grid-template-columns: 1fr 2fr;
       gap: 0.5em;
       margin: 2em;
-      font-size: map-get($fontSizes, "lg");
+      font-size: map-get(theme.$font-sizes, "lg");
 
       > .photo {
         justify-self: center;
@@ -31,7 +33,7 @@
   }
 }
 
-@media (max-width: $breakpoint) {
+@media (max-width: theme.$breakpoint) {
   .about {
     .browser {
       > div:nth-of-type(2) {

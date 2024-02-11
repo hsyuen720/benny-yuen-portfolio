@@ -8,13 +8,14 @@ export type BrowserProps = {
   className?: string;
   title?: string;
   children: ReactNode;
+  isDarkMode?: boolean;
 };
 
 const Browser = (props: BrowserProps) => {
-  const { className, title, children } = props;
+  const { className, title, children, isDarkMode } = props;
 
   return (
-    <div className={clsx(styles.container, className)}>
+    <div className={clsx(styles.container, { [styles.isDarkMode]: isDarkMode }, className)}>
       <div className={styles.header}>
         <div className={styles.dots}>
           <span />

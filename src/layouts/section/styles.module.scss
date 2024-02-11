@@ -1,18 +1,18 @@
-@import "~/styles/theme";
+@use "~/styles/theme";
 
 .section {
   position: relative;
-  min-height: max(600px, 100svh);
-  padding-left: map-get($sectionPaddingHorizontal, "md");
-  padding-right: map-get($sectionPaddingHorizontal, "md");
-  font-size: map-get($fontSizes, "md");
+  min-height: max(800px, 100svh);
+  padding-left: map-get(theme.$section-padding-horizontal, "md");
+  padding-right: map-get(theme.$section-padding-horizontal, "md");
+  font-size: map-get(theme.$font-sizes, "md");
   overflow-x: hidden;
 }
 
-@media (max-width: $breakpoint) {
+@media (max-width: theme.$breakpoint) {
   .section {
-    font-size: map-get($fontSizes, "sm");
-    padding-left: map-get($sectionPaddingHorizontal, "sm");
-    padding-right: map-get($sectionPaddingHorizontal, "sm");
+    font-size: map-get(theme.$font-sizes, "sm");
+    padding-left: map-get(theme.$section-padding-horizontal, "sm");
+    padding-right: map-get(theme.$section-padding-horizontal, "sm");
   }
 }

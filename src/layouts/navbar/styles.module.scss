@@ -1,16 +1,20 @@
-@import "~/styles/theme";
-@import "~/styles/colors";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .navbar {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: map-get($zIndices, "header");
-  padding: 1em map-get($sectionPaddingHorizontal, "md");
+  z-index: map-get(theme.$z-indices, "header");
+  padding: 1em map-get(theme.$section-padding-horizontal, "md");
+  @include theme.transition("fast", "background-color");
+  background-color: transparent;
 
-  background-color: rgba($primaryColor, 0.7);
-  backdrop-filter: blur(10px);
+  &.isBlurBackground {
+    background-color: rgba(colors.$primary-color, 0.8);
+    backdrop-filter: blur(10px);
+  }
 
   display: flex;
   flex-direction: row;
@@ -26,20 +30,20 @@
 
     > .menuItem {
       cursor: pointer;
-      @include transition("normal", "color");
+      @include theme.transition("normal", "color");
       &.active {
-        color: $highlightColor;
+        color: colors.$highlight-color;
       }
       &:hover {
-        color: $highlightColor;
+        color: colors.$highlight-color;
       }
     }
   }
 }
 
-@media (max-width: $breakpoint) {
+@media (max-width: theme.$breakpoint) {
   .navbar {
-    padding: 1em map-get($sectionPaddingHorizontal, "sm");
+    padding: 1em map-get(theme.$section-padding-horizontal, "sm");
 
     > .menu {
       display: none;

@@ -1,41 +1,62 @@
-@import "~/styles/theme";
-@import "~/styles/colors";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .container {
-  clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
-
-  > .background {
-    opacity: 0.6;
-    filter: blur(2.5px) grayscale(40%);
-    object-fit: cover;
-    user-select: none;
-    z-index: -1;
-  }
-
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  gap: 0.75em;
-  > * {
-    margin-block: 0;
-  }
-  > .greeting {
-    font-size: 1.25em;
-    color: $highlightColor;
-  }
+  align-items: center;
+  gap: 4em;
 
-  > .introduction {
-    font-size: 1.25em * $ratio;
-  }
-
-  > .briefDescription {
-    font-size: 1.25em;
-  }
-
-  > .socialMedia {
+  > .content {
     display: flex;
-    flex-direction: row;
-    gap: inherit;
-    font-size: 0.75em;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+
+    > .greeting {
+      font-size: 1.25em;
+      color: colors.$highlight-color;
+    }
+
+    > .introduction {
+      font-size: 1.25em * theme.$ratio;
+    }
+
+    > .briefDescription {
+      font-size: 1.25em;
+    }
+
+    > .socialMedia {
+      display: flex;
+      flex-direction: row;
+      gap: inherit;
+      font-size: 0.75em;
+    }
+  }
+
+  > .profile {
+    position: relative;
+    > .image {
+      @include theme.transition("slowest", "border-radius");
+      margin: auto;
+      border-radius: 24% 76% 70% 30% / 22% 30% 70% 78%;
+      min-width: 350px;
+      min-height: 350px;
+      overflow: hidden;
+      object-fit: cover;
+      user-select: none;
+
+      &:hover {
+        border-radius: 71% 29% 70% 30% / 62% 73% 27% 38%;
+      }
+    }
+  }
+}
+
+@media (max-width: theme.$breakpoint) {
+  .container {
+    flex-direction: column-reverse;
+    gap: 2em;
   }
 }

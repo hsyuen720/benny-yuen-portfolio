@@ -1,17 +1,17 @@
-@import "~/styles/theme";
-@import "~/styles/colors";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .footer {
-  padding: 1.25em map-get($sectionPaddingHorizontal, "md");
-  border-top: 0.25rem solid $highlightColor;
-  font-size: map-get($fontSizes, "sm");
+  padding: 1.25em map-get(theme.$section-padding-horizontal, "md");
+  border-top: 0.25rem solid colors.$highlight-color;
+  font-size: map-get(theme.$font-sizes, "sm");
   // display: flex;
   // align-items: center;
   // justify-content: space-between;
 }
 
-@media (max-width: $breakpoint) {
+@media (max-width: theme.$breakpoint) {
   .footer {
-    padding: 1.25em map-get($sectionPaddingHorizontal, "sm");
+    padding: 1.25em map-get(theme.$section-padding-horizontal, "sm");
   }
 }

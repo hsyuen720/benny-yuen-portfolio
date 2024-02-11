@@ -1,20 +1,20 @@
-@import "~/styles/theme";
-@import "~/styles/colors";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .sectionTitle {
   display: flex;
   flex-direction: column;
   width: 100%;
-  font-size: map-get($fontSizes, "sm");
+  font-size: map-get(theme.$font-sizes, "sm");
   > .description {
     font-size: 1em;
-    color: $secondaryTextColor;
+    color: colors.$secondary-text-color;
   }
   > .title {
     margin-block: 0;
-    font-size: 1em * $ratio;
+    font-size: 1em * theme.$ratio;
     text-transform: uppercase;
-    color: $textColor;
+    color: colors.$text-color;
     &::after {
       content: ".";
     }

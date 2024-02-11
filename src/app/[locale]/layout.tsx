@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Quantico } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";

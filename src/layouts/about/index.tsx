@@ -15,7 +15,7 @@ const About = () => {
   return (
     <Section id={PortfolioSection.About} className={styles.about}>
       <Heading title="About" description="A bit about me" />
-      <Browser className={styles.browser} title={t("title")}>
+      <Browser isDarkMode className={styles.browser} title={t("title")}>
         <Image className={styles.photo} src={image} alt="Benny Yuen" width={300} height={500} />
         <div className={styles.content}>
           <p className={styles.introduction}>

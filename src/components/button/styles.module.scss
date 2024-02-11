@@ -1,5 +1,5 @@
-@import "~/styles/theme";
-@import "~/styles/colors";
+@use "~/styles/theme";
+@use "~/styles/colors";
 
 .button {
   appearance: none;
@@ -9,17 +9,17 @@
   gap: 0.25em;
 
   padding: 0.3em 0.75em;
-  border-radius: map-get($borderRadii, "sm");
+  border-radius: map-get(theme.$border-radii, "sm");
 
   &.isIconOnly {
-    @include transition("slow", "background-color, color");
+    @include theme.transition("slow", "background-color, color");
     padding: 0.5em;
     border-radius: 50%;
     background-color: transparent;
 
     &:hover {
-      background-color: $highlightColor;
-      color: $primaryColor;
+      background-color: colors.$highlight-color;
+      color: colors.$primary-color;
     }
   }
 

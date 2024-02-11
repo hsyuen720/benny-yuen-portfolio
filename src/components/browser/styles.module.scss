@@ -1,12 +1,17 @@
-@import "~/styles/theme";
-
-$browserColor: #f1f1f1;
+@use "~/styles/theme";
 
 .container {
+  --main-color: #f1f1f1;
+  --text-color: #000000;
+
+  &.isDarkMode {
+    --main-color: #0b0c10;
+    --text-color: #dddddd;
+  }
   border-width: 0.25em;
   border-style: solid;
-  border-color: $browserColor;
-  border-radius: map_get($borderRadii, "sm");
+  border-color: var(--main-color);
+  border-radius: map_get(theme.$border-radii, "sm");
   display: flex;
   flex-direction: column;
 
@@ -16,7 +21,7 @@ $browserColor: #f1f1f1;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 0.25em;
-    background-color: $browserColor;
+    background-color: var(--main-color);
 
     > .dots {
       display: flex;
@@ -39,10 +44,11 @@ $browserColor: #f1f1f1;
     }
 
     > input {
-      border: 0.1em solid $browserColor;
-      border-radius: map-get($borderRadii, "md");
+      border: 0.1em solid var(--main-color);
+      border-radius: map-get(theme.$border-radii, "md");
       width: 70%;
       margin: 0 auto;
+      padding: 0.25em;
       outline: none;
       line-height: 1.5;
       font-family: inherit;
@@ -50,8 +56,8 @@ $browserColor: #f1f1f1;
     }
 
     > .setting {
-      cursor: default;
-      color: black;
+      cursor: pointer;
+      color: var(--text-color);
     }
   }
 
