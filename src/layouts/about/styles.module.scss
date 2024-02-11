@@ -2,21 +2,33 @@
 @use "~/styles/colors";
 
 .about {
-  background-color: colors.$primary-color-light;
+  background-color: colors.$secondary-color;
+  color: colors.$secondary-text-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 0.5em;
+
   .browser {
     > div:nth-of-type(2) {
       display: grid;
       grid-template-columns: 1fr 2fr;
+      align-items: center;
+      justify-content: center;
       gap: 0.5em;
       margin: 2em;
       font-size: map-get(theme.$font-sizes, "lg");
 
-      > .photo {
-        justify-self: center;
+      > .frame {
+        position: relative;
+        overflow: hidden;
+        width: 400px;
+        height: 400px;
+        border: 0.25em solid black;
+        box-shadow: 0.5em 0.5em 0 black;
+        > .photo {
+          object-fit: cover;
+        }
       }
 
       > .content {

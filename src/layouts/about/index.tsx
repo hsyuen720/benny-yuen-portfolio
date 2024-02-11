@@ -14,9 +14,11 @@ const About = () => {
   const t = useTranslations(AppTranslation.Portfolio);
   return (
     <Section id={PortfolioSection.About} className={styles.about}>
-      <Heading title="About" description="A bit about me" />
+      <Heading isDarkMode title="About" description="A bit about me" />
       <Browser isDarkMode className={styles.browser} title={t("title")}>
-        <Image className={styles.photo} src={image} alt="Benny Yuen" width={300} height={500} />
+        <div className={styles.frame}>
+          <Image className={styles.photo} src={image} alt="Benny Yuen" width={400} height={400} />
+        </div>
         <div className={styles.content}>
           <p className={styles.introduction}>
             {"<h1>"}I am a front-end developer currently based in Hong Kong. I graduated from HKUST

@@ -19,13 +19,16 @@ const Navbar = () => {
   const [isScrollStarted, setIsScrollStarted] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     const onScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrollStarted(scrollPosition > 100);
     };
+    isMounted && onScroll();
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);
+      isMounted = false;
     };
   }, []);
 

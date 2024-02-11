@@ -2,19 +2,28 @@
 @use "~/styles/colors";
 
 .sectionTitle {
+  &.isDarkMode {
+    > .description {
+      color: colors.$secondary-accent-text-color;
+    }
+    > .title {
+      color: colors.$secondary-text-color;
+    }
+  }
   display: flex;
   flex-direction: column;
   width: 100%;
   font-size: map-get(theme.$font-sizes, "sm");
   > .description {
     font-size: 1em;
-    color: colors.$secondary-text-color;
+    color: colors.$primary-accent-text-color;
   }
   > .title {
     margin-block: 0;
     font-size: 1em * theme.$ratio;
+    font-weight: map-get(theme.$font-weights, "bold");
     text-transform: uppercase;
-    color: colors.$text-color;
+    color: colors.$primary-text-color;
     &::after {
       content: ".";
     }

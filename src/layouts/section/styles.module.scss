@@ -3,8 +3,7 @@
 .section {
   position: relative;
   min-height: max(800px, 100svh);
-  padding-left: map-get(theme.$section-padding-horizontal, "md");
-  padding-right: map-get(theme.$section-padding-horizontal, "md");
+  padding: 5em map-get(theme.$section-padding-horizontal, "md");
   font-size: map-get(theme.$font-sizes, "md");
   overflow-x: hidden;
 }
@@ -12,7 +11,6 @@
 @media (max-width: theme.$breakpoint) {
   .section {
     font-size: map-get(theme.$font-sizes, "sm");
-    padding-left: map-get(theme.$section-padding-horizontal, "sm");
-    padding-right: map-get(theme.$section-padding-horizontal, "sm");
+    padding: 5em map-get(theme.$section-padding-horizontal, "sm");
   }
 }
