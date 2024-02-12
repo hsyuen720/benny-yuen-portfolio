@@ -11,31 +11,23 @@
 
   .browser {
     > div:nth-of-type(2) {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
+      display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: center;
-      gap: 0.5em;
+      gap: 5em;
       margin: 2em;
       font-size: map-get(theme.$font-sizes, "lg");
 
-      > .frame {
-        position: relative;
-        overflow: hidden;
-        width: 400px;
-        height: 400px;
+      > .photo {
         border: 0.25em solid black;
         box-shadow: 0.5em 0.5em 0 black;
-        > .photo {
-          object-fit: cover;
-        }
       }
 
       > .content {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: inherit;
 
         > .introduction {
           text-align: justify;
@@ -49,8 +41,8 @@
   .about {
     .browser {
       > div:nth-of-type(2) {
-        grid-template-columns: 1fr;
         margin: 1em;
+        flex-direction: column;
       }
     }
   }

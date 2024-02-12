@@ -36,19 +36,10 @@
   }
 
   > .profile {
-    position: relative;
     @include theme.transition("slowest", border-radius);
     border-radius: 24% 76% 70% 30% / 22% 30% 70% 78%;
-    min-width: 350px;
-    min-height: 350px;
-    overflow: hidden;
     &:hover {
       border-radius: 71% 29% 70% 30% / 62% 73% 27% 38%;
-    }
-    > .image {
-      margin: auto;
-      object-fit: cover;
-      user-select: none;
     }
   }
 }

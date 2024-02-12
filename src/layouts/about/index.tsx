@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 
 import Browser from "~/components/browser";
 import Button from "~/components/button";
 import Heading from "~/components/heading";
+import Image from "~/components/image";
 import Section from "~/layouts/section";
 import { AppTranslation, PortfolioSection } from "~/settings/constants";
 
@@ -16,9 +16,7 @@ const About = () => {
     <Section id={PortfolioSection.About} className={styles.about}>
       <Heading isDarkMode title="About" description="A bit about me" />
       <Browser isDarkMode className={styles.browser} title={t("title")}>
-        <div className={styles.frame}>
-          <Image className={styles.photo} src={image} alt="Benny Yuen" width={400} height={400} />
-        </div>
+        <Image className={styles.photo} src={image} alt="Benny Yuen" width={400} height={400} />
         <div className={styles.content}>
           <p className={styles.introduction}>
             {"<h1>"}I am a front-end developer currently based in Hong Kong. I graduated from HKUST

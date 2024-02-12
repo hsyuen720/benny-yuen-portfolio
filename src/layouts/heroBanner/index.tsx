@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import Button from "~/components/button";
+import Image from "~/components/image";
 import TypingWords from "~/components/typingWords";
 import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
@@ -27,19 +27,13 @@ const HeroBanner = () => {
           <Button icon={FaEnvelope} />
         </div>
       </div>
-      <div className={styles.profile}>
-        {/* TODO: the issue of rendering image when using fill */}
-        <Image
-          className={styles.image}
-          src={profile}
-          alt="Benny's profile picture"
-          width={350}
-          height={350}
-          placeholder="blur"
-          priority
-          draggable={false}
-        />
-      </div>
+      <Image
+        className={styles.profile}
+        src={profile}
+        alt="Benny's profile picture"
+        width={350}
+        height={350}
+      />
     </Section>
   );
 };

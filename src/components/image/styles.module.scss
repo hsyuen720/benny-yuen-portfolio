@@ -1,0 +1,10 @@
+.container {
+  position: relative;
+  overflow: hidden;
+
+  > .image {
+    margin: auto;
+    object-fit: cover;
+    user-select: none;
+  }
+}
