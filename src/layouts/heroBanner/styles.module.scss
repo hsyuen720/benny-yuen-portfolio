@@ -38,7 +38,7 @@
   > .profile {
     position: relative;
     > .image {
-      @include theme.transition("slowest", "border-radius");
+      @include theme.transition("slowest", border-radius);
       margin: auto;
       border-radius: 24% 76% 70% 30% / 22% 30% 70% 78%;
       min-width: 350px;

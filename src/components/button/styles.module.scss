@@ -12,7 +12,7 @@
   border-radius: map-get(theme.$border-radii, "sm");
 
   &.isIconOnly {
-    @include theme.transition("slow", "background-color, color");
+    @include theme.transition("slow", all);
     padding: 0.5em;
     border-radius: 50%;
     background-color: transparent;

@@ -8,7 +8,7 @@
   left: 0;
   z-index: map-get(theme.$z-indices, "header");
   padding: 1em map-get(theme.$section-padding-horizontal, "md");
-  @include theme.transition("fast", "background-color");
+  @include theme.transition("fast", background-color);
   background-color: transparent;
 
   &.isBlurBackground {
@@ -30,7 +30,7 @@
 
     > .menuItem {
       cursor: pointer;
-      @include theme.transition("normal", "color");
+      @include theme.transition("normal", color);
       &.active {
         color: colors.$highlight-color;
       }
