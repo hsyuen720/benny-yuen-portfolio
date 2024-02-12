@@ -17,6 +17,10 @@ ol[role="list"] {
   list-style: none;
 }
 
+html {
+  scrollbar-color: colors.$highlight-color colors.$primary-color;
+}
+
 html:focus-within {
   scroll-behavior: smooth;
 }
