@@ -17,7 +17,7 @@ const Logo = (props: LogoProps) => {
   const { onClick, className } = props;
   return (
     <span className={clsx(inter.className, styles.logo, className)} onClick={onClick}>
-      Benny.Yuen
+      B.Yuen
     </span>
   );
 };
