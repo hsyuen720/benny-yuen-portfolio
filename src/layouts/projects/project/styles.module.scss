@@ -1,0 +1,35 @@
+@use "~/styles/theme";
+
+.project {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: inherit;
+
+  > .photo {
+  }
+
+  > .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > .name {
+      font-size: map-get(theme.$font-sizes, "lg");
+      font-weight: 400;
+      > span:nth-of-type(1) {
+        font-size: 1.25em;
+        &::after {
+          content: ". ";
+        }
+      }
+    }
+    > .description {
+      flex: 1;
+    }
+  }
+}
+
+@media (max-width: theme.$breakpoint) {
+  .project {
+    grid-template-columns: 1fr;
+  }
+}

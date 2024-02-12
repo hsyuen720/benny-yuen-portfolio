@@ -1,7 +1,9 @@
 import clsx from "clsx";
-import Image from "next/image";
+import { Fragment } from "react";
 
 import Heading from "~/components/heading";
+import Image from "~/components/image";
+import Project from "~/layouts/projects/project";
 import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
 
@@ -12,20 +14,21 @@ const projects = [
   {
     year: "2024",
     name: "Personal Website Version 2",
-    description: "My personal portfolio",
+    description:
+      "It is my portfolio website that I develop with NextJS and Firebase. All content in this application stored in the firebase can be modified using a built-in UI. The primary reason I chose such frameworks is I can build the application in a short time.",
     techStack: ["React", "NextJS", "TypeScript", "Sass"],
-    link: "",
-    github: "",
-    photo: "",
+    url: "",
+    repository: "",
+    photo: testImage,
   },
   {
     year: "2022",
     name: "HKID Generator",
     description: "xxxx",
     techStack: ["React", "NextJS", "TypeScript", "Sass"],
-    link: "",
-    github: "",
-    photo: "",
+    url: "",
+    repository: "",
+    photo: testImage,
   },
 ];
 
@@ -33,28 +36,9 @@ const Projects = () => {
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
       <Heading isDark title="Projects" description="I am fine" />
-      <div className={styles.content}>
-        {projects.map((project, index) => (
-          <div key={index} className={clsx(styles.projectItem, { [styles.isReverse]: index % 2 })}>
-            <Image
-              className={styles.image}
-              src={testImage}
-              alt={project.name}
-              width={300}
-              height={200}
-            />
-            <div className={styles.detail}>
-              <h3>{project.name}</h3>
-              <p>{project.description}</p>
-              <div>
-                {project.techStack.map((tech, index) => (
-                  <span key={index}>{tech}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {projects.map((project, index) => (
+        <Project {...project} key={index} index={index} />
+      ))}
     </Section>
   );
 };
