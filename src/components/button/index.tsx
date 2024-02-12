@@ -7,10 +7,12 @@ import styles from "./styles.module.scss";
 export type ButtonProps<T extends "button" | "a" = "button"> = LabelProps<T> & {
   isLoading?: boolean;
   disabled?: boolean;
+  isDark?: boolean;
 };
 
 const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
-  const { tag, isLoading, icon, title, children, type, disabled, className, ...rest } = props;
+  const { tag, isLoading, icon, title, children, type, disabled, className, isDark, ...rest } =
+    props;
 
   const isIconOnly = !!icon && !title && !children;
 
@@ -20,7 +22,11 @@ const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
       tag={tag ?? "button"}
       icon={icon}
       disabled={disabled}
-      className={clsx(styles.button, { [styles.isIconOnly]: isIconOnly }, className)}
+      className={clsx(
+        styles.button,
+        { [styles.isIconOnly]: isIconOnly, [styles.isDark]: isDark },
+        className,
+      )}
     >
       {children ?? title}
     </Label>

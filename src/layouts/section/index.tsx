@@ -13,11 +13,12 @@ import styles from "./styles.module.scss";
 export type SectionProps<T extends ValueOf<typeof PortfolioSection>> = {
   className?: string;
   id: T;
+  isLight?: boolean;
   children: ReactNode;
 };
 
 const Section = <T extends string>(props: SectionProps<T>) => {
-  const { className, id, children } = props;
+  const { className, id, children, isLight } = props;
   const { el, isInView } = useInView<HTMLElement>({ threshold: 0.5 });
   const { focus } = useHome();
 
@@ -28,7 +29,11 @@ const Section = <T extends string>(props: SectionProps<T>) => {
   }, [isInView, focus, id]);
 
   return (
-    <section ref={el} id={id} className={clsx(styles.section, className)}>
+    <section
+      ref={el}
+      id={id}
+      className={clsx(styles.section, { [styles.isLight]: isLight }, className)}
+    >
       {children}
     </section>
   );

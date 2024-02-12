@@ -31,8 +31,8 @@ const projects = [
 
 const Projects = () => {
   return (
-    <Section id={PortfolioSection.Projects} className={styles.projects}>
-      <Heading title="Projects" description="I am fine" />
+    <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
+      <Heading isDark title="Projects" description="I am fine" />
       <div className={styles.content}>
         {projects.map((project, index) => (
           <div key={index} className={clsx(styles.projectItem, { [styles.isReverse]: index % 2 })}>

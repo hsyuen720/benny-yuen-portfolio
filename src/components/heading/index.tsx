@@ -8,15 +8,17 @@ import styles from "./styles.module.scss";
 export type SectionTitleProps = {
   title?: string;
   description?: string;
-  isDarkMode?: boolean;
+  isDark?: boolean;
+  isSeparatorShown?: boolean;
 };
 
 const Heading = (props: SectionTitleProps) => {
-  const { title, description, isDarkMode } = props;
+  const { title, description, isDark, isSeparatorShown } = props;
   return (
-    <div className={clsx(styles.sectionTitle, { [styles.isDarkMode]: isDarkMode })}>
+    <div className={clsx(styles.sectionTitle, { [styles.isDark]: isDark })}>
       {description ? <Label className={styles.description} tag="span" title={description} /> : null}
       <Label className={styles.title} tag="h2" title={title} />
+      {isSeparatorShown ? <div className={styles.separator} /> : null}
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 
 import Browser from "~/components/browser";
-import Button from "~/components/button";
 import Heading from "~/components/heading";
 import Image from "~/components/image";
+import Label from "~/components/label";
 import Section from "~/layouts/section";
 import { AppTranslation, PortfolioSection } from "~/settings/constants";
 
@@ -13,26 +13,30 @@ import styles from "./styles.module.scss";
 const About = () => {
   const t = useTranslations(AppTranslation.Portfolio);
   return (
-    <Section id={PortfolioSection.About} className={styles.about}>
-      <Heading isDarkMode title="About" description="A bit about me" />
-      <Browser isDarkMode className={styles.browser} title={t("title")}>
-        <Image className={styles.photo} src={image} alt="Benny Yuen" width={400} height={400} />
+    <Section isLight id={PortfolioSection.About} className={styles.about}>
+      <Heading isDark title="About" description="A bit about me" />
+      <Browser isDark className={styles.browser} title={t("title")}>
+        <Image className={styles.photo} src={image} alt="Benny Yuen" width={300} height={300} />
         <div className={styles.content}>
-          <p className={styles.introduction}>
-            {"<h1>"}I am a front-end developer currently based in Hong Kong. I graduated from HKUST
-            with a Bachelor s degree in Computer Engineering. HKUST is a great place where I have
-            developed a passion for developing high-quality applications. Hence, I wish to work with
-            my interest and make beautiful, user-friendly applications for my target audience. It is
-            how my web development journey starts.{"</h1>"}
+          <Heading isDark title="Who am I" />
+          <p>
+            I am an experienced frontend developer with a strong passion for creating responsive and
+            engaging web/mobile applications. I take pride in my work ethic, problem solving skills,
+            and attention to detail. My main focus is on building interactive application that
+            empower others by allowing them to engage with their own content and share it with
+            others through various forms of technology.
           </p>
-          <div>
-            <span>#React</span>
-            <span>#React Native</span>
-            <span>#NextJS</span>
-            <span>#Remix</span>
-          </div>
-          <div>
-            <Button>Resume</Button>
+          <div className={styles.hashtag}>
+            {[
+              "Frontend Development",
+              "Mobile Development",
+              "React",
+              "React Native",
+              "NextJS",
+              "Remix",
+            ].map((item) => (
+              <Label key={item} title={`#${item}`} />
+            ))}
           </div>
         </div>
       </Browser>

@@ -32,7 +32,11 @@ const experiences = [
 const Experience = () => {
   return (
     <Section id={PortfolioSection.Experience} className={styles.experience}>
-      <Heading title="Experience" description="I started for journey for 5 years 🤓" />
+      <Heading
+        isSeparatorShown
+        title="Experience"
+        description="I started for journey for 5 years 🤓"
+      />
       <div>
         {experiences.map((experience, index) => (
           <ExperienceItem key={index} {...experience} />

@@ -1,16 +1,21 @@
 @use "~/styles/theme";
+@use "~/styles/colors";
 
 .section {
   position: relative;
   min-height: max(800px, 100svh);
-  padding: 5em map-get(theme.$section-padding-horizontal, "md");
+  padding: 10em map-get(theme.$section-padding-horizontal, "md");
   font-size: map-get(theme.$font-sizes, "md");
   overflow-x: hidden;
+
+  &.isLight {
+    background-color: colors.$secondary-color;
+    color: colors.$secondary-text-color;
+  }
 }
 
 @media (max-width: theme.$breakpoint) {
   .section {
-    font-size: map-get(theme.$font-sizes, "sm");
-    padding: 5em map-get(theme.$section-padding-horizontal, "sm");
+    padding: 10em map-get(theme.$section-padding-horizontal, "sm");
   }
 }
