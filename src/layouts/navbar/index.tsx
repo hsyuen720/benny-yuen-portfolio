@@ -1,7 +1,6 @@
 "use client";
 
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 import Label from "~/components/label";
@@ -15,7 +14,6 @@ const menuItems = [PortfolioSection.About, PortfolioSection.Experience, Portfoli
 
 const Navbar = () => {
   const { scroll, currentView } = useHome();
-  const t = useTranslations(AppTranslation.Portfolio);
   const [isScrollStarted, setIsScrollStarted] = useState(false);
 
   useEffect(() => {
@@ -42,7 +40,7 @@ const Navbar = () => {
         {menuItems.map((item) => (
           <Label
             className={clsx(styles.menuItem, { [styles.active]: currentView === item })}
-            title={t(`navigation.${item}`)}
+            title={item}
             key={item}
             onClick={() => scroll(item)}
           />

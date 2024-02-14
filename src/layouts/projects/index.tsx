@@ -49,7 +49,8 @@ const Projects = () => {
                   src={project.photo}
                   alt="Project Image"
                   fill
-                  sizes="15em"
+                  sizes="18em"
+                  quality={100}
                   priority
                 />
               ) : null}
