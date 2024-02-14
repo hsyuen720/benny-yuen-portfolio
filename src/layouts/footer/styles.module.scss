@@ -5,6 +5,7 @@
   padding: 1.25em map-get(theme.$section-padding-horizontal, "md");
   border-top: 0.25rem solid colors.$highlight-color;
   font-size: map-get(theme.$font-sizes, "sm");
+  overflow-x: hidden;
   // display: flex;
   // align-items: center;
   // justify-content: space-between;

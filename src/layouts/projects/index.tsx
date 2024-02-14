@@ -35,7 +35,7 @@ const projects = [
 const Projects = () => {
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
-      <Heading isDark title="Projects" description="I am fine" />
+      <Heading isDark title="Projects" description="My Previous Work" />
       {projects.map((project, index) => (
         <Project {...project} key={index} index={index} />
       ))}
