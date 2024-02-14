@@ -1,9 +1,11 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { Fragment } from "react";
+import { FaCode, FaLink, FaVial } from "react-icons/fa";
 
+import Button from "~/components/button";
 import Heading from "~/components/heading";
-import Image from "~/components/image";
-import Project from "~/layouts/projects/project";
+import Label from "~/components/label";
 import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
 
@@ -16,18 +18,18 @@ const projects = [
     name: "Personal Website Version 2",
     description:
       "It is my portfolio website that I develop with NextJS and Firebase. All content in this application stored in the firebase can be modified using a built-in UI. The primary reason I chose such frameworks is I can build the application in a short time.",
-    techStack: ["React", "NextJS", "TypeScript", "Sass"],
-    url: "",
-    repository: "",
+    technologies: ["React", "NextJS", "TypeScript", "Sass"],
+    url: "https://www.google.com",
+    repository: "https://www.google.com",
     photo: testImage,
   },
   {
     year: "2022",
     name: "HKID Generator",
     description: "xxxx",
-    techStack: ["React", "NextJS", "TypeScript", "Sass"],
-    url: "",
-    repository: "",
+    technologies: ["React", "NextJS", "TypeScript", "Sass"],
+    url: "https://www.google.com",
+    repository: "https://www.google.com",
     photo: testImage,
   },
 ];
@@ -36,9 +38,42 @@ const Projects = () => {
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
       <Heading isDark title="Projects" description="My Previous Work" />
-      {projects.map((project, index) => (
-        <Project {...project} key={index} index={index} />
-      ))}
+      <div className={styles.content}>
+        {projects.map((project, index) => {
+          const { photo, name, description, technologies, url, repository } = project;
+          return (
+            <div className={styles.project} key={index}>
+              {photo ? (
+                <Image
+                  className={styles.photo}
+                  src={project.photo}
+                  alt="Project Image"
+                  fill
+                  sizes="15em"
+                  priority
+                />
+              ) : null}
+              <div className={styles.detail}>
+                <Label className={styles.name} tag="h3" icon={FaVial} title={name} />
+                <p className={styles.description}>{description}</p>
+                <div className={styles.footer}>
+                  <div className={styles.technologies}>
+                    {technologies.map((technology, index) => (
+                      <span key={index}>#{technology}</span>
+                    ))}
+                  </div>
+                  <div className={styles.links}>
+                    {repository ? (
+                      <Button tag="a" icon={FaCode} href={repository} target="_blank" />
+                    ) : null}
+                    {url ? <Button tag="a" icon={FaLink} href={url} target="_blank" /> : null}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </Section>
   );
 };
