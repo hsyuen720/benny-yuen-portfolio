@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clsx": "^2.1.0",
+    "firebase": "^10.8.0",
     "luxon": "^3.4.4",
     "next": "14.1.0",
     "next-intl": "^3.7.0",
