@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Label from "~/components/label";
 import Logo from "~/components/logo";
 import useHome from "~/contexts/home/useHome";
-import { AppTranslation, PortfolioSection } from "~/settings/constants";
+import { PortfolioSection } from "~/settings/constants";
 
 import styles from "./styles.module.scss";
 

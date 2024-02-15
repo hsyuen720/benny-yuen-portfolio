@@ -5,7 +5,7 @@ import Footer from "~/layouts/footer";
 import HeroBanner from "~/layouts/heroBanner";
 import Navbar from "~/layouts/navbar";
 import Projects from "~/layouts/projects";
-import { type Languages } from "~/settings/constants";
+import { type Languages } from "~/settings/i18n";
 import type { ValueOf } from "~/utils/type";
 
 type HomeProps = {
