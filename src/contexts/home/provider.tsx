@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState } from "react";
 
 import { PortfolioSection } from "~/settings/constants";
-import type { WrapperProps } from "~/utils/type";
+import type { WrapperProps } from "~/types/common";
 
 import { type HomeContextValue, HomeContext } from "./context";
 

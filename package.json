@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "accept-language": "^3.0.18",
     "clsx": "^2.1.0",
     "firebase": "^10.8.0",
     "i18next": "^23.8.2",

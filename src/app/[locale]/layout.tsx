@@ -1,7 +1,7 @@
 import { Quantico } from "next/font/google";
 
 import { Languages } from "~/settings/i18n";
-import type { ValueOf } from "~/utils/type";
+import type { ValueOf } from "~/types/common";
 
 import "./global.scss";
 

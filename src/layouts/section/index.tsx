@@ -6,7 +6,7 @@ import { useEffect, type ReactNode } from "react";
 import useHome from "~/contexts/home/useHome";
 import useInView from "~/hooks/useInView";
 import { PortfolioSection } from "~/settings/constants";
-import type { ValueOf } from "~/utils/type";
+import type { ValueOf } from "~/types/common";
 
 import styles from "./styles.module.scss";
 

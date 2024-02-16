@@ -24,6 +24,7 @@
       "~/layouts/*": ["./src/layouts/*"],
       "~/settings/*": ["./src/settings/*"],
       "~/styles/*": ["./src/styles/*"],
+      "~/types/*": ["./src/types/*"],
       "~/utils/*": ["./src/utils/*"]
     }
   },

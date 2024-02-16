@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 import type { PortfolioSection } from "~/settings/constants";
-import type { ValueOf } from "~/utils/type";
+import type { ValueOf } from "~/types/common";
 
 export interface HomeContextValue<T = ValueOf<typeof PortfolioSection>> {
   currentView: T;

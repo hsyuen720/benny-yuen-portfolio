@@ -6,7 +6,7 @@ import HeroBanner from "~/layouts/heroBanner";
 import Navbar from "~/layouts/navbar";
 import Projects from "~/layouts/projects";
 import { type Languages } from "~/settings/i18n";
-import type { ValueOf } from "~/utils/type";
+import type { ValueOf } from "~/types/common";
 
 type HomeProps = {
   params: { locale: ValueOf<typeof Languages> };
