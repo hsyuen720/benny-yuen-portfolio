@@ -17,7 +17,7 @@ const menuItems = [PortfolioSection.About, PortfolioSection.Experience, Portfoli
 const Navbar = () => {
   const { scroll, currentView } = useHome();
   const [isScrollStarted, setIsScrollStarted] = useState(false);
-  // const t = useTranslations(`${AppTranslation.Portfolio}.navigation`);
+  const t = useTranslations(`${AppTranslation.Portfolio}.navigation`);
 
   useEffect(() => {
     let isMounted = true;
@@ -43,7 +43,7 @@ const Navbar = () => {
         {menuItems.map((item) => (
           <Label
             className={clsx(styles.menuItem, { [styles.active]: currentView === item })}
-            // title={t(item)}
+            title={t(item)}
             key={item}
             onClick={() => scroll(item)}
           />

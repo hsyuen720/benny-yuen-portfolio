@@ -2,7 +2,7 @@
   "common": {
     "author": "Benny Yuen",
     "title": "Benny Yuen | Frontend Developer",
-    "description": "Benny Yuen' Personal Website"
+    "description": "Benny Yuen's Personal Website"
   },
   "portfolio": {
     "navigation": {
@@ -12,7 +12,7 @@
     },
     "heroBanner": {
       "greeting": "Hello👋, I am Benny👨🏻‍💻!",
-      "introduction": "I am a <role>Frontend Developer!, Mobile Developer!, Travel Lover!</role>",
+      "introduction": "I am a <role>Frontend Developer!, Mobile Developer!</role>",
       "description": "I am a passionate developer who loves to build things that make people's lives easier."
     },
     "about": {

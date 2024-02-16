@@ -1,3 +1,5 @@
+import { unstable_setRequestLocale } from "next-intl/server";
+
 import HomeProvider from "~/contexts/home/provider";
 import About from "~/layouts/about";
 import Experience from "~/layouts/experience";
@@ -13,6 +15,7 @@ type HomeProps = {
 };
 
 const Home = ({ params }: HomeProps) => {
+  unstable_setRequestLocale(params.locale);
   return (
     <HomeProvider>
       <Navbar />

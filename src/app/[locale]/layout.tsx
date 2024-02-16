@@ -1,6 +1,6 @@
 import { Quantico } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 import { AppTranslation, Languages } from "~/settings/i18n";
 import type { ValueOf } from "~/types/common";
@@ -34,6 +34,7 @@ type AppLayoutProps = Readonly<{
 }>;
 
 export default function AppLayout({ children, params }: AppLayoutProps) {
+  unstable_setRequestLocale(params.locale);
   const messages = useMessages();
   return (
     <html lang={params.locale}>

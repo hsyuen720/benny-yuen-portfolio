@@ -13,13 +13,13 @@ export default getRequestConfig(async ({ locale }) => {
   if (!locales.includes(locale as ValueOf<typeof Languages>)) notFound();
 
   let messages = (await import(`../locales/${locale}.json`)).default;
-  try {
-    const url = await getDownloadURL(ref(storage, `locales/${locale}.json`));
-    const request = await fetch(url);
-    messages = await request.json();
-  } catch (error) {
-    console.error(error);
-  }
+  // try {
+  //   const url = await getDownloadURL(ref(storage, `locales/${locale}.json`));
+  //   const request = await fetch(url);
+  //   messages = await request.json();
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
   return {
     messages,
