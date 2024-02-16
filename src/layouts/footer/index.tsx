@@ -1,14 +1,23 @@
+import { useTranslations } from "next-intl";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import Button from "~/components/button";
 import Label from "~/components/label";
+import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
 
 const Footer = () => {
+  const t = useTranslations();
   return (
     <footer className={styles.footer}>
-      <Label className={styles.label} title={"hello"} />
+      <Label
+        className={styles.label}
+        title={t(`${AppTranslation.Portfolio}.footer.copyright`, {
+          year: 2024,
+          name: t(`${AppTranslation.Common}.author`),
+        })}
+      />
       <div className={styles.socialMedia}>
         <Button icon={FaGithub} />
         <Button icon={FaLinkedin} />

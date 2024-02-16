@@ -5,5 +5,5 @@ export const AppTranslation = {
 
 export const Languages = {
   English: "en",
-  // Chinese: "zh",
+  Chinese: "zh",
 } as const;

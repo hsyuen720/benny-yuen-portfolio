@@ -1,6 +1,8 @@
 import { Quantico } from "next/font/google";
+import { NextIntlClientProvider, useMessages } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
-import { Languages } from "~/settings/i18n";
+import { AppTranslation, Languages } from "~/settings/i18n";
 import type { ValueOf } from "~/types/common";
 
 import "./global.scss";
@@ -14,8 +16,9 @@ export async function generateMetadata({
 }: {
   params: { locale: ValueOf<typeof Languages> };
 }) {
+  const t = await getTranslations({ locale: params.locale, namespace: AppTranslation.Common });
   return {
-    title: "Hello",
+    title: t("title"),
     description: "I am Benny",
   };
 }
@@ -31,9 +34,14 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export default function RootLayout({ children, params }: RootLayoutProps) {
+  const messages = useMessages();
   return (
     <html lang={params.locale}>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <NextIntlClientProvider locale={params.locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

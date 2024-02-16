@@ -47,6 +47,9 @@
             background-color: colors.$primary-color;
             color: colors.$primary-text-color;
             border-radius: map-get(theme.$border-radii, "md");
+            > span {
+              overflow: visible;
+            }
           }
         }
       }

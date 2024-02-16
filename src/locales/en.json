@@ -1,15 +1,34 @@
 {
   "common": {
-    "test": ["test1", "test2"]
+    "author": "Benny Yuen",
+    "title": "Benny Yuen | Frontend Developer",
+    "description": "Benny Yuen' Personal Website"
   },
   "portfolio": {
-    "title": "Benny Yuen | Frontend Developer",
-    "description": "Benny Yuen' Personal Website",
-
     "navigation": {
       "about": "About",
       "experience": "Experience",
       "projects": "Projects"
+    },
+    "heroBanner": {
+      "greeting": "Hello👋, I am Benny👨🏻‍💻!",
+      "introduction": "I am a <role>Frontend Developer!, Mobile Developer!, Travel Lover!</role>",
+      "description": "I am a passionate developer who loves to build things that make people's lives easier."
+    },
+    "about": {
+      "title": "About Me",
+      "subtitle": "A bit about me",
+      "heading": "Who am I",
+      "description": "I am an experienced frontend developer with a strong passion for creating responsive and engaging web/mobile applications. I take pride in my work ethic, problem solving skills, and attention to detail. My main focus is on building interactive application that empower others by allowing them to engage with their own content and share it with others through various forms of technology.",
+      "techStack": "<tech>Frontend Development</tech><tech>Mobile Development</tech><tech>React</tech><tech>React Native</tech><tech>NextJS</tech><tech>Remix</tech>"
+    },
+    "experience": {
+      "title": "Experience",
+      "subtitle": "I started the journey for 5 years🤓"
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "A demo is worth a thousand words😉"
     },
     "footer": {
       "copyright": "Copyright @{year} {name}. All rights reserved."

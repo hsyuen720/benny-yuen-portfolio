@@ -1,12 +1,14 @@
 import clsx from "clsx";
 import { DateTime } from "luxon";
+import { useTranslations } from "next-intl";
 import { Fragment } from "react";
-import { FaBusinessTime, FaClock, FaCodeBranch, FaSuitcase } from "react-icons/fa";
+import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 
 import Heading from "~/components/heading";
 import Label from "~/components/label";
 import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
+import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
 
@@ -38,13 +40,10 @@ const experiences = [
 ];
 
 const Experience = () => {
+  const t = useTranslations(`${AppTranslation.Portfolio}.experience`);
   return (
     <Section id={PortfolioSection.Experience} className={styles.experience}>
-      <Heading
-        isSeparatorShown
-        title="Experience"
-        description="I started for journey for 5 years 🤓"
-      />
+      <Heading isSeparatorShown title={t("title")} description={t("subtitle")} />
       <div className={styles.timeline}>
         {experiences.map((experience, index) => {
           const { company, positions, fromDate, toDate, descriptions, technologies } = experience;
