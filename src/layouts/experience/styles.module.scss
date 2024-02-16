@@ -78,14 +78,7 @@
           display: inline-flex;
           flex-wrap: wrap;
           gap: 0.25em;
-          > span {
-            font-size: 0.85em;
-            font-style: italic;
-            background-color: colors.$highlight-color;
-            color: colors.$primary-color;
-            padding: 0.1em 0.5em;
-            border-radius: map-get(theme.$border-radii, "sm");
-          }
+          font-size: 0.85em;
         }
       }
     }

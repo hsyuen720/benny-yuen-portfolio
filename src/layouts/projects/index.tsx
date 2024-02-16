@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { FaCode, FaLink, FaVial } from "react-icons/fa";
 
 import Button from "~/components/button";
+import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
 import Section from "~/layouts/section";
@@ -62,7 +63,7 @@ const Projects = () => {
                 <div className={styles.footer}>
                   <div className={styles.technologies}>
                     {technologies.map((technology, index) => (
-                      <span key={index}>#{technology}</span>
+                      <Hashtag key={index}>#{technology}</Hashtag>
                     ))}
                   </div>
                   <div className={styles.links}>

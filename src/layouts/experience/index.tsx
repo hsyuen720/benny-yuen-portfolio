@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { Fragment } from "react";
 import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 
+import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
 import Section from "~/layouts/section";
@@ -77,7 +78,7 @@ const Experience = () => {
                 </ul>
                 <span className={styles.technologies}>
                   {technologies.map((technology, index) => (
-                    <span key={technology}>#{technology}</span>
+                    <Hashtag key={technology}>#{technology}</Hashtag>
                   ))}
                 </span>
               </div>

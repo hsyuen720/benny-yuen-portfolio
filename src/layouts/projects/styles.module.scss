@@ -68,13 +68,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: inherit;
-            > span {
-              border-radius: map-get(theme.$border-radii, "sm");
-              padding: 0.05em 0.25em;
-              background-color: colors.$highlight-color;
-              color: colors.$primary-color;
-              font-size: 0.85em;
-            }
+            font-size: 0.75em;
           }
           > .links {
             display: flex;

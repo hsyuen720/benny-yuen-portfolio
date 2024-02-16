@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 
 import Browser from "~/components/browser";
+import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Image from "~/components/image";
 import Label from "~/components/label";
@@ -23,7 +24,7 @@ const About = () => {
           <Heading isDark title={t("heading")} />
           <p>{t("description")}</p>
           <div className={styles.hashtag}>
-            {t.rich("techStack", { tech: (chunks) => <Label>#{chunks}</Label> })}
+            {t.rich("techStack", { tech: (chunks) => <Hashtag isDark>#{chunks}</Hashtag> })}
           </div>
         </div>
       </Browser>

@@ -41,16 +41,6 @@
           display: flex;
           flex-wrap: wrap;
           gap: 0.25em;
-          > span {
-            font-style: italic;
-            padding: 0.25em 0.5em;
-            background-color: colors.$primary-color;
-            color: colors.$primary-text-color;
-            border-radius: map-get(theme.$border-radii, "md");
-            > span {
-              overflow: visible;
-            }
-          }
         }
       }
     }

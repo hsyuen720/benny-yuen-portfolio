@@ -28,12 +28,12 @@ const inter = Quantico({
   subsets: ["latin"],
 });
 
-type RootLayoutProps = Readonly<{
+type AppLayoutProps = Readonly<{
   children: React.ReactNode;
   params: { locale: ValueOf<typeof Languages> };
 }>;
 
-export default function RootLayout({ children, params }: RootLayoutProps) {
+export default function AppLayout({ children, params }: AppLayoutProps) {
   const messages = useMessages();
   return (
     <html lang={params.locale}>
