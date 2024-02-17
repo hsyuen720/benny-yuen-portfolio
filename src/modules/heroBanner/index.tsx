@@ -6,14 +6,16 @@ import Image from "~/components/image";
 import TypingWords from "~/components/typingWords";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
-import getFileUrl from "~/utils/getFileUrl";
+import getStorageUrl from "~/utils/getStorageUrl";
 
 import styles from "./styles.module.scss";
 import Section from "../section";
 
+import SocialMedia from "~/modules/socialMedia";
+
 const HeroBanner = async () => {
   const t = await getTranslations(`${AppTranslation.Portfolio}.heroBanner`);
-  const profile = await getFileUrl(t("photoPath"));
+  const profile = await getStorageUrl(t("photoPath"));
 
   return (
     <Section id={PortfolioSection.HeroBanner} className={styles.container}>
@@ -25,11 +27,7 @@ const HeroBanner = async () => {
           })}
         </h1>
         <p className={styles.briefDescription}>{t("description")}</p>
-        <div className={styles.socialMedia}>
-          <Button icon={FaGithub} />
-          <Button icon={FaLinkedin} />
-          <Button icon={FaEnvelope} />
-        </div>
+        <SocialMedia className={styles.socialMedia} />
       </div>
       <Image
         className={styles.profile}

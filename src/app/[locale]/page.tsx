@@ -1,3 +1,4 @@
+import { useLocale } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
 
 import HomeProvider from "~/contexts/home/provider";
@@ -5,7 +6,7 @@ import type { Languages } from "~/settings/i18n";
 import type { ValueOf } from "~/types/common";
 
 import About from "~/modules/about";
-import Experience from "~/modules/experience";
+import Experiences from "~/modules/experiences";
 import Footer from "~/modules/footer";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
@@ -22,7 +23,7 @@ const Home = ({ params }: HomeProps) => {
       <Navbar />
       <HeroBanner />
       <About />
-      <Experience />
+      <Experiences />
       <Projects />
       <Footer />
     </HomeProvider>

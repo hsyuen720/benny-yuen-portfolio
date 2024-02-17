@@ -1,47 +1,31 @@
 import clsx from "clsx";
 import { DateTime } from "luxon";
-import { useTranslations } from "next-intl";
+import type { DateTimeFormatOptions } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import { PortfolioSection } from "~/settings/constants";
+import useFormat from "~/hooks/useFormat";
+import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
+import type { IExperience } from "~/types/data";
+import getCollection from "~/utils/getCollection";
 
 import styles from "./styles.module.scss";
 import Section from "../section";
 
-const experiences = [
-  {
-    company: "Amplify Health",
-    positions: ["Frontend Engineer"],
-    fromDate: "2022-11-11",
-    toDate: "2024-03-01",
-    descriptions: [
-      "Implementing new features on AIA Vitality Indonesia Mobile Application",
-      "Optimising app performance such as reducing the number of API calls, and preventing unnecessary rerendering",
-      "Implementing a CI/CD pipeline using Detox, Fastlane in Azure Pipeline to enhance product quality and reduce product delivery time.",
-    ],
-    technologies: ["React", "TypeScript", "GraphQL", "Node.js", "AWS"],
-  },
-  {
-    company: "Fujifilm Business Innovation Hong Kong Limited",
-    positions: ["Analyst Programmer", "Programmer"],
-    fromDate: "2019-07-01",
-    toDate: "2022-11-11",
-    descriptions: [
-      "I am fine",
-      "I am fine",
-      "I am an experienced frontend developer with a strong passion for creating responsive and engaging web/mobile applications. I take pride in my work ethic, problem solving skills, and attention to detail. My main focus is on building interactive application that empower others by allowing them to engage with their own content and share it with others through various forms of technology.",
-    ],
-    technologies: ["React", "TypeScript", "GraphQL", "Node.js", "AWS"],
-  },
-];
+const Experiences = async () => {
+  const format = useFormat();
 
-const Experience = () => {
-  const t = useTranslations(`${AppTranslation.Portfolio}.experience`);
+  const t = await getTranslations(`${AppTranslation.Portfolio}.experience`);
+  const experiences = ((await getCollection(AppCollection.Experiences, {
+    orderBy: "fromDate",
+    order: "desc",
+  })) ?? []) as IExperience[];
+
   return (
     <Section id={PortfolioSection.Experience} className={styles.experience}>
       <Heading isSeparatorShown title={t("title")} description={t("subtitle")} />
@@ -49,8 +33,11 @@ const Experience = () => {
         {experiences.map((experience, index) => {
           const { company, positions, fromDate, toDate, descriptions, technologies } = experience;
           const intlOption: Intl.DateTimeFormatOptions = { year: "numeric", month: "short" };
-          const from = DateTime.fromISO(fromDate).toLocaleString(intlOption);
-          const to = toDate ? DateTime.fromISO(toDate).toLocaleString(intlOption) : "Present";
+
+          const from = DateTime.fromJSDate(fromDate.toDate()).toLocaleString(intlOption);
+          const to = toDate
+            ? DateTime.fromJSDate(toDate.toDate()).toLocaleString(intlOption)
+            : "Present";
           return (
             <div key={index} className={styles.item}>
               <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />
@@ -62,22 +49,22 @@ const Experience = () => {
               <div className={styles.detail}>
                 <Label icon={FaCodeBranch} className={styles.positions}>
                   {positions.map((position, index) => (
-                    <Fragment key={position}>
-                      <span className={styles.position}>{position}</span>
+                    <Fragment key={index}>
+                      <span className={styles.position}>{format(position)}</span>
                       {index !== positions.length - 1 && <span> | </span>}
                     </Fragment>
                   ))}
                 </Label>
-                <Label className={styles.company} icon={FaSuitcase} title={company} />
+                <Label className={styles.company} icon={FaSuitcase} title={format(company)} />
                 <ul className={styles.descriptions}>
                   {descriptions.map((description, index) => (
                     <li key={index} className={styles.description}>
-                      {description}
+                      {format(description)}
                     </li>
                   ))}
                 </ul>
                 <span className={styles.technologies}>
-                  {technologies.map((technology, index) => (
+                  {technologies.map((technology) => (
                     <Hashtag key={technology}>#{technology}</Hashtag>
                   ))}
                 </span>
@@ -89,4 +76,4 @@ const Experience = () => {
     </Section>
   );
 };
-export default Experience;
+export default Experiences;

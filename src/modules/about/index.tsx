@@ -6,7 +6,7 @@ import Heading from "~/components/heading";
 import Image from "~/components/image";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
-import getFileUrl from "~/utils/getFileUrl";
+import getStorageUrl from "~/utils/getStorageUrl";
 
 import styles from "./styles.module.scss";
 import Section from "../section";
@@ -14,8 +14,8 @@ import Section from "../section";
 const About = async () => {
   const t = await getTranslations(`${AppTranslation.Portfolio}.about`);
   const commonTrans = await getTranslations(AppTranslation.Common);
-  const photoUrl = await getFileUrl(t("photoPath"));
-  const resumeUrl = await getFileUrl(t("resumePath"));
+  const photoUrl = await getStorageUrl(t("photoPath"));
+  const resumeUrl = await getStorageUrl(t("resumePath"));
 
   return (
     <Section isLight id={PortfolioSection.About} className={styles.about}>

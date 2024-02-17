@@ -9,11 +9,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  > .socialMedia {
-    display: flex;
-    flex-wrap: nowrap;
-  }
 }
 
 @media (max-width: theme.$breakpoint) {

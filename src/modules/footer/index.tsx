@@ -1,11 +1,11 @@
 import { useTranslations } from "next-intl";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
-import Button from "~/components/button";
 import Label from "~/components/label";
 import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
+
+import SocialMedia from "~/modules/socialMedia";
 
 const Footer = () => {
   const t = useTranslations();
@@ -18,11 +18,7 @@ const Footer = () => {
           name: t(`${AppTranslation.Common}.author`),
         })}
       />
-      <div className={styles.socialMedia}>
-        <Button icon={FaGithub} />
-        <Button icon={FaLinkedin} />
-        <Button icon={FaEnvelope} />
-      </div>
+      <SocialMedia />
     </footer>
   );
 };

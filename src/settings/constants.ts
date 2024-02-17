@@ -10,3 +10,9 @@ export const AppCollection = {
   Projects: "projects",
   SocialMedia: "socialMedia",
 };
+
+export const SocialMedia = {
+  Github: "github",
+  Linkedin: "linkedin",
+  Email: "email",
+};
