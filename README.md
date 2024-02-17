@@ -6,5 +6,6 @@ This tools is using NextJS and Firebase.
 
 ```bash
 git clone https://github.com/hsyuen720/benny-yuen-portfolio.git
+yarn
 yarn dev
 ```
