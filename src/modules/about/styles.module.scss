@@ -16,7 +16,7 @@
       align-items: center;
       gap: 3em;
       padding: 4em;
-      > .photo {
+      > a > .photo {
         cursor: pointer;
         @include theme.transition("normal", box-shadow);
         border: 0.25em solid colors.$primary-color;

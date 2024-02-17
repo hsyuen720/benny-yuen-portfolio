@@ -1,18 +1,20 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import Button from "~/components/button";
 import Image from "~/components/image";
 import TypingWords from "~/components/typingWords";
-import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
+import getFileUrl from "~/utils/getFileUrl";
 
-import profile from "./profile.jpeg";
 import styles from "./styles.module.scss";
+import Section from "../section";
 
-const HeroBanner = () => {
-  const t = useTranslations(`${AppTranslation.Portfolio}.heroBanner`);
+const HeroBanner = async () => {
+  const t = await getTranslations(`${AppTranslation.Portfolio}.heroBanner`);
+  const profile = await getFileUrl(t("photoPath"));
+
   return (
     <Section id={PortfolioSection.HeroBanner} className={styles.container}>
       <div className={styles.content}>

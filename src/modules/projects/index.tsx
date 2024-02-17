@@ -7,12 +7,12 @@ import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
 import testImage from "../about/benny.jpeg";
+import Section from "../section";
 
 const projects = [
   {

@@ -7,11 +7,11 @@ import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import Section from "~/layouts/section";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
+import Section from "../section";
 
 const experiences = [
   {

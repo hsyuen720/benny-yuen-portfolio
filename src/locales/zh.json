@@ -13,14 +13,17 @@
     "heroBanner": {
       "greeting": "喂你好呀👋, 我叫Benny👨🏻‍💻!",
       "introduction": "我係一個 <role>Frontend Developer!, Mobile Developer!</role>",
-      "description": "熱衷於Web Development同Mobile App Development 既Developer 🚀"
+      "description": "熱衷於Web Development同Mobile App Development 既Developer 🚀",
+      "photoPath": "assets/picture-in-hero-banner.jpeg"
     },
     "about": {
       "title": "關於我既事",
       "subtitle": "知多少少我既野",
       "heading": "我係~",
       "description": "我係一個來自香港既前端工程師, 我喜歡用React, React Native, NextJS, Remix等等技術去開發Web同Mobile App, 我亦都喜歡學習新既技術同埋分享我既知識俾其他人, 如果你有任何問題或者想同我交流, 歡迎聯絡我!😊",
-      "techStack": "<tech>Frontend Development</tech><tech>Mobile Development</tech><tech>React</tech><tech>React Native</tech><tech>NextJS</tech><tech>Remix</tech>"
+      "techStack": "<tech>Frontend Development</tech><tech>Mobile Development</tech><tech>React</tech><tech>React Native</tech><tech>NextJS</tech><tech>Remix</tech>",
+      "photoPath": "assets/picture-in-about.jpg",
+      "resumePath": "resume/Resume_Yuen_Hon_Sing_Benny.pdf"
     },
     "experience": {
       "title": "我既經驗",

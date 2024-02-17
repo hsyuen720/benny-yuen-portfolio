@@ -21,7 +21,7 @@
       "~/components/*": ["./src/components/*"],
       "~/contexts/*": ["./src/contexts/*"],
       "~/hooks/*": ["./src/hooks/*"],
-      "~/layouts/*": ["./src/layouts/*"],
+      "~/modules/*": ["./src/modules/*"],
       "~/settings/*": ["./src/settings/*"],
       "~/styles/*": ["./src/styles/*"],
       "~/types/*": ["./src/types/*"],

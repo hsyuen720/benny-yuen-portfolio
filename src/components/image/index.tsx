@@ -4,7 +4,7 @@ import NextImage, { type ImageProps } from "next/image";
 import styles from "./styles.module.scss";
 
 const Image = (props: ImageProps) => {
-  const { className, width, height, placeholder = "blur", draggable = false, ...rest } = props;
+  const { className, width, height, placeholder, draggable = false, ...rest } = props;
   return (
     <div
       className={clsx(styles.container, className)}
