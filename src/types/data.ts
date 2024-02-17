@@ -6,6 +6,7 @@ import { ValueOf } from "~/types/common";
 export type ITranslation = Record<ValueOf<typeof Languages>, string>;
 
 export interface IExperience {
+  id: string;
   company: ITranslation;
   positions: ITranslation[];
   fromDate: Timestamp;
@@ -15,7 +16,8 @@ export interface IExperience {
 }
 
 export interface IProject {
-  year: number;
+  id: string;
+  date: Timestamp;
   name: ITranslation;
   description: ITranslation;
   technologies: string[];

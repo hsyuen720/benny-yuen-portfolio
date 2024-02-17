@@ -2,7 +2,17 @@
   "common": {
     "author": "Benny Yuen",
     "title": "Benny Yuen | Frontend Developer",
-    "description": "Benny Yuen's Personal Website"
+    "description": "Benny Yuen's Personal Website",
+
+    "text": {
+      "loading": "Loading...",
+      "noData": "No data found"
+    },
+
+    "date": {
+      "invalid": "Invalid Date",
+      "present": "Present"
+    }
   },
   "portfolio": {
     "navigation": {

@@ -28,6 +28,6 @@ const getCollection = async (
     ...doc.data(),
     id: doc.id,
   }));
-  return data as Array<{}>;
+  return data as Array<object>;
 };
 export default getCollection;

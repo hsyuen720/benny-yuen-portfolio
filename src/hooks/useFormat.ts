@@ -1,4 +1,4 @@
-import { useFormatter, useLocale } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { Languages } from "~/settings/i18n";
 import { ValueOf } from "~/types/common";

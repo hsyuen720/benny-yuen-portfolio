@@ -1,7 +1,7 @@
 @use "~/styles/theme";
 @use "~/styles/colors";
 
-.experience {
+.experiences {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -70,8 +70,7 @@
         }
         > .descriptions {
           > .description {
-            margin: 0 1.25em;
-            text-align: justify;
+            margin: 0 1.25em 0.5em;
           }
         }
         > .technologies {
@@ -86,7 +85,7 @@
 }
 
 @media (max-width: theme.$breakpoint) {
-  .experience {
+  .experiences {
     > .timeline {
       > .item {
         grid-template-columns: auto 1fr;

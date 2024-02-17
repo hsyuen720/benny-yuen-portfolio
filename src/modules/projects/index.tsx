@@ -1,43 +1,29 @@
-import clsx from "clsx";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { FaCode, FaLink, FaVial } from "react-icons/fa";
 
 import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import { PortfolioSection } from "~/settings/constants";
+import useFormat from "~/hooks/useFormat";
+import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
+import { IProject } from "~/types/data";
+import getCollection from "~/utils/getCollection";
 
+import testImage from "./benny.jpeg";
 import styles from "./styles.module.scss";
-import testImage from "../about/benny.jpeg";
 import Section from "../section";
 
-const projects = [
-  {
-    year: "2024",
-    name: "Personal Website Version 2",
-    description:
-      "It is my portfolio website that I develop with NextJS and Firebase. All content in this application stored in the firebase can be modified using a built-in UI. The primary reason I chose such frameworks is I can build the application in a short time.",
-    technologies: ["React", "NextJS", "TypeScript", "Sass"],
-    url: "https://www.google.com",
-    repository: "https://www.google.com",
-    photo: testImage,
-  },
-  {
-    year: "2022",
-    name: "HKID Generator",
-    description: "xxxx",
-    technologies: ["React", "NextJS", "TypeScript", "Sass"],
-    url: "https://www.google.com",
-    repository: "https://www.google.com",
-    photo: testImage,
-  },
-];
+const Projects = async () => {
+  const format = useFormat();
 
-const Projects = () => {
-  const t = useTranslations(`${AppTranslation.Portfolio}.projects`);
+  const t = await getTranslations(`${AppTranslation.Portfolio}.projects`);
+  const projects = ((await getCollection(AppCollection.Projects, {
+    orderBy: "date",
+    order: "desc",
+  })) ?? []) as IProject[];
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
@@ -49,17 +35,16 @@ const Projects = () => {
               {photo ? (
                 <Image
                   className={styles.photo}
-                  src={project.photo}
+                  src={photo}
                   alt="Project Image"
                   fill
                   sizes="18em"
-                  quality={100}
                   priority
                 />
               ) : null}
               <div className={styles.detail}>
-                <Label className={styles.name} tag="h3" icon={FaVial} title={name} />
-                <p className={styles.description}>{description}</p>
+                <Label className={styles.name} tag="h3" icon={FaVial} title={format(name)} />
+                <p className={styles.description}>{format(description)}</p>
                 <div className={styles.footer}>
                   <div className={styles.technologies}>
                     {technologies.map((technology, index) => (

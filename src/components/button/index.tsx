@@ -1,6 +1,8 @@
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 
 import Label, { type LabelProps } from "~/components/label";
+import { AppTranslation } from "~/settings/i18n";
 
 import styles from "./styles.module.scss";
 
@@ -11,9 +13,8 @@ export type ButtonProps<T extends "button" | "a" = "button"> = LabelProps<T> & {
 };
 
 const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
-  const { tag, isLoading, icon, title, children, type, disabled, className, isDark, ...rest } =
-    props;
-
+  const { tag, isLoading, icon, title, children, disabled, className, isDark, ...rest } = props;
+  const t = useTranslations(AppTranslation.Common);
   const isIconOnly = !!icon && !title && !children;
 
   return (
@@ -28,7 +29,7 @@ const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
         className,
       )}
     >
-      {children ?? title}
+      {isLoading ? t("text.loading") : children ?? title}
     </Label>
   );
 };

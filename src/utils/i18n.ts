@@ -9,17 +9,18 @@ import { storage } from "~/utils/firebase";
 const locales = Object.values(Languages);
 
 export default getRequestConfig(async ({ locale }) => {
-  // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale as ValueOf<typeof Languages>)) notFound();
 
   let messages = (await import(`../locales/${locale}.json`)).default;
-  // try {
-  //   const url = await getDownloadURL(ref(storage, `locales/${locale}.json`));
-  //   const request = await fetch(url);
-  //   messages = await request.json();
-  // } catch (error) {
-  //   console.error(error);
-  // }
+  try {
+    if (process.env.NODE_ENV !== "development") {
+      const url = await getDownloadURL(ref(storage, `locales/${locale}.json`));
+      const request = await fetch(url);
+      messages = await request.json();
+    }
+  } catch (error) {
+    console.error(error);
+  }
 
   return {
     messages,

@@ -1,6 +1,5 @@
 import clsx from "clsx";
 import { DateTime } from "luxon";
-import type { DateTimeFormatOptions } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
@@ -21,25 +20,28 @@ const Experiences = async () => {
   const format = useFormat();
 
   const t = await getTranslations(`${AppTranslation.Portfolio}.experience`);
+  const commonTrans = await getTranslations(AppTranslation.Common);
+
   const experiences = ((await getCollection(AppCollection.Experiences, {
     orderBy: "fromDate",
     order: "desc",
   })) ?? []) as IExperience[];
 
   return (
-    <Section id={PortfolioSection.Experience} className={styles.experience}>
+    <Section id={PortfolioSection.Experience} className={styles.experiences}>
       <Heading isSeparatorShown title={t("title")} description={t("subtitle")} />
       <div className={styles.timeline}>
         {experiences.map((experience, index) => {
-          const { company, positions, fromDate, toDate, descriptions, technologies } = experience;
+          const { id, company, positions, fromDate, toDate, descriptions, technologies } =
+            experience;
           const intlOption: Intl.DateTimeFormatOptions = { year: "numeric", month: "short" };
 
           const from = DateTime.fromJSDate(fromDate.toDate()).toLocaleString(intlOption);
           const to = toDate
             ? DateTime.fromJSDate(toDate.toDate()).toLocaleString(intlOption)
-            : "Present";
+            : commonTrans("date.present");
           return (
-            <div key={index} className={styles.item}>
+            <div key={id ?? index} className={styles.item}>
               <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />
               <div className={styles.separator}>
                 <div className={clsx(styles.top, styles.line)} />

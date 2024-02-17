@@ -7,6 +7,7 @@ export default createMiddleware({
   locales: Object.values(Languages),
   // Used when no locale matches
   defaultLocale: Languages.English,
+  localePrefix: "as-needed",
 });
 
 export const config = {

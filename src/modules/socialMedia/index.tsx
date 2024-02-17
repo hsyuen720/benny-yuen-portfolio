@@ -1,13 +1,12 @@
 import clsx from "clsx";
 
 import Button from "~/components/button";
+import { IconSetting } from "~/modules/socialMedia/setting";
 import { AppCollection } from "~/settings/constants";
 import type { ISocialMedia } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 
 import styles from "./styles.module.scss";
-
-import { IconSetting } from "~/modules/socialMedia/setting";
 
 export type SocialMediaProps = {
   className?: string;

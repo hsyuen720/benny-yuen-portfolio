@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import type { IconType } from "react-icons";
 
 import Label from "~/components/label";
 
