@@ -20,12 +20,12 @@ const Experiences = async () => {
   const format = useFormat();
 
   const t = await getTranslations(`${AppTranslation.Portfolio}.experience`);
-  const commonTrans = await getTranslations(AppTranslation.Common);
+  const ct = await getTranslations(AppTranslation.Common);
 
-  const experiences = ((await getCollection(AppCollection.Experiences, {
+  const experiences = await getCollection<IExperience>(AppCollection.Experiences, {
     orderBy: "fromDate",
     order: "desc",
-  })) ?? []) as IExperience[];
+  });
 
   return (
     <Section id={PortfolioSection.Experience} className={styles.experiences}>
@@ -39,7 +39,7 @@ const Experiences = async () => {
           const from = DateTime.fromJSDate(fromDate.toDate()).toLocaleString(intlOption);
           const to = toDate
             ? DateTime.fromJSDate(toDate.toDate()).toLocaleString(intlOption)
-            : commonTrans("date.present");
+            : ct("date.present");
           return (
             <div key={id ?? index} className={styles.item}>
               <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />

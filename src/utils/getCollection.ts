@@ -10,13 +10,13 @@ import { AppCollection } from "~/settings/constants";
 import type { ValueOf } from "~/types/common";
 import { db } from "~/utils/firebase";
 
-const getCollection = async (
+const getCollection = async <T = object>(
   collection: ValueOf<typeof AppCollection>,
   options: {
     orderBy?: string;
     order?: "asc" | "desc";
   } = {},
-) => {
+): Promise<Array<T>> => {
   const ref = collectionRef(db, collection);
   const sorting: QueryConstraint[] = [];
   if (options.orderBy) {
@@ -28,6 +28,7 @@ const getCollection = async (
     ...doc.data(),
     id: doc.id,
   }));
-  return data as Array<object>;
+  return (data ?? []) as Array<T>;
 };
+
 export default getCollection;

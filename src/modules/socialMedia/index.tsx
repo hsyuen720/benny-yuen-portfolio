@@ -14,10 +14,10 @@ export type SocialMediaProps = {
 
 const SocialMedia = async (props: SocialMediaProps) => {
   const { className } = props;
-  const data = ((await getCollection(AppCollection.SocialMedia, {
+  const data = await getCollection<ISocialMedia>(AppCollection.SocialMedia, {
     orderBy: "order",
     order: "asc",
-  })) ?? []) as ISocialMedia[];
+  });
   return (
     <div className={clsx(styles.container, className)}>
       {data.map((item) => (

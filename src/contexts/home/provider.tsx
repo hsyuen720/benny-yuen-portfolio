@@ -17,9 +17,8 @@ const HomeProvider = (props: WrapperProps) => {
 
   const scroll = useCallback<HomeContextValue["scroll"]>((id) => {
     const el = document.getElementById(id);
-    const navbar = document.getElementById("navbar");
-    if (el && navbar) {
-      window.scrollTo({ behavior: "smooth", top: el.offsetTop - navbar.offsetHeight });
+    if (el) {
+      window.scrollTo({ behavior: "smooth", top: el.offsetTop });
     }
   }, []);
 

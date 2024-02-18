@@ -1,0 +1,45 @@
+@use "~/styles/colors";
+
+.container {
+  appearance: none;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  width: 1.75em;
+  .hamburger {
+    --animation-duration: 200ms;
+    fill: colors.$primary-text-color;
+    > .line {
+      transition:
+        y var(--animation-duration) ease-in var(--animation-duration),
+        rotate var(--animation-duration) ease-in,
+        opacity 0ms var(--animation-duration);
+      transform-origin: center;
+    }
+  }
+
+  &[aria-expanded="true"] {
+    .hamburger {
+      > .line {
+        transition:
+          y var(--animation-duration) ease-in,
+          rotate var(--animation-duration) ease-in var(--animation-duration),
+          opacity 0ms var(--animation-duration);
+        transform-origin: center;
+
+        &:nth-of-type(1) {
+          y: 45;
+          rotate: 45deg;
+        }
+        &:nth-of-type(2) {
+          opacity: 0;
+        }
+        &:nth-of-type(3) {
+          y: 45;
+          rotate: -45deg;
+        }
+      }
+    }
+  }
+}

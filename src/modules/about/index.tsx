@@ -13,14 +13,14 @@ import Section from "../section";
 
 const About = async () => {
   const t = await getTranslations(`${AppTranslation.Portfolio}.about`);
-  const commonTrans = await getTranslations(AppTranslation.Common);
+  const ct = await getTranslations(AppTranslation.Common);
   const photoUrl = await getStorageUrl(t("photoPath"));
   const resumeUrl = await getStorageUrl(t("resumePath"));
 
   return (
     <Section isLight id={PortfolioSection.About} className={styles.about}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
-      <Browser isDark className={styles.browser} title={commonTrans("title")}>
+      <Browser isDark className={styles.browser} title={ct("title")}>
         <a href={resumeUrl} target="_blank">
           <Image
             className={styles.photo}

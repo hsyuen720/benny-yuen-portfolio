@@ -12,7 +12,6 @@ import { AppTranslation } from "~/settings/i18n";
 import { IProject } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 
-import testImage from "./benny.jpeg";
 import styles from "./styles.module.scss";
 import Section from "../section";
 
@@ -20,10 +19,10 @@ const Projects = async () => {
   const format = useFormat();
 
   const t = await getTranslations(`${AppTranslation.Portfolio}.projects`);
-  const projects = ((await getCollection(AppCollection.Projects, {
+  const projects = await getCollection<IProject>(AppCollection.Projects, {
     orderBy: "date",
     order: "desc",
-  })) ?? []) as IProject[];
+  });
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
