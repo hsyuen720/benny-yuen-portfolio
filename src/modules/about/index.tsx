@@ -21,14 +21,9 @@ const About = async () => {
     <Section isLight id={PortfolioSection.About} className={styles.about}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
       <Browser isDark className={styles.browser} title={ct("title")}>
-        <a href={resumeUrl} target="_blank">
-          <Image
-            className={styles.photo}
-            src={photoUrl}
-            alt="Benny Yuen"
-            width={300}
-            height={300}
-          />
+        <a className={styles.photo} href={resumeUrl} target="_blank">
+          <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} />
+          <span className={styles.overlay}>{t("resumeDescription")}</span>
         </a>
         <div className={styles.content}>
           <Heading isDark title={t("heading")} />

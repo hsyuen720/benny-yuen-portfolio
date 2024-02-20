@@ -29,6 +29,7 @@
     "about": {
       "title": "About Me",
       "subtitle": "A bit about me",
+      "resumeDescription": "Checkout My resume!😉",
       "heading": "Who am I",
       "description": "I am an experienced frontend developer with a strong passion for creating responsive and engaging web/mobile applications. I take pride in my work ethic, problem solving skills, and attention to detail. My main focus is on building interactive application that empower others by allowing them to engage with their own content and share it with others through various forms of technology.",
       "techStack": "<tech>Frontend Development</tech><tech>Mobile Development</tech><tech>React</tech><tech>React Native</tech><tech>NextJS</tech><tech>Remix</tech>",
