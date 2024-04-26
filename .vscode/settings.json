@@ -1,6 +1,14 @@
 {
   "cSpell.words": ["clsx", "Firestore", "luxon"],
+  "editor.rulers": [100],
+  "editor.tabCompletion": "on",
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "editor.trimAutoWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true
 }
