@@ -16,6 +16,8 @@ import getCollection from "~/utils/getCollection";
 import styles from "./styles.module.scss";
 import Section from "../section";
 
+export const revalidate = 3600;
+
 const Experiences = async () => {
   const format = useFormat();
 
