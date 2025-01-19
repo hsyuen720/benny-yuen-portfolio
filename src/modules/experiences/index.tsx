@@ -29,9 +29,12 @@ const Experiences = async () => {
     order: "desc",
   });
 
+  const startDate = DateTime.fromJSDate(experiences[experiences.length - 1].fromDate.toDate());
+  const numOfYears = Math.ceil(DateTime.now().diff(startDate, "years").years);
+
   return (
     <Section id={PortfolioSection.Experience} className={styles.experiences}>
-      <Heading isSeparatorShown title={t("title")} description={t("subtitle")} />
+      <Heading isSeparatorShown title={t("title")} description={t("subtitle", { numOfYears })} />
       <div className={styles.timeline}>
         {experiences.map((experience, index) => {
           const { id, company, positions, fromDate, toDate, descriptions, technologies } =

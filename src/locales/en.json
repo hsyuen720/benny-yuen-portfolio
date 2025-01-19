@@ -38,7 +38,7 @@
     },
     "experience": {
       "title": "Experience",
-      "subtitle": "I started the journey for 5 years🤓"
+      "subtitle": "I started the journey for {numOfYears} years🤓"
     },
     "projects": {
       "title": "Projects",
