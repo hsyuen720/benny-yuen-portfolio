@@ -16,7 +16,8 @@ export default getRequestConfig(async ({ locale }) => {
     if (process.env.NODE_ENV !== "development") {
       const url = await getDownloadURL(ref(storage, `locales/${locale}.json`));
       const request = await fetch(url);
-      messages = await request.json();
+      const json = await request.json();
+      if (json) messages = json;
     }
   } catch (error) {
     console.error(error);
