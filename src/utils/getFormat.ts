@@ -1,11 +1,11 @@
-import { useLocale } from "next-intl";
+import { getLocale } from "next-intl/server";
 
 import { Languages } from "~/settings/i18n";
-import { ValueOf } from "~/types/common";
-import { ITranslation } from "~/types/data";
+import type { ValueOf } from "~/types/common";
+import type { ITranslation } from "~/types/data";
 
-const useFormat = () => {
-  const locale = useLocale();
+const getFormat = async () => {
+  const locale = await getLocale();
 
   type FormatReturnType<T> = T extends ITranslation[] ? string[] : string;
   const format = <T extends ITranslation | ITranslation[]>(data: T) => {
@@ -17,4 +17,5 @@ const useFormat = () => {
 
   return format;
 };
-export default useFormat;
+
+export default getFormat;

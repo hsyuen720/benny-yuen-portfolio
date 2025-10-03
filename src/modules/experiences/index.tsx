@@ -7,11 +7,11 @@ import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import useFormat from "~/hooks/useFormat";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IExperience } from "~/types/data";
 import getCollection from "~/utils/getCollection";
+import getFormat from "~/utils/getFormat";
 
 import styles from "./styles.module.scss";
 import Section from "../section";
@@ -19,7 +19,7 @@ import Section from "../section";
 export const revalidate = 3600;
 
 const Experiences = async () => {
-  const format = useFormat();
+  const format = await getFormat();
 
   const t = await getTranslations(`${AppTranslation.Portfolio}.experience`);
   const ct = await getTranslations(AppTranslation.Common);

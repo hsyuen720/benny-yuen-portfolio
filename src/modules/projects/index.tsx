@@ -6,17 +6,17 @@ import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import useFormat from "~/hooks/useFormat";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
-import { IProject } from "~/types/data";
+import type { IProject } from "~/types/data";
 import getCollection from "~/utils/getCollection";
+import getFormat from "~/utils/getFormat";
 
 import styles from "./styles.module.scss";
 import Section from "../section";
 
 const Projects = async () => {
-  const format = useFormat();
+  const format = await getFormat();
 
   const t = await getTranslations(`${AppTranslation.Portfolio}.projects`);
   const projects = await getCollection<IProject>(AppCollection.Projects, {

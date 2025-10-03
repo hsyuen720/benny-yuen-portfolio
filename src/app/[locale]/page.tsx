@@ -1,4 +1,4 @@
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 import HomeProvider from "~/contexts/home/provider";
 import About from "~/modules/about";
@@ -7,15 +7,12 @@ import Footer from "~/modules/footer";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
 import Projects from "~/modules/projects";
-import type { Languages } from "~/settings/i18n";
-import type { ValueOf } from "~/types/common";
 
-type HomeProps = {
-  params: { locale: ValueOf<typeof Languages> };
-};
+type HomeProps = { params: Promise<{ locale: string }> };
 
-const Home = ({ params }: HomeProps) => {
-  unstable_setRequestLocale(params.locale);
+const Home = async (props: HomeProps) => {
+  const params = await props.params;
+  setRequestLocale(params.locale);
   return (
     <HomeProvider>
       <Navbar />

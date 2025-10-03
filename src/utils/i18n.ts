@@ -8,8 +8,10 @@ import { storage } from "~/utils/firebase";
 
 const locales = Object.values(Languages);
 
-export default getRequestConfig(async ({ locale }) => {
-  if (!locales.includes(locale as ValueOf<typeof Languages>)) notFound();
+export default getRequestConfig(async ({ requestLocale }) => {
+  const locale = await requestLocale;
+
+  if (!locale || !locales.includes(locale as ValueOf<typeof Languages>)) notFound();
 
   let messages = (await import(`../locales/${locale}.json`)).default;
   try {
@@ -23,7 +25,5 @@ export default getRequestConfig(async ({ locale }) => {
     console.error(error);
   }
 
-  return {
-    messages,
-  };
+  return { locale, messages };
 });
