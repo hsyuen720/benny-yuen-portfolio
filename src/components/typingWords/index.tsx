@@ -27,7 +27,9 @@ const TypingWords = ({ className, words, ...rest }: TypingWordsProps) => {
       isInfinite = true,
     } = rest;
     if (index === words.length) {
-      isInfinite && setIndex(0);
+      if (isInfinite) {
+        setIndex(0);
+      }
       return;
     }
     if (subIndex === words[index].length + 1 && !isReversed) {

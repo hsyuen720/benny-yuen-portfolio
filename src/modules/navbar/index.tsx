@@ -27,7 +27,9 @@ const Navbar = () => {
       const scrollPosition = window.scrollY;
       setIsScrollStarted(scrollPosition > 100);
     };
-    isMounted && onScroll();
+    if (isMounted) {
+      onScroll();
+    }
     window.addEventListener("scroll", onScroll);
     return () => {
       window.removeEventListener("scroll", onScroll);

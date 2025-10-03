@@ -15,11 +15,15 @@ const useInView = <T extends HTMLElement = HTMLDivElement>(props?: UseInView<T>)
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
-        once && el.current && entry.isIntersecting && observer.unobserve(el.current);
+        if (once && el.current && entry.isIntersecting) {
+          observer.unobserve(el.current);
+        }
       },
       { root: root?.current ?? null, rootMargin, threshold },
     );
-    el.current && observer.observe(el.current);
+    if (el.current) {
+      observer.observe(el.current);
+    }
     return () => observer.disconnect();
   }, [root, once, rootMargin, threshold]);
 

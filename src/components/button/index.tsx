@@ -29,7 +29,7 @@ const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
         className,
       )}
     >
-      {isLoading ? t("text.loading") : children ?? title}
+      {isLoading ? t("text.loading") : (children ?? title)}
     </Label>
   );
 };
