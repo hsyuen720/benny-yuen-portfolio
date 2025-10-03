@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "~/styles/theme";
 @use "~/styles/colors";
 
@@ -9,7 +10,7 @@
   cursor: pointer;
   gap: 0.25em;
   padding: 0.3em 0.75em;
-  border-radius: map-get(theme.$border-radii, "sm");
+  border-radius: map.get(theme.$border-radii, "sm");
 
   &.isDark {
     background-color: colors.$primary-color;

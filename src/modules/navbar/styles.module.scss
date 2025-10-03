@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "~/styles/theme";
 @use "~/styles/colors";
 
@@ -6,8 +7,8 @@
   top: 0;
   right: 0;
   left: 0;
-  z-index: map-get(theme.$z-indices, "header");
-  padding: 1em map-get(theme.$section-padding-horizontal, "md");
+  z-index: map.get(theme.$z-indices, "header");
+  padding: 1em map.get(theme.$section-padding-horizontal, "md");
   @include theme.transition("fast", background-color);
   background-color: transparent;
 
@@ -50,7 +51,7 @@
 
 @media (max-width: theme.$breakpoint) {
   .navbar {
-    padding: 1em map-get(theme.$section-padding-horizontal, "sm");
+    padding: 1em map.get(theme.$section-padding-horizontal, "sm");
 
     > .toggle {
       display: block;

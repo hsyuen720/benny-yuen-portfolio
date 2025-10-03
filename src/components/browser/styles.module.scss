@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "~/styles/theme";
 
 .container {
@@ -11,7 +12,7 @@
   border-width: 0.25em;
   border-style: solid;
   border-color: var(--main-color);
-  border-radius: map_get(theme.$border-radii, "sm");
+  border-radius: map.get(theme.$border-radii, "sm");
   display: flex;
   flex-direction: column;
 
@@ -46,7 +47,7 @@
 
     > input {
       border: 0.1em solid var(--main-color);
-      border-radius: map-get(theme.$border-radii, "md");
+      border-radius: map.get(theme.$border-radii, "md");
       width: 70%;
       margin: 0 auto;
       padding: 0.25em;

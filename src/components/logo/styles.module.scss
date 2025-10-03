@@ -1,6 +1,7 @@
+@use "sass:map";
 @use "~/styles/theme";
 
 .logo {
-  font-size: map-get(theme.$font-sizes, "xl");
+  font-size: map.get(theme.$font-sizes, "xl");
   user-select: none;
 }

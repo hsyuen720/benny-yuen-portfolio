@@ -1,3 +1,5 @@
+@use "sass:map";
+
 $font-sizes: (
   xs: 0.75rem,
   sm: 0.875rem,
@@ -47,6 +49,6 @@ $section-padding-horizontal: (
   );
 
   transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-  transition-duration: map-get($durations, $duration);
+  transition-duration: map.get($durations, $duration);
   transition-property: $property;
 }
