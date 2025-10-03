@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "prepare": "husky"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "sharp": "^0.34.4"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3",
     "@types/luxon": "^3.7.1",
     "@types/node": "^24",
     "@types/react": "^19.2.0",
