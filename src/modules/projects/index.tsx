@@ -6,6 +6,7 @@ import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
+import withSuspense from "~/components/withSuspense";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IProject } from "~/types/data";
@@ -65,4 +66,4 @@ const Projects = async () => {
     </Section>
   );
 };
-export default Projects;
+export default withSuspense(Projects);

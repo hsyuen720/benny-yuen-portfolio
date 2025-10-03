@@ -7,6 +7,7 @@ import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
+import withSuspense from "~/components/withSuspense";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IExperience } from "~/types/data";
@@ -16,7 +17,26 @@ import getFormat from "~/utils/getFormat";
 import styles from "./styles.module.scss";
 import Section from "../section";
 
-export const revalidate = 3600;
+// Helper function to safely convert Firebase Timestamp to Date
+const convertToDate = (timestamp: unknown): Date => {
+  if (typeof timestamp === "object" && timestamp !== null) {
+    // If it's a Firestore Timestamp object
+    if ("toDate" in timestamp && typeof timestamp.toDate === "function") {
+      return timestamp.toDate();
+    }
+    // If it's serialized with seconds/nanoseconds
+    else if ("seconds" in timestamp) {
+      return new Date((timestamp as { seconds: number }).seconds * 1000);
+    }
+    // If it's already a Date object
+    else {
+      return new Date(timestamp as string | number | Date);
+    }
+  } else {
+    // Fallback: try to parse as date
+    return new Date(timestamp as string | number | Date);
+  }
+};
 
 const Experiences = async () => {
   const format = await getFormat();
@@ -29,7 +49,9 @@ const Experiences = async () => {
     order: "desc",
   });
 
-  const startDate = DateTime.fromJSDate(experiences[experiences.length - 1].fromDate.toDate());
+  const startDate = DateTime.fromJSDate(
+    convertToDate(experiences[experiences.length - 1].fromDate),
+  );
   const numOfYears = Math.ceil(DateTime.now().diff(startDate, "years").years);
 
   return (
@@ -41,9 +63,9 @@ const Experiences = async () => {
             experience;
           const intlOption: Intl.DateTimeFormatOptions = { year: "numeric", month: "short" };
 
-          const from = DateTime.fromJSDate(fromDate.toDate()).toLocaleString(intlOption);
+          const from = DateTime.fromJSDate(convertToDate(fromDate)).toLocaleString(intlOption);
           const to = toDate
-            ? DateTime.fromJSDate(toDate.toDate()).toLocaleString(intlOption)
+            ? DateTime.fromJSDate(convertToDate(toDate)).toLocaleString(intlOption)
             : ct("date.present");
           return (
             <div key={id ?? index} className={styles.item}>
@@ -83,4 +105,4 @@ const Experiences = async () => {
     </Section>
   );
 };
-export default Experiences;
+export default withSuspense(Experiences);
