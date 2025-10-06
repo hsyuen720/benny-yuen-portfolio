@@ -78,6 +78,8 @@ const inter = Quantico({
   subsets: ["latin"],
   display: "swap",
   preload: true,
+  adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
 });
 
 type AppLayoutProps = Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>;
@@ -96,13 +98,16 @@ export default async function AppLayout(props: AppLayoutProps) {
           href="https://firebasestorage.googleapis.com"
           crossOrigin="anonymous"
         />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
+          <SpeedInsights />
+          <Analytics />
         </NextIntlClientProvider>
-        <SpeedInsights />
-        <Analytics />
       </body>
     </html>
   );

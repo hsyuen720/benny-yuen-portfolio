@@ -1,5 +1,15 @@
 @use "~/styles/colors";
 
+/* Critical above-the-fold styles for faster FCP */
+html,
+body {
+  height: 100%;
+  background-color: colors.$primary-color;
+  color: colors.$primary-text-color;
+  margin: 0;
+  padding: 0;
+}
+
 *,
 *::before,
 *::after {
@@ -25,16 +35,12 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
-html,
-body {
-  height: 100%;
-  background-color: colors.$primary-color;
-  color: colors.$primary-text-color;
-}
-
 body {
   text-rendering: optimizeSpeed;
   line-height: 1.5;
+  /* Prevent FOIT (Flash of Invisible Text) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a:not([class]) {

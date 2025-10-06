@@ -30,6 +30,11 @@ const nextConfig = {
   // Enable compression
   compress: true,
 
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
+  },
+
   // Enable modern JS features and optimize imports
   modularizeImports: {
     "react-icons/fa": {
