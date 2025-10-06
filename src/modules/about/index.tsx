@@ -14,6 +14,9 @@ import getStorageUrl from "~/utils/getStorageUrl";
 import styles from "./styles.module.scss";
 import Section from "../section";
 
+// This component is dynamic to read user location
+export const dynamic = "force-dynamic";
+
 const About = async () => {
   const headerList = await headers();
   const userCountry = headerList.get("x-user-country") || "HK";

@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import createMiddleware from "next-intl/middleware";
 
 import { Languages } from "~/settings/i18n";
@@ -14,23 +14,13 @@ const intlMiddleware = createMiddleware({
 export default function middleware(request: NextRequest) {
   const response = intlMiddleware(request);
 
+  // Detect country from Vercel edge header
   const country = request.headers.get("x-vercel-ip-country") || "HK";
 
-  const modifiedResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+  // Add country to response headers so it can be read server-side
+  response.headers.set("x-user-country", country);
 
-  if (response) {
-    response.headers.forEach((value, key) => {
-      modifiedResponse.headers.set(key, value);
-    });
-  }
-
-  modifiedResponse.headers.set("x-user-country", country);
-
-  return modifiedResponse;
+  return response;
 }
 
 export const config = {
