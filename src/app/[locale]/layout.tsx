@@ -12,6 +12,13 @@ export function generateStaticParams() {
   return Object.values(Languages).map((locale) => ({ locale }));
 }
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+};
+
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   const t = await getTranslations({ locale: params.locale, namespace: AppTranslation.Common });
@@ -60,10 +67,18 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
     verification: {
       google: "dpQk_UFBjZcwMt2xmEIo4M3YdQCEF5q9aS_IILpu8OM",
     },
+    other: {
+      preconnect: "https://firebasestorage.googleapis.com",
+    },
   };
 }
 
-const inter = Quantico({ weight: ["400", "700"], subsets: ["latin"] });
+const inter = Quantico({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
 
 type AppLayoutProps = Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>;
 

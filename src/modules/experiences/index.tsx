@@ -7,7 +7,6 @@ import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import withSuspense from "~/components/withSuspense";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IExperience } from "~/types/data";
@@ -105,4 +104,4 @@ const Experiences = async () => {
     </Section>
   );
 };
-export default withSuspense(Experiences);
+export default Experiences;

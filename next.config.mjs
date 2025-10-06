@@ -42,7 +42,8 @@ const nextConfig = {
 
   // Add performance optimizations
   experimental: {
-    optimizePackageImports: ["react-icons", "luxon"],
+    optimizePackageImports: ["react-icons", "luxon", "next-intl", "clsx"],
+    scrollRestoration: true,
   },
 
   // External packages for server components

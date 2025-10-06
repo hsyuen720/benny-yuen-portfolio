@@ -32,7 +32,7 @@ const About = async () => {
       <Heading isDark title={t("title")} description={t("subtitle")} />
       <Browser isDark className={styles.browser} title={ct("title")}>
         <a className={styles.photo} href={url} target="_blank">
-          <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} />
+          <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
           <span className={styles.overlay}>
             {isHongKong ? t("resumeDescription") : t("linkedInDescription")}
           </span>

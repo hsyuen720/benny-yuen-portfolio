@@ -6,7 +6,6 @@ import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
-import withSuspense from "~/components/withSuspense";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IProject } from "~/types/data";
@@ -39,7 +38,7 @@ const Projects = async () => {
                   alt="Project Image"
                   fill
                   sizes="18em"
-                  priority
+                  loading="lazy"
                 />
               ) : null}
               <div className={styles.detail}>
@@ -66,4 +65,4 @@ const Projects = async () => {
     </Section>
   );
 };
-export default withSuspense(Projects);
+export default Projects;

@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useTranslations } from "next-intl";
+import { memo } from "react";
 
 import Label, { type LabelProps } from "~/components/label";
 import { AppTranslation } from "~/settings/i18n";
@@ -33,4 +34,4 @@ const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
     </Label>
   );
 };
-export default Button;
+export default memo(Button);
