@@ -13,7 +13,52 @@ export function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ locale: string }> }) {
   const params = await props.params;
   const t = await getTranslations({ locale: params.locale, namespace: AppTranslation.Common });
-  return { title: t("title"), description: "I am Benny" };
+
+  return {
+    title: {
+      template: `%s | ${t("author")}`,
+      default: t("title"),
+    },
+    description: t("description"),
+    keywords: [
+      "Frontend Developer",
+      "Full Stack Developer",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "NodeJS",
+    ],
+    authors: [{ name: t("author") }],
+    creator: t("author"),
+    publisher: t("author"),
+    formatDetection: {
+      email: false,
+      address: false,
+      telephone: false,
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: process.env.NEXT_PUBLIC_URL,
+      siteName: t("title"),
+      locale: params.locale,
+      type: "website",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+    verification: {
+      google: "dpQk_UFBjZcwMt2xmEIo4M3YdQCEF5q9aS_IILpu8OM", // Replace with your actual verification code
+    },
+  };
 }
 
 const inter = Quantico({ weight: ["400", "700"], subsets: ["latin"] });
