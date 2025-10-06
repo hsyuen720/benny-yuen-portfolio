@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import withSuspense from "~/components/suspense/index";
+import withSuspense from "~/components/withSuspense";
 
 // Mock component that renders immediately
 const MockComponent = ({ title = "Test Component" }: { title?: string }) => {
