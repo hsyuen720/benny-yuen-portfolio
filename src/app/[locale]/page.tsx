@@ -6,7 +6,8 @@ import HomeProvider from "~/contexts/home/provider";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
 
-// Enable ISR with revalidation every hour
+// Force static generation - Firebase will only run at build time
+export const dynamic = "force-static";
 export const revalidate = 86400; // 1 day in seconds
 
 // Lazy load below-the-fold components

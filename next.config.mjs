@@ -47,22 +47,22 @@ const nextConfig = {
   },
 
   // External packages for server components
-  serverExternalPackages: ["firebase-admin"],
+  serverExternalPackages: [
+    "firebase-admin",
+    "firebase",
+    "@firebase/app",
+    "@firebase/firestore",
+    "@firebase/storage",
+  ],
 
   // Enable webpack optimizations
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      // Split chunks to reduce initial bundle
+      // Split common chunks to reduce initial bundle
       config.optimization.splitChunks = {
         ...config.optimization.splitChunks,
         cacheGroups: {
           ...config.optimization.splitChunks?.cacheGroups,
-          firebase: {
-            test: /[\\/]node_modules[\\/](firebase|@firebase)[\\/]/,
-            name: "firebase",
-            priority: 10,
-            reuseExistingChunk: true,
-          },
           commons: {
             test: /[\\/]node_modules[\\/]/,
             name: "commons",
