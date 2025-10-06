@@ -6,9 +6,8 @@ import HomeProvider from "~/contexts/home/provider";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
 
-// Force static generation - Firebase will only run at build time
-export const dynamic = "force-static";
-export const revalidate = 86400; // 1 day in seconds
+// Use revalidation for caching while allowing dynamic components
+export const revalidate = 86400; // 24 hours - optimized for performance
 
 // Lazy load below-the-fold components
 const About = lazy(() => import("~/modules/about"));

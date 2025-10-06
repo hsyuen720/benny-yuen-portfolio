@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { getTranslations } from "next-intl/server";
 
 import Browser from "~/components/browser";
@@ -14,21 +13,11 @@ import getStorageUrl from "~/utils/getStorageUrl";
 import styles from "./styles.module.scss";
 import Section from "../section";
 
-// This component is dynamic to read user location
-export const dynamic = "force-dynamic";
-
 const About = async () => {
-  const headerList = await headers();
-  const userCountry = headerList.get("x-user-country") || "HK";
-
-  const isHongKong = userCountry === "HK";
-
   const t = await getTranslations(`${AppTranslation.Portfolio}.about`);
   const ct = await getTranslations(AppTranslation.Common);
   const photoUrl = await getStorageUrl(t("photoPath"));
-  const url = isHongKong
-    ? await getStorageUrl(t("resumePath"))
-    : (await getDocument<ISocialMedia>(AppCollection.SocialMedia, "linkedin"))?.value;
+  const url = (await getDocument<ISocialMedia>(AppCollection.SocialMedia, "linkedin"))?.value;
 
   return (
     <Section isLight id={PortfolioSection.About} className={styles.about}>
@@ -36,9 +25,7 @@ const About = async () => {
       <Browser isDark className={styles.browser} title={ct("title")}>
         <a className={styles.photo} href={url} target="_blank">
           <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
-          <span className={styles.overlay}>
-            {isHongKong ? t("resumeDescription") : t("linkedInDescription")}
-          </span>
+          <span className={styles.overlay}>{t("photoDescription")}</span>
         </a>
         <div className={styles.content}>
           <Heading isDark title={t("heading")} />
