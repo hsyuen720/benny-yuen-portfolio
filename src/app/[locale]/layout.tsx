@@ -56,7 +56,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
       },
     },
     verification: {
-      google: "dpQk_UFBjZcwMt2xmEIo4M3YdQCEF5q9aS_IILpu8OM", // Replace with your actual verification code
+      google: "dpQk_UFBjZcwMt2xmEIo4M3YdQCEF5q9aS_IILpu8OM",
     },
   };
 }
