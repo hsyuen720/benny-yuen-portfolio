@@ -6,6 +6,9 @@ import HomeProvider from "~/contexts/home/provider";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
 
+// Enable ISR with revalidation every hour
+export const revalidate = 86400; // 1 day in seconds
+
 // Lazy load below-the-fold components
 const About = lazy(() => import("~/modules/about"));
 const Experiences = lazy(() => import("~/modules/experiences"));

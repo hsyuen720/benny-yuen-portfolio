@@ -52,6 +52,27 @@ const nextConfig = {
   // Enable webpack optimizations
   webpack: (config, { isServer }) => {
     if (!isServer) {
+      // Split chunks to reduce initial bundle
+      config.optimization.splitChunks = {
+        ...config.optimization.splitChunks,
+        cacheGroups: {
+          ...config.optimization.splitChunks?.cacheGroups,
+          firebase: {
+            test: /[\\/]node_modules[\\/](firebase|@firebase)[\\/]/,
+            name: "firebase",
+            priority: 10,
+            reuseExistingChunk: true,
+          },
+          commons: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "commons",
+            priority: 5,
+            reuseExistingChunk: true,
+            minChunks: 2,
+          },
+        },
+      };
+
       config.resolve.fallback = {
         ...config.resolve.fallback,
         fs: false,

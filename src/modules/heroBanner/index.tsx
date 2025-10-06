@@ -33,6 +33,7 @@ const HeroBanner = async () => {
         width={350}
         height={350}
         priority
+        fetchPriority="high"
       />
     </Section>
   );

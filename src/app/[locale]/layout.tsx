@@ -89,6 +89,14 @@ export default async function AppLayout(props: AppLayoutProps) {
   const messages = await getMessages();
   return (
     <html lang={params.locale}>
+      <head>
+        <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://firebasestorage.googleapis.com"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={inter.className}>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
