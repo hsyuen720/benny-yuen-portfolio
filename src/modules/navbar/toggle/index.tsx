@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type ToggleProps = {
   className?: string;

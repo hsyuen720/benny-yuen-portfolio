@@ -12,7 +12,7 @@ import type { IProject } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getFormat from "~/utils/getFormat";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 import Section from "../section";
 
 const Projects = async () => {
@@ -43,7 +43,7 @@ const Projects = async () => {
               ) : null}
               <div className={styles.detail}>
                 <Label className={styles.name} tag="h3" icon={FaVial} title={format(name)} />
-                <p className={styles.description}>{format(description)}</p>
+                <p className={styles.projectDescription}>{format(description)}</p>
                 <div className={styles.footer}>
                   <div className={styles.technologies}>
                     {technologies.map((technology, index) => (

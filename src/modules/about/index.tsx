@@ -10,7 +10,7 @@ import { ISocialMedia } from "~/types/data";
 import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 import Section from "../section";
 
 const About = async () => {
@@ -23,15 +23,17 @@ const About = async () => {
     <Section isLight id={PortfolioSection.About} className={styles.about}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
       <Browser isDark className={styles.browser} title={ct("title")}>
-        <a className={styles.photo} href={url} target="_blank">
-          <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
-          <span className={styles.overlay}>{t("photoDescription")}</span>
-        </a>
-        <div className={styles.content}>
-          <Heading isDark title={t("heading")} />
-          <p>{t("description")}</p>
-          <div className={styles.hashtag}>
-            {t.rich("techStack", { tech: (chunks) => <Hashtag isDark>#{chunks}</Hashtag> })}
+        <div className={styles.browserContent}>
+          <a className={styles.photo} href={url} target="_blank">
+            <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
+            <span className={styles.overlay}>{t("photoDescription")}</span>
+          </a>
+          <div className={styles.content}>
+            <Heading isDark title={t("heading")} />
+            <p className={styles.paragraph}>{t("description")}</p>
+            <div className={styles.hashtag}>
+              {t.rich("techStack", { tech: (chunks) => <Hashtag isDark>#{chunks}</Hashtag> })}
+            </div>
           </div>
         </div>
       </Browser>

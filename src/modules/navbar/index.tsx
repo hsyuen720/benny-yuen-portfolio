@@ -11,7 +11,7 @@ import Toggle from "~/modules/navbar/toggle";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 const menuItems = [PortfolioSection.About, PortfolioSection.Experience, PortfolioSection.Projects];
 

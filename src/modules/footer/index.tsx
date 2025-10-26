@@ -5,7 +5,7 @@ import Label from "~/components/label";
 import SocialMedia from "~/modules/socialMedia";
 import { AppTranslation } from "~/settings/i18n";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 const Footer = () => {
   const t = useTranslations();

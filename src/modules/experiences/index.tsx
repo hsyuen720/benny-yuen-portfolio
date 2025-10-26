@@ -13,7 +13,7 @@ import type { IExperience } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getFormat from "~/utils/getFormat";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 import Section from "../section";
 
 // Helper function to safely convert Firebase Timestamp to Date

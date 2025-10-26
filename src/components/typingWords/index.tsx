@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type TypingWordsProps = {
   className?: string;

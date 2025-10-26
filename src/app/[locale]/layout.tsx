@@ -6,7 +6,7 @@ import { getTranslations, getMessages, setRequestLocale } from "next-intl/server
 
 import { AppTranslation, Languages } from "~/settings/i18n";
 
-import "./global.scss";
+import "~/styles/global.css";
 
 export function generateStaticParams() {
   return Object.values(Languages).map((locale) => ({ locale }));

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import NextImage, { type ImageProps } from "next/image";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 const Image = (props: ImageProps) => {
   const { className, width, height, placeholder, draggable = false, ...rest } = props;

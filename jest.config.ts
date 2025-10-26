@@ -19,7 +19,8 @@ const customJestConfig: Config = {
     "^~/styles/(.*)$": "<rootDir>/src/styles/$1",
     "^~/types/(.*)$": "<rootDir>/src/types/$1",
     "^~/utils/(.*)$": "<rootDir>/src/utils/$1",
-    "\\.(scss|css|sass)$": "identity-obj-proxy",
+    "^react-icons/(.*)$": "<rootDir>/__mocks__/react-icons.ts",
+    "\\.css\\.ts$": "identity-obj-proxy",
   },
   testMatch: ["**/__tests__/**/*.test.[jt]s?(x)"],
   collectCoverageFrom: [

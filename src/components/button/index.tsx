@@ -5,7 +5,7 @@ import { memo } from "react";
 import Label, { type LabelProps } from "~/components/label";
 import { AppTranslation } from "~/settings/i18n";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type ButtonProps<T extends "button" | "a" = "button"> = LabelProps<T> & {
   isLoading?: boolean;

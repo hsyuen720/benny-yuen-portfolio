@@ -8,7 +8,7 @@ import useInView from "~/hooks/useInView";
 import { PortfolioSection } from "~/settings/constants";
 import type { ValueOf } from "~/types/common";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type SectionProps<T extends ValueOf<typeof PortfolioSection>> = {
   className?: string;

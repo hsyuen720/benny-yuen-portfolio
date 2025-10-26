@@ -1,9 +1,8 @@
-import { Suspense } from "react";
-import type { ComponentType } from "react";
+import { type ComponentType, Suspense } from "react";
 
 import Skeleton from "~/components/skeleton";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 interface WithSuspenseOptions {
   fallback?: React.ReactNode;

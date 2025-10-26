@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import type { ReactNode } from "react";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type HashtagProps = {
   isDark?: boolean;

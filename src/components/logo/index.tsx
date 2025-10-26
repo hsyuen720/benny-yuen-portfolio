@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { Damion } from "next/font/google";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 const inter = Damion({
   weight: ["400"],

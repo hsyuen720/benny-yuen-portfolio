@@ -1,17 +1,11 @@
-import path from "path";
-import { fileURLToPath } from "url";
-
+import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
 import createNextIntlPlugin from "next-intl/plugin";
 
+const withVanillaExtract = createVanillaExtractPlugin();
 const withNextIntl = createNextIntlPlugin("./src/utils/i18n.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // SASS options
-  sassOptions: {
-    includePaths: [path.join(fileURLToPath(import.meta.url), "styles")],
-  },
-
   // Optimize images
   images: {
     remotePatterns: [
@@ -94,4 +88,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default withVanillaExtract(withNextIntl(nextConfig));

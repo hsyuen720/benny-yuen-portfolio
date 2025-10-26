@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
 import Skeleton from "~/components/skeleton";
-import heroBannerStyles from "~/modules/heroBanner/styles.module.scss";
-import navbarStyles from "~/modules/navbar/styles.module.scss";
-import sectionStyles from "~/modules/section/styles.module.scss";
+import * as heroBannerStyles from "~/modules/heroBanner/styles.css";
+import * as navbarStyles from "~/modules/navbar/styles.css";
+import * as sectionStyles from "~/modules/section/styles.css";
 
 const Loading = () => {
   return (

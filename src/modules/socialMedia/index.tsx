@@ -6,7 +6,7 @@ import { AppCollection } from "~/settings/constants";
 import type { ISocialMedia } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type SocialMediaProps = {
   className?: string;

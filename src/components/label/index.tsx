@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React, { createElement, type HTMLAttributes, type ComponentPropsWithoutRef } from "react";
 import type { IconType } from "react-icons";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 
 export type LabelProps<T extends keyof React.JSX.IntrinsicElements> = {
   tag?: T;
@@ -17,7 +17,7 @@ const Label = <T extends keyof React.JSX.IntrinsicElements = "span">(props: Labe
 
   return (
     <Tag {...rest} className={clsx(styles.label, className)}>
-      {icon ? createElement(icon) : null}
+      {icon ? createElement(icon, { className: styles.icon }) : null}
       {title || children ? <span className={styles.title}>{children ?? title}</span> : null}
     </Tag>
   );

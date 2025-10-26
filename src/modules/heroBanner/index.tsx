@@ -7,7 +7,7 @@ import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import getStorageUrl from "~/utils/getStorageUrl";
 
-import styles from "./styles.module.scss";
+import * as styles from "./styles.css";
 import Section from "../section";
 
 const HeroBanner = async () => {
