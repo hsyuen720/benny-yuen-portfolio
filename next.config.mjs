@@ -15,6 +15,10 @@ const nextConfig = {
         port: "",
         pathname: `/v0/b/${process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET}/o/*`,
       },
+      {
+        protocol: "https",
+        hostname: "opengraph.githubassets.com",
+      },
     ],
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

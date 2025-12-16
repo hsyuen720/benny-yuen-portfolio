@@ -29,12 +29,25 @@ const Projects = async () => {
       <div className={styles.content}>
         {projects.map((project, index) => {
           const { photo, name, description, technologies, url, repository } = project;
+
+          // Use GitHub OG image as fallback when no photo but has repository URL
+          const getGitHubOgImage = (repoUrl: string) => {
+            const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+            if (match) {
+              const [, owner, repo] = match;
+              return `https://opengraph.githubassets.com/1/${owner}/${repo.replace(/\.git$/, "")}`;
+            }
+            return null;
+          };
+
+          const imageUrl = photo || (repository ? getGitHubOgImage(repository) : null);
+
           return (
             <div className={styles.project} key={index}>
-              {photo ? (
+              {imageUrl ? (
                 <Image
                   className={styles.photo}
-                  src={photo}
+                  src={imageUrl}
                   alt="Project Image"
                   fill
                   sizes="18em"
