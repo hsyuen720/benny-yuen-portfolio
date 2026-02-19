@@ -11,6 +11,11 @@ globalStyle("html, body", {
   padding: 0,
 });
 
+globalStyle("::selection", {
+  backgroundColor: colors.highlight,
+  color: colors.primary,
+});
+
 globalStyle("*, *::before, *::after", {
   boxSizing: "border-box",
 });

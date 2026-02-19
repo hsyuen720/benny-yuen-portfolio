@@ -29,8 +29,9 @@ export const navbar = style({
 });
 
 export const isBlurBackground = style({
-  backgroundColor: `rgba(${parseInt(colors.primary.slice(1, 3), 16)}, ${parseInt(colors.primary.slice(3, 5), 16)}, ${parseInt(colors.primary.slice(5, 7), 16)}, 0.9)`,
-  backdropFilter: "blur(10px)",
+  backgroundColor: `rgba(${parseInt(colors.primary.slice(1, 3), 16)}, ${parseInt(colors.primary.slice(3, 5), 16)}, ${parseInt(colors.primary.slice(5, 7), 16)}, 0.75)`,
+  backdropFilter: "blur(16px)",
+  borderBottom: `1px solid rgba(255, 255, 255, 0.06)`,
 });
 
 export const logo = style({

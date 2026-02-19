@@ -32,7 +32,8 @@ export const period = style({
   padding: "0.25em 0.5em 0.15em",
   backgroundColor: colors.highlight,
   color: colors.primary,
-  borderRadius: borderRadii.sm,
+  borderRadius: borderRadii.lg,
+  fontWeight: "700",
   "@media": {
     [`(max-width: ${breakpoint})`]: {
       justifySelf: "flex-start",
@@ -48,15 +49,16 @@ export const separator = style({
 });
 
 export const dot = style({
-  width: "1em",
-  height: "1em",
-  boxShadow: `0 0 0 0.1em ${colors.primaryText} inset`,
+  width: "0.875em",
+  height: "0.875em",
+  backgroundColor: colors.highlight,
   borderRadius: "50%",
+  boxShadow: `0 0 0 0.2em rgba(255, 183, 3, 0.2)`,
 });
 
 export const line = style({
-  backgroundColor: colors.primaryText,
-  width: "0.1em",
+  backgroundColor: `rgba(245, 245, 245, 0.15)`,
+  width: "0.125em",
   marginLeft: "0.02em",
 });
 

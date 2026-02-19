@@ -28,6 +28,15 @@ export const borderRadii = {
   md: "0.375rem",
   lg: "0.5rem",
   xl: "0.75rem",
+  "2xl": "1rem",
+  "3xl": "1.5rem",
+};
+
+export const shadows = {
+  sm: "0 1px 2px rgba(0, 0, 0, 0.3)",
+  md: "0 4px 12px rgba(0, 0, 0, 0.25)",
+  lg: "0 8px 24px rgba(0, 0, 0, 0.3)",
+  glow: `0 0 20px rgba(255, 183, 3, 0.15)`,
 };
 
 export const zIndices = {

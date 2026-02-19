@@ -4,7 +4,10 @@ import { colors, fontSizes, sectionPaddingHorizontal, breakpoint } from "~/style
 
 export const footer = style({
   padding: `1.25em ${sectionPaddingHorizontal.md}`,
-  borderTop: `0.25rem solid ${colors.highlight}`,
+  borderTop: "none",
+  borderImage: `linear-gradient(90deg, transparent, ${colors.highlight}, transparent) 1`,
+  borderTopWidth: "0.2rem",
+  borderTopStyle: "solid",
   fontSize: fontSizes.sm,
   overflowX: "hidden",
   display: "flex",

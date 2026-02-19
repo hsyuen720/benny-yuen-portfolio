@@ -1,9 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, transition, borderRadii, breakpoint } from "~/styles/theme.css";
+import { colors, transition, borderRadii, breakpoint, shadows } from "~/styles/theme.css";
 
 export const about = style({
-  clipPath: "polygon(0 10%, 100% 0%, 100% 90%, 0% 100%)",
+  clipPath: "polygon(0 6%, 100% 0%, 100% 94%, 0% 100%)",
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -29,13 +29,14 @@ export const browserContent = style({
 
 export const photo = style({
   position: "relative",
-  transition: transition("normal", "box-shadow"),
+  transition: transition("slow", "all"),
   border: `0.25em solid ${colors.primary}`,
   boxShadow: `0.75em 0.75em 0 ${colors.primary}`,
-  borderRadius: borderRadii.md,
+  borderRadius: borderRadii.lg,
   selectors: {
     "&:hover": {
-      boxShadow: `0 0 0 ${colors.primary}`,
+      boxShadow: shadows.lg,
+      transform: "translateY(-2px)",
     },
   },
 });
