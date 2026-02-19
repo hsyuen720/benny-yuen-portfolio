@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, fontSizes, borderRadii, breakpoint } from "~/styles/theme.css";
+import { colors, fontSizes, fontWeights, borderRadii, breakpoint } from "~/styles/theme.css";
 
 export const experiences = style({
   display: "flex",
@@ -33,7 +33,7 @@ export const period = style({
   backgroundColor: colors.highlight,
   color: colors.primary,
   borderRadius: borderRadii.lg,
-  fontWeight: "700",
+  fontWeight: fontWeights.bold,
   "@media": {
     [`(max-width: ${breakpoint})`]: {
       justifySelf: "flex-start",
