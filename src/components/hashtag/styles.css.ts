@@ -14,7 +14,6 @@ export const container = style([
 ]);
 
 export const isDark = style({
-  backgroundColor: "rgba(245, 245, 245, 0.1)",
-  color: colors.primaryText,
+  background: "rgba(245, 245, 245, 0.1)",
   border: "1px solid rgba(245, 245, 245, 0.12)",
 });
