@@ -41,6 +41,7 @@ const Projects = async () => {
           };
 
           const imageUrl = photo || (repository ? getGitHubOgImage(repository) : null);
+          const isGitHubOgImage = !photo && !!imageUrl;
 
           return (
             <div className={styles.project} key={index}>
@@ -52,6 +53,7 @@ const Projects = async () => {
                   fill
                   sizes="18em"
                   loading="lazy"
+                  unoptimized={isGitHubOgImage}
                 />
               ) : null}
               <div className={styles.detail}>
