@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, getMessages, setRequestLocale } from "next-intl/server";
 
 import { AppTranslation, Languages } from "~/settings/i18n";
+import BackgroundBlobs from "~/styles/BackgroundBlobs";
 
 import "~/styles/global.css";
 
@@ -103,6 +104,7 @@ export default async function AppLayout(props: AppLayoutProps) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={inter.className}>
+        <BackgroundBlobs />
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
           <SpeedInsights />
