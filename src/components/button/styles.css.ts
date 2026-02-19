@@ -9,7 +9,7 @@ export const button = style({
   cursor: "pointer",
   gap: "0.25em",
   padding: "0.3em 0.75em",
-  borderRadius: borderRadii.sm,
+  borderRadius: borderRadii.lg,
   transition: transition("normal", "all"),
   selectors: {
     "&:disabled": {
@@ -25,6 +25,7 @@ export const isDark = style({
     "&:hover": {
       backgroundColor: colors.highlight,
       color: colors.primary,
+      transform: "translateY(-1px)",
     },
   },
 });
@@ -38,6 +39,7 @@ export const isIconOnly = style({
     "&:hover": {
       backgroundColor: colors.highlight,
       color: colors.primary,
+      transform: "translateY(-1px)",
     },
   },
 });

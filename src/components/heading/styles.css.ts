@@ -26,10 +26,12 @@ export const title = style({
   fontSize: `${ratio}em`,
   fontWeight: fontWeights.bold,
   textTransform: "uppercase",
+  letterSpacing: "0.04em",
   color: colors.primaryText,
   selectors: {
     "&::after": {
       content: '"."',
+      color: colors.highlight,
     },
     [`${isDark} &`]: {
       color: colors.secondaryText,
@@ -38,8 +40,8 @@ export const title = style({
 });
 
 export const separator = style({
-  width: "100%",
-  height: "0.125em",
+  width: "4em",
+  height: "0.2em",
   borderRadius: borderRadii.xl,
-  backgroundColor: colors.highlight,
+  background: `linear-gradient(90deg, ${colors.highlight}, rgba(255, 183, 3, 0.3))`,
 });

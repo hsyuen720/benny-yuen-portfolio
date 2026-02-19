@@ -38,7 +38,7 @@ export const star = style({
   backgroundColor: colors.highlight,
   borderRadius: "50%",
   animation: `${twinkle} 3s ease-in-out infinite`,
-  boxShadow: `0 0 4px ${colors.highlight}`,
+  boxShadow: `0 0 6px 1px rgba(255, 183, 3, 0.4)`,
 });
 
 export const content = style({
@@ -57,6 +57,7 @@ export const greeting = style({
 
 export const introduction = style({
   fontSize: `${1.25 * ratio}em`,
+  letterSpacing: "-0.01em",
 });
 
 export const briefDescription = style({

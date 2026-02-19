@@ -6,9 +6,10 @@ export const container = style({
   borderWidth: "0.25em",
   borderStyle: "solid",
   borderColor: "var(--main-color)",
-  borderRadius: borderRadii.sm,
+  borderRadius: borderRadii["2xl"],
   display: "flex",
   flexDirection: "column",
+  overflow: "hidden",
   vars: {
     "--main-color": "#f1f1f1",
     "--text-color": "#000000",
@@ -58,10 +59,10 @@ export const dotGreen = style({
 
 export const input = style({
   border: "0.1em solid var(--main-color)",
-  borderRadius: borderRadii.md,
+  borderRadius: borderRadii.xl,
   width: "70%",
   margin: "0 auto",
-  padding: "0.25em",
+  padding: "0.25em 0.75em",
   outline: "none",
   lineHeight: 1.5,
   fontFamily: "inherit",
