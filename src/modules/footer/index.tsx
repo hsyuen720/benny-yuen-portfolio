@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import Label from "~/components/label";
 import SocialMedia from "~/modules/socialMedia";
@@ -7,8 +7,8 @@ import { AppTranslation } from "~/settings/i18n";
 
 import * as styles from "./styles.css";
 
-const Footer = () => {
-  const t = useTranslations();
+const Footer = async () => {
+  const t = await getTranslations();
   return (
     <footer className={styles.footer}>
       <Label

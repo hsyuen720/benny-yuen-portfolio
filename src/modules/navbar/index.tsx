@@ -30,7 +30,7 @@ const Navbar = () => {
     if (isMounted) {
       onScroll();
     }
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", onScroll);
       isMounted = false;

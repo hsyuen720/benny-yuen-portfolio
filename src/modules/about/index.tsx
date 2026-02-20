@@ -14,10 +14,16 @@ import * as styles from "./styles.css";
 import Section from "../section";
 
 const About = async () => {
-  const t = await getTranslations(`${AppTranslation.Portfolio}.about`);
-  const ct = await getTranslations(AppTranslation.Common);
-  const photoUrl = await getStorageUrl(t("photoPath"));
-  const url = (await getDocument<ISocialMedia>(AppCollection.SocialMedia, "linkedin"))?.value;
+  const [t, ct] = await Promise.all([
+    getTranslations(`${AppTranslation.Portfolio}.about`),
+    getTranslations(AppTranslation.Common),
+  ]);
+
+  const [photoUrl, socialData] = await Promise.all([
+    getStorageUrl(t("photoPath")),
+    getDocument<ISocialMedia>(AppCollection.SocialMedia, "linkedin"),
+  ]);
+  const url = socialData?.value;
 
   return (
     <Section isLight id={PortfolioSection.About} className={styles.about}>

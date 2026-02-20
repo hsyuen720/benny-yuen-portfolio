@@ -38,15 +38,16 @@ const convertToDate = (timestamp: unknown): Date => {
 };
 
 const Experiences = async () => {
-  const format = await getFormat();
-
-  const t = await getTranslations(`${AppTranslation.Portfolio}.experience`);
-  const ct = await getTranslations(AppTranslation.Common);
-
-  const experiences = await getCollection<IExperience>(AppCollection.Experiences, {
-    orderBy: "fromDate",
-    order: "desc",
-  });
+  // All four are independent — fetch in parallel
+  const [format, t, ct, experiences] = await Promise.all([
+    getFormat(),
+    getTranslations(`${AppTranslation.Portfolio}.experience`),
+    getTranslations(AppTranslation.Common),
+    getCollection<IExperience>(AppCollection.Experiences, {
+      orderBy: "fromDate",
+      order: "desc",
+    }),
+  ]);
 
   const startDate = DateTime.fromJSDate(
     convertToDate(experiences[experiences.length - 1].fromDate),

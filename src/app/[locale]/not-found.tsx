@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { AppTranslation } from "~/settings/i18n";
 
-export default function NotFound() {
-  const t = useTranslations(AppTranslation.Common);
+export default async function NotFound() {
+  const t = await getTranslations(AppTranslation.Common);
   return (
     <div>
       <h2>

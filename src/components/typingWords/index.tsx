@@ -14,18 +14,19 @@ export type TypingWordsProps = {
   isInfinite?: boolean;
 };
 
-const TypingWords = ({ className, words, ...rest }: TypingWordsProps) => {
+const TypingWords = ({
+  className,
+  words,
+  typeInterval = 200,
+  deleteInterval = 100,
+  swapInterval = 1000,
+  isInfinite = true,
+}: TypingWordsProps) => {
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [isReversed, setIsReversed] = useState(false);
 
   useEffect(() => {
-    const {
-      typeInterval = 200,
-      deleteInterval = 100,
-      swapInterval = 1000,
-      isInfinite = true,
-    } = rest;
     if (index === words.length) {
       if (isInfinite) {
         setIndex(0);
@@ -46,7 +47,7 @@ const TypingWords = ({ className, words, ...rest }: TypingWordsProps) => {
       isReversed ? deleteInterval : subIndex === words[index].length ? swapInterval : typeInterval,
     );
     return () => clearTimeout(timeout);
-  }, [subIndex, index, isReversed, words, rest]);
+  }, [subIndex, index, isReversed, words, typeInterval, deleteInterval, swapInterval, isInfinite]);
 
   return (
     <span className={clsx(styles.container, className)}>

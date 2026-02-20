@@ -16,13 +16,15 @@ import * as styles from "./styles.css";
 import Section from "../section";
 
 const Projects = async () => {
-  const format = await getFormat();
-
-  const t = await getTranslations(`${AppTranslation.Portfolio}.projects`);
-  const projects = await getCollection<IProject>(AppCollection.Projects, {
-    orderBy: "date",
-    order: "desc",
-  });
+  // All three are independent — fetch in parallel
+  const [format, t, projects] = await Promise.all([
+    getFormat(),
+    getTranslations(`${AppTranslation.Portfolio}.projects`),
+    getCollection<IProject>(AppCollection.Projects, {
+      orderBy: "date",
+      order: "desc",
+    }),
+  ]);
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
       <Heading isDark title={t("title")} description={t("subtitle")} />
