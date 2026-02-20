@@ -10,7 +10,7 @@ Guidelines for working with `next-intl` in this Next.js 15 portfolio project.
 ## Overview
 
 - **Library:** `next-intl`
-- **Supported locales:** Defined in `Languages` enum (`~/settings/i18n`)
+- **Supported locales:** Defined in `Languages` const object (`~/settings/i18n`)
 - **Local messages:** `src/locales/en.json`
 - **Remote messages:** Firebase Storage (`locales/{locale}.json`) — used in production
 - **Routing:** Locale is a dynamic segment `[locale]` in the App Router
@@ -21,19 +21,19 @@ Guidelines for working with `next-intl` in this Next.js 15 portfolio project.
 
 ```ts
 // ~/settings/i18n.ts
-export enum Languages {
-  English = "en",
+export const Languages = {
+  English: "en",
   // Add new locales here
-}
+} as const;
 
-export enum AppTranslation {
-  Common = "common",
-  Portfolio = "portfolio",
-}
+export const AppTranslation = {
+  Common: "common",
+  Portfolio: "portfolio",
+} as const;
 ```
 
 **Adding a new locale:**
-1. Add the value to the `Languages` enum
+1. Add the value to the `Languages` const object
 2. Create `src/locales/{locale}.json`
 3. Upload the file to Firebase Storage at `locales/{locale}.json`
 4. Add the locale to `generateStaticParams` in the layout (already uses `Object.values(Languages)`)
@@ -82,7 +82,7 @@ const MyModule = async () => {
 };
 ```
 
-**Always use `AppTranslation` enum** — never hardcode namespace strings.
+**Always use `AppTranslation` const object** — never hardcode namespace strings.
 
 ---
 
@@ -190,7 +190,7 @@ The `src/middleware.ts` handles locale detection and routing. The locale prefix 
 - `example.com/en/` → English
 - `example.com/zh/` → Chinese (when added)
 
-When adding new locales, ensure middleware picks them up via the `Languages` enum.
+When adding new locales, ensure middleware picks them up via the `Languages` const object.
 
 ---
 
