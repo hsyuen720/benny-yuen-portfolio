@@ -1,6 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, transition, borderRadii } from "~/styles/theme.css";
+import { glassCard } from "~/styles/glass.css";
+import { colors, transition } from "~/styles/theme.css";
 
 export const projects = style({
   clipPath: "polygon(0 0, 100% 3%, 100% 100%, 0% 100%)",
@@ -22,12 +23,14 @@ export const content = style({
   gap: "var(--gap)",
 });
 
-export const project = style({
-  position: "relative",
-  height: "18em",
-  overflow: "hidden",
-  borderRadius: borderRadii["2xl"],
-});
+export const project = style([
+  glassCard,
+  {
+    position: "relative",
+    height: "18em",
+    overflow: "hidden",
+  },
+]);
 
 export const photo = style({
   width: "100%",

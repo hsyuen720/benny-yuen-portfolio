@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
+import { glassCard } from "~/styles/glass.css";
 import { colors, fontSizes, fontWeights, borderRadii, breakpoint } from "~/styles/theme.css";
 
 export const experiences = style({
@@ -70,13 +71,17 @@ export const bottom = style({
   flex: 1,
 });
 
-export const detail = style({
-  gridArea: "detail",
-  display: "flex",
-  flexDirection: "column",
-  gap: "0.5em",
-  marginBottom: "2em",
-});
+export const detail = style([
+  glassCard,
+  {
+    gridArea: "detail",
+    display: "flex",
+    flexDirection: "column",
+    gap: "0.5em",
+    marginBottom: "2em",
+    padding: "1.25em",
+  },
+]);
 
 export const positions = style({
   fontWeight: "bold",
