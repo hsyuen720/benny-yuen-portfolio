@@ -1,6 +1,5 @@
 ---
-name: vanilla-extract-css
-description: Vanilla Extract CSS-in-JS styling patterns for this portfolio project. Use this skill when writing or reviewing style files (*.css.ts), working with theme tokens, responsive design, dark/light variants, animations, or when a component needs new styles.
+applyTo: "**/*.css.ts,src/styles/**"
 ---
 
 # Vanilla Extract CSS Patterns

@@ -1,6 +1,5 @@
 ---
-name: i18n-patterns
-description: Internationalization patterns for this portfolio project using next-intl. Use this skill when adding new translation keys, creating localized content, working with the locale routing, handling dates/numbers with locale formatting, or fetching remote translation files from Firebase Storage.
+applyTo: "src/settings/i18n.ts,src/locales/**,src/utils/i18n.ts,src/middleware.ts,src/app/**/layout.tsx,src/app/**/page.tsx"
 ---
 
 # Internationalization (i18n) Patterns

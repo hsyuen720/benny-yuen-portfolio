@@ -1,6 +1,5 @@
 ---
-name: react-best-practices
-description: React and Next.js performance optimization guidelines for this portfolio project. Use this skill when writing, reviewing, or refactoring React/Next.js components, data fetching, server/client components, re-render optimization, or bundle size improvements.
+applyTo: "src/components/**,src/modules/**,src/contexts/**,src/hooks/**,src/app/**/page.tsx"
 ---
 
 # React Best Practices

@@ -1,6 +1,5 @@
 ---
-name: firebase-patterns
-description: Firebase Firestore and Storage integration patterns for this portfolio project. Use this skill when working with data fetching utilities (getCollection, getDocument, getStorageUrl), adding new Firebase collections, handling cache invalidation, or working with Firebase types.
+applyTo: "src/utils/firebase.ts,src/utils/getCollection.ts,src/utils/getDocument.ts,src/utils/getStorageUrl.ts,src/settings/constants.ts,src/types/data.ts"
 ---
 
 # Firebase Patterns

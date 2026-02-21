@@ -1,6 +1,5 @@
 ---
-name: nextjs-patterns
-description: Next.js 15 App Router patterns for this portfolio project. Use this skill when working with App Router layouts, server/client component boundaries, caching strategies, revalidation, metadata, image optimization, middleware, or deployment configuration.
+applyTo: "src/app/**,next.config.mjs,src/middleware.ts,src/modules/**"
 ---
 
 # Next.js 15 App Router Patterns

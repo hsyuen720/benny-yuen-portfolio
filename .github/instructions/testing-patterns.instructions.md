@@ -1,6 +1,5 @@
 ---
-name: testing-patterns
-description: Jest and React Testing Library patterns for this portfolio project. Use this skill when writing, reviewing, or fixing tests for components, hooks, contexts, utilities, or settings. Covers test structure, mocking strategies, and coverage requirements.
+applyTo: "src/__tests__/**,jest.config.ts,jest.setup.ts,__mocks__/**"
 ---
 
 # Testing Patterns
