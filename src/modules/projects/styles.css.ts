@@ -32,7 +32,7 @@ export const project = style([
     transition: "all 0.3s ease-in-out",
     selectors: {
       "&:hover": {
-        transform: "translateY(-5px) scale(1.02)",
+        transform: "translateY(-5px)",
         borderTop: "2px solid rgba(255, 183, 3, 0.4)",
       },
     },
@@ -43,12 +43,7 @@ export const photo = style({
   width: "100%",
   height: "100%",
   objectFit: "cover",
-  transition: transition("slow", "transform"),
-  selectors: {
-    [`${project}:hover &`]: {
-      transform: "scale(1.05)",
-    },
-  },
+  borderRadius: "inherit",
 });
 
 export const detail = style({
@@ -60,6 +55,7 @@ export const detail = style({
   bottom: 0,
   backgroundColor: `rgba(${parseInt(colors.primary.slice(1, 3), 16)}, ${parseInt(colors.primary.slice(3, 5), 16)}, ${parseInt(colors.primary.slice(5, 7), 16)}, 0.65)`,
   backdropFilter: "blur(4px)",
+  borderRadius: "inherit",
   color: colors.primaryText,
   opacity: 0,
   padding: "1em 1.25em",

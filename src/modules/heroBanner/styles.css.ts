@@ -57,7 +57,6 @@ export const greeting = style({
 
 export const introduction = style({
   fontSize: `${1.5 * ratio}em`,
-  fontFamily: "var(--font-display), sans-serif",
   letterSpacing: "-0.02em",
   background: `linear-gradient(135deg, ${colors.primaryText}, ${colors.highlight}, ${colors.primaryAccentText})`,
   backgroundClip: "text",
