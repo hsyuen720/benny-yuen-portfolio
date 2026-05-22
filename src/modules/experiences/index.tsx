@@ -7,6 +7,7 @@ import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
+import ScrollReveal from "~/components/scrollReveal";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IExperience } from "~/types/data";
@@ -56,7 +57,9 @@ const Experiences = async () => {
 
   return (
     <Section id={PortfolioSection.Experience} className={styles.experiences}>
-      <Heading isSeparatorShown title={t("title")} description={t("subtitle", { numOfYears })} />
+      <ScrollReveal direction="up">
+        <Heading isSeparatorShown title={t("title")} description={t("subtitle", { numOfYears })} />
+      </ScrollReveal>
       <div className={styles.timeline}>
         {experiences.map((experience, index) => {
           const { id, company, positions, fromDate, toDate, descriptions, technologies } =
@@ -68,37 +71,39 @@ const Experiences = async () => {
             ? DateTime.fromJSDate(convertToDate(toDate)).toLocaleString(intlOption)
             : ct("date.present");
           return (
-            <div key={id ?? index} className={styles.item}>
-              <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />
-              <div className={styles.separator}>
-                <div className={clsx(styles.top, styles.line)} />
-                <div className={styles.dot} />
-                <div className={clsx(styles.bottom, styles.line)} />
+            <ScrollReveal key={id ?? index} direction="up" delay={index * 100}>
+              <div className={styles.item}>
+                <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />
+                <div className={styles.separator}>
+                  <div className={clsx(styles.top, styles.line)} />
+                  <div className={styles.dot} />
+                  <div className={clsx(styles.bottom, styles.line)} />
+                </div>
+                <div className={styles.detail}>
+                  <Label icon={FaCodeBranch} className={styles.positions}>
+                    {positions.map((position, index) => (
+                      <Fragment key={index}>
+                        <span className={styles.position}>{format(position)}</span>
+                        {index !== positions.length - 1 && <span> | </span>}
+                      </Fragment>
+                    ))}
+                  </Label>
+                  <Label className={styles.company} icon={FaSuitcase} title={format(company)} />
+                  <ul className={styles.descriptions}>
+                    {descriptions.map((description, index) => (
+                      <li key={index} className={styles.description}>
+                        {format(description)}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className={styles.technologies}>
+                    {technologies.map((technology) => (
+                      <Hashtag key={technology}>#{technology}</Hashtag>
+                    ))}
+                  </span>
+                </div>
               </div>
-              <div className={styles.detail}>
-                <Label icon={FaCodeBranch} className={styles.positions}>
-                  {positions.map((position, index) => (
-                    <Fragment key={index}>
-                      <span className={styles.position}>{format(position)}</span>
-                      {index !== positions.length - 1 && <span> | </span>}
-                    </Fragment>
-                  ))}
-                </Label>
-                <Label className={styles.company} icon={FaSuitcase} title={format(company)} />
-                <ul className={styles.descriptions}>
-                  {descriptions.map((description, index) => (
-                    <li key={index} className={styles.description}>
-                      {format(description)}
-                    </li>
-                  ))}
-                </ul>
-                <span className={styles.technologies}>
-                  {technologies.map((technology) => (
-                    <Hashtag key={technology}>#{technology}</Hashtag>
-                  ))}
-                </span>
-              </div>
-            </div>
+            </ScrollReveal>
           );
         })}
       </div>

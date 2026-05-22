@@ -6,6 +6,7 @@ import Button from "~/components/button";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Label from "~/components/label";
+import ScrollReveal from "~/components/scrollReveal";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IProject } from "~/types/data";
@@ -27,7 +28,9 @@ const Projects = async () => {
   ]);
   return (
     <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
-      <Heading isDark title={t("title")} description={t("subtitle")} />
+      <ScrollReveal direction="up">
+        <Heading isDark title={t("title")} description={t("subtitle")} />
+      </ScrollReveal>
       <div className={styles.content}>
         {projects.map((project, index) => {
           const { photo, name, description, technologies, url, repository } = project;
@@ -46,36 +49,38 @@ const Projects = async () => {
           const isGitHubOgImage = !photo && !!imageUrl;
 
           return (
-            <div className={styles.project} key={index}>
-              {imageUrl ? (
-                <Image
-                  className={styles.photo}
-                  src={imageUrl}
-                  alt="Project Image"
-                  fill
-                  sizes="18em"
-                  loading="lazy"
-                  unoptimized={isGitHubOgImage}
-                />
-              ) : null}
-              <div className={styles.detail}>
-                <Label className={styles.name} tag="h3" icon={FaVial} title={format(name)} />
-                <p className={styles.projectDescription}>{format(description)}</p>
-                <div className={styles.footer}>
-                  <div className={styles.technologies}>
-                    {technologies.map((technology, index) => (
-                      <Hashtag key={index}>#{technology}</Hashtag>
-                    ))}
-                  </div>
-                  <div className={styles.links}>
-                    {repository ? (
-                      <Button tag="a" icon={FaCode} href={repository} target="_blank" />
-                    ) : null}
-                    {url ? <Button tag="a" icon={FaLink} href={url} target="_blank" /> : null}
+            <ScrollReveal key={index} direction="up" delay={index * 100}>
+              <div className={styles.project}>
+                {imageUrl ? (
+                  <Image
+                    className={styles.photo}
+                    src={imageUrl}
+                    alt="Project Image"
+                    fill
+                    sizes="18em"
+                    loading="lazy"
+                    unoptimized={isGitHubOgImage}
+                  />
+                ) : null}
+                <div className={styles.detail}>
+                  <Label className={styles.name} tag="h3" icon={FaVial} title={format(name)} />
+                  <p className={styles.projectDescription}>{format(description)}</p>
+                  <div className={styles.footer}>
+                    <div className={styles.technologies}>
+                      {technologies.map((technology, index) => (
+                        <Hashtag key={index}>#{technology}</Hashtag>
+                      ))}
+                    </div>
+                    <div className={styles.links}>
+                      {repository ? (
+                        <Button tag="a" icon={FaCode} href={repository} target="_blank" />
+                      ) : null}
+                      {url ? <Button tag="a" icon={FaLink} href={url} target="_blank" /> : null}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </ScrollReveal>
           );
         })}
       </div>

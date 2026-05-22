@@ -81,13 +81,34 @@ export const isOpen = style({
 export const menuItem = style({
   cursor: "pointer",
   transition: transition("normal", "color"),
+  position: "relative",
   selectors: {
     "&:hover": {
       color: colors.highlight,
+    },
+    "&::after": {
+      content: '""',
+      position: "absolute",
+      bottom: "-2px",
+      left: 0,
+      width: "100%",
+      height: "2px",
+      backgroundColor: colors.highlight,
+      transform: "scaleX(0)",
+      transformOrigin: "left",
+      transition: transition("slow", "transform"),
+    },
+    "&:hover::after": {
+      transform: "scaleX(1)",
     },
   },
 });
 
 export const active = style({
   color: colors.highlight,
+  selectors: {
+    "&::after": {
+      transform: "scaleX(1)",
+    },
+  },
 });

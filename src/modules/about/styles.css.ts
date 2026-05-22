@@ -35,7 +35,8 @@ export const photo = style({
   borderRadius: borderRadii.lg,
   selectors: {
     "&:hover": {
-      boxShadow: shadows.lg,
+      boxShadow: `${shadows.lg}, 0 0 20px rgba(255, 183, 3, 0.15)`,
+      borderColor: colors.highlight,
       transform: "translateY(-2px)",
     },
   },

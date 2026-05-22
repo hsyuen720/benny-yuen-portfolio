@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, transition, borderRadii } from "~/styles/theme.css";
+import { colors, transition, borderRadii, shadows } from "~/styles/theme.css";
 
 export const button = style({
   appearance: "none",
@@ -26,6 +26,10 @@ export const isDark = style({
       backgroundColor: colors.highlight,
       color: colors.primary,
       transform: "translateY(-1px)",
+      boxShadow: shadows.glow,
+    },
+    "&:active": {
+      transform: "translateY(0) scale(0.98)",
     },
   },
 });
@@ -40,6 +44,9 @@ export const isIconOnly = style({
       backgroundColor: colors.highlight,
       color: colors.primary,
       transform: "translateY(-1px)",
+    },
+    "&:active": {
+      transform: "translateY(0) scale(0.98)",
     },
   },
 });

@@ -1,6 +1,6 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Quantico } from "next/font/google";
+import { Quantico, Syne } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, getMessages, setRequestLocale } from "next-intl/server";
 
@@ -74,10 +74,20 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   };
 }
 
-const inter = Quantico({
+const quantico = Quantico({
   weight: ["400", "700"],
   subsets: ["latin"],
   display: "swap",
+  preload: true,
+  adjustFontFallback: true,
+  fallback: ["system-ui", "arial"],
+});
+
+const syne = Syne({
+  weight: ["400", "500", "600", "700", "800"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-display",
   preload: true,
   adjustFontFallback: true,
   fallback: ["system-ui", "arial"],
@@ -103,7 +113,7 @@ export default async function AppLayout(props: AppLayoutProps) {
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
+      <body className={`${quantico.className} ${syne.variable}`}>
         <BackgroundBlobs />
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}

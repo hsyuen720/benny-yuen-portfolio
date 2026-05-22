@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 
 import Image from "~/components/image";
+import ScrollReveal from "~/components/scrollReveal";
 import TypingWords from "~/components/typingWords";
 import SocialMedia from "~/modules/socialMedia";
 import { PortfolioSection } from "~/settings/constants";
@@ -39,25 +40,29 @@ const HeroBanner = async () => {
           />
         ))}
       </div>
-      <div className={styles.content}>
-        <h2 className={styles.greeting}>{t("greeting")}</h2>
-        <h1 className={styles.introduction}>
-          {t.rich("introduction", {
-            role: (chunks) => <TypingWords words={chunks?.toString().split(", ") ?? []} />,
-          })}
-        </h1>
-        <p className={styles.briefDescription}>{t("description")}</p>
-        <SocialMedia className={styles.socialMedia} />
-      </div>
-      <Image
-        className={styles.profile}
-        src={profile}
-        alt="profile picture"
-        width={350}
-        height={350}
-        priority
-        fetchPriority="high"
-      />
+      <ScrollReveal direction="left">
+        <div className={styles.content}>
+          <h2 className={styles.greeting}>{t("greeting")}</h2>
+          <h1 className={styles.introduction}>
+            {t.rich("introduction", {
+              role: (chunks) => <TypingWords words={chunks?.toString().split(", ") ?? []} />,
+            })}
+          </h1>
+          <p className={styles.briefDescription}>{t("description")}</p>
+          <SocialMedia className={styles.socialMedia} />
+        </div>
+      </ScrollReveal>
+      <ScrollReveal direction="right" delay={200}>
+        <Image
+          className={styles.profile}
+          src={profile}
+          alt="profile picture"
+          width={350}
+          height={350}
+          priority
+          fetchPriority="high"
+        />
+      </ScrollReveal>
     </Section>
   );
 };

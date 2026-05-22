@@ -3,6 +3,7 @@ import { style, keyframes, createVar } from "@vanilla-extract/css";
 const blobColorGold = createVar();
 const blobColorBlue = createVar();
 const blobColorPurple = createVar();
+const blobColorTeal = createVar();
 
 const float1 = keyframes({
   "0%": { transform: "translate(0, 0) scale(1)" },
@@ -35,9 +36,10 @@ export const backgroundContainer = style({
   zIndex: 0,
   pointerEvents: "none",
   vars: {
-    [blobColorGold]: "rgba(255, 183, 3, 0.15)",
+    [blobColorGold]: "rgba(255, 183, 3, 0.18)",
     [blobColorBlue]: "rgba(59, 130, 246, 0.12)",
     [blobColorPurple]: "rgba(139, 92, 246, 0.1)",
+    [blobColorTeal]: "rgba(13, 148, 136, 0.1)",
   },
 });
 
@@ -81,5 +83,25 @@ export const blob3 = style([
     left: "30%",
     background: blobColorPurple,
     animation: `${float3} 22s ease-in-out infinite`,
+  },
+]);
+
+const float4 = keyframes({
+  "0%": { transform: "translate(0, 0) scale(1)" },
+  "33%": { transform: "translate(-25px, -40px) scale(1.06)" },
+  "66%": { transform: "translate(35px, 15px) scale(0.94)" },
+  "100%": { transform: "translate(0, 0) scale(1)" },
+});
+
+export const blob4 = style([
+  blobBase,
+  {
+    width: "25vw",
+    height: "25vw",
+    top: "35%",
+    right: "20%",
+    background: blobColorTeal,
+    filter: "blur(60px)",
+    animation: `${float4} 18s ease-in-out infinite`,
   },
 ]);

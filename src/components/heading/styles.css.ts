@@ -23,25 +23,29 @@ export const description = style({
 
 export const title = style({
   marginBlock: 0,
-  fontSize: `${ratio}em`,
+  fontSize: `${ratio * 1.4}em`,
+  fontFamily: "var(--font-display), sans-serif",
   fontWeight: fontWeights.bold,
   textTransform: "uppercase",
-  letterSpacing: "0.04em",
+  letterSpacing: "-0.01em",
   color: colors.primaryText,
+  textShadow: "0 2px 10px rgba(255, 183, 3, 0.1)",
   selectors: {
     "&::after": {
-      content: '"."',
+      content: '" /"',
       color: colors.highlight,
+      fontWeight: fontWeights.normal,
     },
     [`${isDark} &`]: {
       color: colors.secondaryText,
+      textShadow: "none",
     },
   },
 });
 
 export const separator = style({
-  width: "4em",
-  height: "0.2em",
+  width: "5em",
+  height: "0.15em",
   borderRadius: borderRadii.xl,
-  background: `linear-gradient(90deg, ${colors.highlight}, rgba(255, 183, 3, 0.3))`,
+  background: `linear-gradient(90deg, ${colors.highlight}, ${colors.highlightSecondary}, rgba(255, 183, 3, 0.1))`,
 });

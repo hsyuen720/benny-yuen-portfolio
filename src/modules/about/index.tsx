@@ -4,6 +4,7 @@ import Browser from "~/components/browser";
 import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
 import Image from "~/components/image";
+import ScrollReveal from "~/components/scrollReveal";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import { ISocialMedia } from "~/types/data";
@@ -27,22 +28,26 @@ const About = async () => {
 
   return (
     <Section isLight id={PortfolioSection.About} className={styles.about}>
-      <Heading isDark title={t("title")} description={t("subtitle")} />
-      <Browser isDark className={styles.browser} title={ct("title")}>
-        <div className={styles.browserContent}>
-          <a className={styles.photo} href={url} target="_blank">
-            <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
-            <span className={styles.overlay}>{t("photoDescription")}</span>
-          </a>
-          <div className={styles.content}>
-            <Heading isDark title={t("heading")} />
-            <p className={styles.paragraph}>{t("description")}</p>
-            <div className={styles.hashtag}>
-              {t.rich("techStack", { tech: (chunks) => <Hashtag isDark>#{chunks}</Hashtag> })}
+      <ScrollReveal direction="up">
+        <Heading isDark title={t("title")} description={t("subtitle")} />
+      </ScrollReveal>
+      <ScrollReveal direction="scale" delay={150}>
+        <Browser isDark className={styles.browser} title={ct("title")}>
+          <div className={styles.browserContent}>
+            <a className={styles.photo} href={url} target="_blank">
+              <Image src={photoUrl} alt="Benny Yuen" width={300} height={300} loading="lazy" />
+              <span className={styles.overlay}>{t("photoDescription")}</span>
+            </a>
+            <div className={styles.content}>
+              <Heading isDark title={t("heading")} />
+              <p className={styles.paragraph}>{t("description")}</p>
+              <div className={styles.hashtag}>
+                {t.rich("techStack", { tech: (chunks) => <Hashtag isDark>#{chunks}</Hashtag> })}
+              </div>
             </div>
           </div>
-        </div>
-      </Browser>
+        </Browser>
+      </ScrollReveal>
     </Section>
   );
 };

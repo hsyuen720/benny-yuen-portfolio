@@ -56,8 +56,14 @@ export const greeting = style({
 });
 
 export const introduction = style({
-  fontSize: `${1.25 * ratio}em`,
-  letterSpacing: "-0.01em",
+  fontSize: `${1.5 * ratio}em`,
+  fontFamily: "var(--font-display), sans-serif",
+  letterSpacing: "-0.02em",
+  background: `linear-gradient(135deg, ${colors.primaryText}, ${colors.highlight}, ${colors.primaryAccentText})`,
+  backgroundClip: "text",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundSize: "200% 200%",
 });
 
 export const briefDescription = style({

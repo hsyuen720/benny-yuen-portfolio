@@ -29,6 +29,13 @@ export const project = style([
     position: "relative",
     height: "18em",
     overflow: "hidden",
+    transition: "all 0.3s ease-in-out",
+    selectors: {
+      "&:hover": {
+        transform: "translateY(-5px) scale(1.02)",
+        borderTop: "2px solid rgba(255, 183, 3, 0.4)",
+      },
+    },
   },
 ]);
 

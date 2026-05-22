@@ -1,11 +1,16 @@
 export const colors = {
   primary: "#070707",
   highlight: "#ffb703",
+  highlightSecondary: "#0d9488",
+  highlightMuted: "rgba(255, 183, 3, 0.15)",
+  highlightSecondaryMuted: "rgba(13, 148, 136, 0.12)",
   primaryText: "#f5f5f5",
   primaryAccentText: "#f8efe0",
   secondary: "#f8efe0",
   secondaryText: "#0b0c10",
   secondaryAccentText: "#183642",
+  surfaceElevated: "rgba(255, 255, 255, 0.03)",
+  surfaceBorder: "rgba(255, 255, 255, 0.06)",
 };
 
 export const fontSizes = {
@@ -14,6 +19,10 @@ export const fontSizes = {
   md: "1rem",
   lg: "1.125rem",
   xl: "1.25rem",
+  "2xl": "1.5rem",
+  "3xl": "1.875rem",
+  "4xl": "2.25rem",
+  "5xl": "3rem",
 };
 
 export const fontWeights = {
@@ -36,7 +45,10 @@ export const shadows = {
   sm: "0 1px 2px rgba(0, 0, 0, 0.3)",
   md: "0 4px 12px rgba(0, 0, 0, 0.25)",
   lg: "0 8px 24px rgba(0, 0, 0, 0.3)",
+  xl: "0 20px 40px rgba(0, 0, 0, 0.4)",
   glow: `0 0 20px rgba(255, 183, 3, 0.15)`,
+  goldGlow: "0 0 30px rgba(255, 183, 3, 0.2), 0 0 60px rgba(255, 183, 3, 0.1)",
+  tealGlow: "0 0 30px rgba(13, 148, 136, 0.15)",
 };
 
 export const zIndices = {
@@ -64,7 +76,13 @@ export const durations = {
   fastest: "50ms",
 };
 
+export const easings = {
+  smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
+  bounce: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+  decelerate: "cubic-bezier(0, 0, 0.2, 1)",
+};
+
 // Helper function to create transition strings
 export const transition = (duration: keyof typeof durations, property: string) => {
-  return `${property} ${durations[duration]} cubic-bezier(0.4, 0, 0.2, 1)`;
+  return `${property} ${durations[duration]} ${easings.smooth}`;
 };

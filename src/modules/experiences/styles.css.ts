@@ -1,7 +1,12 @@
-import { style } from "@vanilla-extract/css";
+import { style, keyframes } from "@vanilla-extract/css";
 
 import { glassCard } from "~/styles/glass.css";
 import { colors, fontSizes, fontWeights, borderRadii, breakpoint } from "~/styles/theme.css";
+
+const pulse = keyframes({
+  "0%, 100%": { boxShadow: `0 0 0 0.2em rgba(255, 183, 3, 0.2)` },
+  "50%": { boxShadow: `0 0 0 0.35em rgba(255, 183, 3, 0.35)` },
+});
 
 export const experiences = style({
   display: "flex",
@@ -55,10 +60,11 @@ export const dot = style({
   backgroundColor: colors.highlight,
   borderRadius: "50%",
   boxShadow: `0 0 0 0.2em rgba(255, 183, 3, 0.2)`,
+  animation: `${pulse} 3s ease-in-out infinite`,
 });
 
 export const line = style({
-  backgroundColor: `rgba(245, 245, 245, 0.15)`,
+  background: `linear-gradient(180deg, ${colors.highlight}, rgba(245, 245, 245, 0.08))`,
   width: "0.125em",
   marginLeft: "0.02em",
 });

@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import { getTranslations } from "next-intl/server";
 
 import Label from "~/components/label";
+import ScrollReveal from "~/components/scrollReveal";
 import SocialMedia from "~/modules/socialMedia";
 import { AppTranslation } from "~/settings/i18n";
 
@@ -11,14 +12,16 @@ const Footer = async () => {
   const t = await getTranslations();
   return (
     <footer className={styles.footer}>
-      <Label
-        className={styles.label}
-        title={t(`${AppTranslation.Portfolio}.footer.copyright`, {
-          year: DateTime.now().year,
-          name: t(`${AppTranslation.Common}.author`),
-        })}
-      />
-      <SocialMedia />
+      <ScrollReveal direction="up" className={styles.content}>
+        <Label
+          className={styles.label}
+          title={t(`${AppTranslation.Portfolio}.footer.copyright`, {
+            year: DateTime.now().year,
+            name: t(`${AppTranslation.Common}.author`),
+          })}
+        />
+        <SocialMedia />
+      </ScrollReveal>
     </footer>
   );
 };
