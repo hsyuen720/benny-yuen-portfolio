@@ -87,6 +87,7 @@ describe("normalize", () => {
     it("drops a missing part, and is empty when both are missing", () => {
       expect(roleLine({ role: "Software Engineer" })).toBe("Software Engineer");
       expect(roleLine({ role: "", location: undefined })).toBe("");
+      expect(roleLine({ role: "  ", location: " Copenhagen " })).toBe("Copenhagen");
     });
   });
 
