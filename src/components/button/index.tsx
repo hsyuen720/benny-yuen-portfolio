@@ -1,37 +1,49 @@
 import clsx from "clsx";
-import { useTranslations } from "next-intl";
-import { memo } from "react";
-
-import Label, { type LabelProps } from "~/components/label";
-import { AppTranslation } from "~/settings/i18n";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ComponentType } from "react";
 
 import * as styles from "./styles.css";
 
-export type ButtonProps<T extends "button" | "a" = "button"> = LabelProps<T> & {
-  isLoading?: boolean;
-  disabled?: boolean;
-  isDark?: boolean;
+type CommonProps = {
+  variant?: "primary" | "secondary";
+  icon?: ComponentType<{ size?: number; "aria-hidden"?: boolean }>;
 };
 
-const Button = <T extends "button" | "a" = "button">(props: ButtonProps<T>) => {
-  const { tag, isLoading, icon, title, children, disabled, className, isDark, ...rest } = props;
-  const t = useTranslations(AppTranslation.Common);
-  const isIconOnly = !!icon && !title && !children;
+export type ButtonProps = CommonProps &
+  (
+    | ({ href: string } & AnchorHTMLAttributes<HTMLAnchorElement>)
+    | ({ href?: undefined } & ButtonHTMLAttributes<HTMLButtonElement>)
+  );
 
+const Button = (props: ButtonProps) => {
+  const { variant = "secondary", icon: Icon, className, children, ...rest } = props;
+  const classes = clsx(
+    styles.button,
+    styles[variant],
+    { [styles.iconOnly]: !!Icon && !children },
+    className,
+  );
+  const content = (
+    <>
+      {Icon ? <Icon size={20} aria-hidden /> : null}
+      {children}
+    </>
+  );
+
+  if (rest.href !== undefined) {
+    return (
+      <a className={classes} {...(rest as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+        {content}
+      </a>
+    );
+  }
   return (
-    <Label
-      {...rest}
-      tag={tag ?? "button"}
-      icon={icon}
-      disabled={disabled}
-      className={clsx(
-        styles.button,
-        { [styles.isIconOnly]: isIconOnly, [styles.isDark]: isDark },
-        className,
-      )}
+    <button
+      type="button"
+      className={classes}
+      {...(rest as ButtonHTMLAttributes<HTMLButtonElement>)}
     >
-      {isLoading ? t("text.loading") : (children ?? title)}
-    </Label>
+      {content}
+    </button>
   );
 };
-export default memo(Button);
+export default Button;
