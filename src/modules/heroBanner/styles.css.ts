@@ -1,6 +1,6 @@
-import { style } from "@vanilla-extract/css";
+import { keyframes, style } from "@vanilla-extract/css";
 
-import { breakpoint, colors, fonts, layout } from "~/styles/theme.css";
+import { breakpoint, colors, ease, fonts, layout, radii, reducedMotion } from "~/styles/theme.css";
 
 export const band = style({
   position: "relative",
@@ -20,24 +20,8 @@ export const inner = style({
     [`(max-width: ${breakpoint})`]: {
       gridTemplateColumns: "minmax(0, 1fr)",
       gap: "40px",
-      padding: `40px ${layout.gutterMobile} 200px`,
+      padding: `40px ${layout.gutterMobile} 64px`,
     },
-  },
-});
-
-// The field sits behind the photo side and fades out towards the text, so it never fights the copy
-const fade = "radial-gradient(ellipse 60% 70% at 65% 65%, #000 35%, transparent 75%)";
-export const terrain = style({
-  position: "absolute",
-  zIndex: 0,
-  left: "38%",
-  bottom: "-22%",
-  width: "min(1000px, 90vw)",
-  maskImage: fade,
-  WebkitMaskImage: fade,
-  "@media": {
-    // Stacked layout: a strip under the buttons
-    [`(max-width: ${breakpoint})`]: { left: "-20%", bottom: "-50vw", width: "140vw" },
   },
 });
 
@@ -129,15 +113,16 @@ export const actions = style({
   pointerEvents: "auto",
 });
 
-export const photoFrame = style({
+export const visual = style({
   position: "relative",
   zIndex: 1,
-  width: "300px",
+  width: "380px",
   "@media": {
-    [`(max-width: ${breakpoint})`]: { display: "none" },
+    [`(max-width: ${breakpoint})`]: { width: "100%", maxWidth: "420px" },
   },
 });
 
+// Offset hairline frame behind the photo: depth without decoration
 export const photo = style({
   display: "block",
   width: "100%",
@@ -145,6 +130,51 @@ export const photo = style({
   aspectRatio: "4 / 5",
   objectFit: "cover",
   objectPosition: "50% 28%",
-  clipPath:
-    "polygon(0 0, calc(100% - 48px) 0, 100% 48px, 100% 100%, 48px 100%, 0 calc(100% - 48px))",
+  borderRadius: radii.card,
+  boxShadow: `16px 16px 0 -1px ${colors.page}, 16px 16px 0 0 ${colors.line2}`,
+});
+
+const pulse = keyframes({
+  "0%": { boxShadow: `0 0 0 0 rgba(255, 183, 3, 0.55)` },
+  "70%": { boxShadow: `0 0 0 10px rgba(255, 183, 3, 0)` },
+  "100%": { boxShadow: `0 0 0 0 rgba(255, 183, 3, 0)` },
+});
+
+// "Now" card overlapping the photo's lower-left corner, fed by the current experience
+export const now = style({
+  position: "absolute",
+  left: "-32px",
+  bottom: "32px",
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  maxWidth: "calc(100% + 16px)",
+  padding: "12px 16px",
+  backgroundColor: colors.raised,
+  border: `1px solid ${colors.line2}`,
+  borderRadius: radii.button,
+  fontSize: "15px",
+  color: colors.text,
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { left: "12px", bottom: "12px", maxWidth: "calc(100% - 24px)" },
+  },
+});
+
+export const nowDot = style({
+  flexShrink: 0,
+  width: "8px",
+  height: "8px",
+  borderRadius: "50%",
+  backgroundColor: colors.gold,
+  animation: `${pulse} 2.4s ${ease} infinite`,
+  "@media": {
+    [reducedMotion]: { animation: "none" },
+  },
+});
+
+export const nowLabel = style({
+  color: colors.muted,
+  selectors: {
+    "&::after": { content: '"·"', marginLeft: "10px" },
+  },
 });

@@ -3,13 +3,14 @@ import { getTranslations } from "next-intl/server";
 import { LuArrowRight } from "react-icons/lu";
 
 import Button from "~/components/button";
-import HairlineFigure from "~/components/hairlineFigure";
 import SocialMedia from "~/modules/socialMedia";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
-import type { IHomeContent } from "~/types/data";
+import type { IExperience, IHomeContent } from "~/types/data";
+import getCollection from "~/utils/getCollection";
 import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
+import { sortExperiences, toExperience } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import Section from "../section";
@@ -17,19 +18,19 @@ import Section from "../section";
 type Stat = { value: string; label: string };
 
 const HeroBanner = async () => {
-  const [t, ct, content] = await Promise.all([
+  const [t, ct, content, docs] = await Promise.all([
     getTranslations(`${AppTranslation.Portfolio}.heroBanner`),
     getTranslations(AppTranslation.Common),
     getDocument<IHomeContent>(AppCollection.Content, "home"),
+    getCollection<IExperience>(AppCollection.Experiences),
   ]);
+  // The newest job without an end date; the card hides when there is none
+  const current = sortExperiences(docs.map(toExperience)).find((e) => !e.end);
   const photo = await getStorageUrl(t("photoPath"));
   const stats = t.raw("stats") as Stat[];
 
   return (
     <Section id={PortfolioSection.HeroBanner} className={styles.band} innerClassName={styles.inner}>
-      <div aria-hidden="true" className={styles.terrain}>
-        <HairlineFigure figure="Terrain" label="" />
-      </div>
       <div className={styles.content}>
         <p className={styles.eyebrow}>
           <span className={styles.author}>{ct("author")}</span>
@@ -55,16 +56,23 @@ const HeroBanner = async () => {
           <SocialMedia allSecondary />
         </div>
       </div>
-      <div className={styles.photoFrame}>
+      <div className={styles.visual}>
         <NextImage
           className={styles.photo}
           src={photo}
           alt={t("photoAlt")}
-          width={300}
-          height={375}
-          sizes="(max-width: 720px) 60vw, 300px"
+          width={380}
+          height={475}
+          sizes="(max-width: 720px) 100vw, 380px"
           priority
         />
+        {current ? (
+          <p className={styles.now}>
+            <span className={styles.nowDot} aria-hidden="true" />
+            <span className={styles.nowLabel}>{t("now")}</span>
+            <span>{t("at", { role: current.role, company: current.company })}</span>
+          </p>
+        ) : null}
       </div>
     </Section>
   );
