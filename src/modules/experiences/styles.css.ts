@@ -71,7 +71,7 @@ export const dot = style({
   width: "11px",
   height: "11px",
   borderRadius: "50%",
-  backgroundColor: colors.page,
+  backgroundColor: "var(--band)",
   border: `1px solid ${colors.text2}`,
 });
 

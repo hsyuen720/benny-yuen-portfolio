@@ -10,6 +10,14 @@ export const section = style({
   flexDirection: "column",
   justifyContent: "center",
   borderTop: `1px solid ${colors.line}`,
+  vars: { "--band": colors.page },
+  backgroundColor: "var(--band)",
+});
+
+// Darker band: sections alternate tone so the page has rhythm. Children that paint the
+// band colour (figure plates, hollow dots) read `--band`.
+export const deep = style({
+  vars: { "--band": colors.deep },
 });
 
 export const inner = style({

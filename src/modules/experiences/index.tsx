@@ -28,7 +28,11 @@ const Experiences = async () => {
   const years = experiences.map((e) => (e.start ? String(e.start.getFullYear()) : "")).reverse();
 
   return (
-    <Section id={PortfolioSection.Experience} innerClassName={sectionStyles.split}>
+    <Section
+      id={PortfolioSection.Experience}
+      className={sectionStyles.deep}
+      innerClassName={sectionStyles.split}
+    >
       <div className={clsx(sectionStyles.splitAside, styles.aside)}>
         <Heading title={t("title")} description={content?.experienceIntro || t("intro")} />
         <CommitGraph

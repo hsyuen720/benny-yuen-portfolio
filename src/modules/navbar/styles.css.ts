@@ -6,7 +6,9 @@ export const header = style({
   position: "sticky",
   top: 0,
   zIndex: 10,
-  backgroundColor: colors.page,
+  backgroundColor: `color-mix(in oklab, ${colors.page} 82%, transparent)`,
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
   borderBottom: `1px solid ${colors.line}`,
 });
 

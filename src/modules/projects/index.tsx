@@ -11,6 +11,7 @@ import MoreProjects from "./moreProjects";
 import ProjectCard from "./projectCard";
 import * as styles from "./styles.css";
 import Section from "../section";
+import * as sectionStyles from "../section/styles.css";
 
 const MAX_FEATURED = 2;
 
@@ -25,7 +26,11 @@ const Projects = async () => {
   const others = projects.filter((p) => !featured.includes(p));
 
   return (
-    <Section id={PortfolioSection.Projects} innerClassName={styles.inner}>
+    <Section
+      id={PortfolioSection.Projects}
+      className={sectionStyles.deep}
+      innerClassName={styles.inner}
+    >
       <div className={styles.header}>
         <Heading title={t("title")} />
         <p className={styles.subtitle}>{t("subtitle")}</p>

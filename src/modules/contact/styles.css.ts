@@ -2,10 +2,6 @@ import { style } from "@vanilla-extract/css";
 
 import { breakpoint, colors, layout } from "~/styles/theme.css";
 
-export const band = style({
-  backgroundColor: colors.deep,
-});
-
 export const inner = style({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
@@ -39,10 +35,6 @@ export const figure = style({
   justifySelf: "end",
   width: "100%",
   maxWidth: "440px",
-  selectors: {
-    // Beats the global [data-hairline] palette regardless of stylesheet order
-    "&[data-hairline]": { vars: { "--hairline-plate": colors.deep } },
-  },
 });
 
 export const footer = style({
