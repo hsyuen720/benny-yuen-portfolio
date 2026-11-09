@@ -2,12 +2,18 @@ import { style } from "@vanilla-extract/css";
 
 import { breakpoint, colors, layout } from "~/styles/theme.css";
 
+// Each section fills at least one screen below the sticky nav, content centred vertically
 export const section = style({
   position: "relative",
+  minHeight: `calc(100svh - ${layout.navHeight})`,
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
   borderTop: `1px solid ${colors.line}`,
 });
 
 export const inner = style({
+  width: "100%",
   maxWidth: layout.maxWidth,
   margin: "0 auto",
   padding: `96px ${layout.gutter}`,

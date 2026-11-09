@@ -29,6 +29,9 @@ export const wordmark = style({
   color: colors.text,
   textDecoration: "none",
   padding: "12px 0",
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { padding: "10px 0 0" },
+  },
 });
 
 export const links = style({
@@ -39,27 +42,30 @@ export const links = style({
   columnGap: "28px",
   fontSize: "15px",
   "@media": {
-    [`(max-width: ${breakpoint})`]: { columnGap: "20px" },
+    [`(max-width: ${breakpoint})`]: { columnGap: "20px", fontSize: "14px" },
   },
 });
 
 export const link = style({
   position: "relative",
   padding: "20px 0",
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { padding: "8px 0 12px" },
+  },
   color: colors.text2,
   textDecoration: "none",
   transition: transition("hover", "color"),
   selectors: {
     "&:hover, &[aria-current]": { color: colors.text },
-    // Hover underline grows from the left
+    // Hover line sits where the gold indicator does (on the header's bottom edge) and grows from the left
     "&::after": {
       content: '""',
       position: "absolute",
       left: 0,
       right: 0,
-      bottom: "14px",
-      height: "1px",
-      backgroundColor: colors.line2,
+      bottom: "-1px",
+      height: "2px",
+      backgroundColor: colors.text2,
       transform: "scaleX(0)",
       transformOrigin: "left",
       transition: transition("hover", "transform"),
