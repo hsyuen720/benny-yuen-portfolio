@@ -31,7 +31,7 @@ const Experiences = async () => {
   const jobs = experiences
     .slice(0, GRAPH_JOBS)
     .map((e, index) => ({
-      company: e.company,
+      company: e.companyShort,
       years: e.start
         ? `${e.start.getFullYear()} – ${e.end ? e.end.getFullYear() : ct("date.present")}`
         : "",
@@ -60,7 +60,11 @@ const Experiences = async () => {
           jobs={jobs}
           since={since}
           label={t("graphLabel", {
-            jobs: jobs.map((job) => `${job.company} ${job.years}`).join(", "),
+            // Screen readers get the full company names
+            jobs: experiences
+              .slice(0, GRAPH_JOBS)
+              .map((e, i) => `${e.company} ${jobs[jobs.length - 1 - i].years}`)
+              .join(", "),
           })}
         />
       </div>

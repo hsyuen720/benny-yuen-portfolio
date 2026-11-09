@@ -20,6 +20,8 @@ export interface IExperience {
   id: string;
   role?: IText;
   company?: IText;
+  /** Short name for the career graph, e.g. "Melco". Falls back to `company`. */
+  companyShort?: string;
   location?: string;
   workMode?: string;
   start?: IDate;

@@ -56,6 +56,7 @@ export type Experience = {
   id: string;
   role: string;
   company: string;
+  companyShort: string;
   location?: string;
   workMode?: string;
   start: Date | null;
@@ -67,6 +68,7 @@ export const toExperience = (doc: IExperience): Experience => ({
   id: doc.id,
   role: toText(doc.role ?? doc.positions?.[0]),
   company: toText(doc.company),
+  companyShort: doc.companyShort || toText(doc.company),
   location: doc.location,
   workMode: doc.workMode,
   start: toDate(doc.start ?? doc.fromDate),

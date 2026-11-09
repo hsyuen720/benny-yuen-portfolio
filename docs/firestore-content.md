@@ -41,15 +41,16 @@ Every non-featured project is listed under "More projects" (first five, then "Sh
 
 ## `experiences` (edit each document)
 
-| Field      | Type                | Sample                      | Legacy fallback   |
-| ---------- | ------------------- | --------------------------- | ----------------- |
-| `role`     | string              | Software Engineer           | `positions[0]`    |
-| `company`  | string              | Jurnie                      | (same field)      |
-| `location` | string              | Copenhagen                  | hidden if missing |
-| `workMode` | string              | part-time / remote / hybrid | hidden if missing |
-| `start`    | timestamp           | 2026-08-01                  | `fromDate`        |
-| `end`      | timestamp or `null` | `null` for the current job  | `toDate`          |
-| `summary`  | string              | One sentence.               | `descriptions[0]` |
+| Field          | Type                | Sample                                      | Legacy fallback   |
+| -------------- | ------------------- | ------------------------------------------- | ----------------- |
+| `role`         | string              | Software Engineer                           | `positions[0]`    |
+| `company`      | string              | Jurnie                                      | (same field)      |
+| `companyShort` | string              | Melco (optional, shown in the career graph) | `company`         |
+| `location`     | string              | Copenhagen                                  | hidden if missing |
+| `workMode`     | string              | part-time / remote / hybrid                 | hidden if missing |
+| `start`        | timestamp           | 2026-08-01                                  | `fromDate`        |
+| `end`          | timestamp or `null` | `null` for the current job                  | `toDate`          |
+| `summary`      | string              | One sentence.                               | `descriptions[0]` |
 
 Sorted newest first by start date. The newest job with no `end` gets the gold dot. Each document
 adds one commit to the commit graph, labelled with its start year.

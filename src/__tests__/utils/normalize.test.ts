@@ -105,4 +105,17 @@ describe("normalize", () => {
       expect(isStudying(end, 2026)).toBe(expected);
     });
   });
+
+  describe("companyShort", () => {
+    it("uses the short name when given and falls back to the full name", () => {
+      const withShort = toExperience({
+        id: "m",
+        company: "Melco Resorts & Entertainment",
+        companyShort: "Melco",
+      } as IExperience);
+      const without = toExperience({ id: "a", company: "Amplify Health" } as IExperience);
+      expect(withShort.companyShort).toBe("Melco");
+      expect(without.companyShort).toBe("Amplify Health");
+    });
+  });
 });
