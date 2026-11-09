@@ -9,7 +9,7 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "home",
       intro:
-        "Software engineer. Seven years building React and React Native apps for health insurance, hospitality and enterprise teams in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
+        "Seven years on health insurance, hospitality and enterprise apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
       experienceIntro:
         "Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.",
     },

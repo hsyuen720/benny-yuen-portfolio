@@ -9,25 +9,25 @@ while you migrate.
 
 ## `content/home` (new document)
 
-| Field             | Type   | Sample                                                                                                                                                                         |
-| ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `intro`           | string | Software engineer. Seven years building React and React Native apps for health insurance, hospitality and enterprise teams in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie. |
-| `experienceIntro` | string | Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.                                                                                          |
+| Field             | Type   | Sample                                                                                                                                 |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `intro`           | string | Seven years on health insurance, hospitality and enterprise apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie. |
+| `experienceIntro` | string | Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.                                                  |
 
 If the document is missing, the copy bundled in `src/locales/en.json` is shown.
 
 ## `projects` (edit each document)
 
-| Field      | Type                                  | Notes                                                                                     | Legacy fallback       |
-| ---------- | ------------------------------------- | ----------------------------------------------------------------------------------------- | --------------------- |
-| `title`    | string                                | Treklay                                                                                   | `name`                |
-| `summary`  | string                                | One or two sentences.                                                                     | `description`         |
-| `stack`    | array of `{label, value}` or strings  | Featured cards show `{label, value}` rows, e.g. `{label: "App", value: "Expo, React Native"}`. Strings are joined into one line. | `technologies`        |
-| `links`    | map `{code?, demo?}`                  | `code`: repository URL. `demo`: live URL.                                                 | `repository`, `url`   |
-| `image`    | string (URL)                          | Full download URL (Firebase Storage). Without it, the card shows the Hairline `Exploded` figure. | `photo`               |
-| `featured` | boolean                               | `true` for at most two projects. The first (by `order`) gets the large card.              | default `false`       |
-| `order`    | number                                | Ascending. Documents without it come last, newest `date` first.                           | `date`                |
-| `status`   | string                                | `live` hides the badge. Any other value is shown as the badge text, e.g. `In development`. | default `live`        |
+| Field      | Type                                 | Notes                                                                                                                            | Legacy fallback     |
+| ---------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `title`    | string                               | Treklay                                                                                                                          | `name`              |
+| `summary`  | string                               | One or two sentences.                                                                                                            | `description`       |
+| `stack`    | array of `{label, value}` or strings | Featured cards show `{label, value}` rows, e.g. `{label: "App", value: "Expo, React Native"}`. Strings are joined into one line. | `technologies`      |
+| `links`    | map `{code?, demo?}`                 | `code`: repository URL. `demo`: live URL.                                                                                        | `repository`, `url` |
+| `image`    | string (URL)                         | Full download URL (Firebase Storage). Without it, the card shows the Hairline `Exploded` figure.                                 | `photo`             |
+| `featured` | boolean                              | `true` for at most two projects. The first (by `order`) gets the large card.                                                     | default `false`     |
+| `order`    | number                               | Ascending. Documents without it come last, newest `date` first.                                                                  | `date`              |
+| `status`   | string                               | `live` hides the badge. Any other value is shown as the badge text, e.g. `In development`.                                       | default `live`      |
 
 Sample featured documents from the design:
 
@@ -41,15 +41,15 @@ Every non-featured project is listed under "More projects" (first five, then "Sh
 
 ## `experiences` (edit each document)
 
-| Field      | Type                  | Sample                                         | Legacy fallback   |
-| ---------- | --------------------- | ---------------------------------------------- | ----------------- |
-| `role`     | string                | Software Engineer                              | `positions[0]`    |
-| `company`  | string                | Jurnie                                         | (same field)      |
-| `location` | string                | Copenhagen                                     | hidden if missing |
-| `workMode` | string                | part-time / remote / hybrid                    | hidden if missing |
-| `start`    | timestamp             | 2026-08-01                                     | `fromDate`        |
-| `end`      | timestamp or `null`   | `null` for the current job                     | `toDate`          |
-| `summary`  | string                | One sentence.                                  | `descriptions[0]` |
+| Field      | Type                | Sample                      | Legacy fallback   |
+| ---------- | ------------------- | --------------------------- | ----------------- |
+| `role`     | string              | Software Engineer           | `positions[0]`    |
+| `company`  | string              | Jurnie                      | (same field)      |
+| `location` | string              | Copenhagen                  | hidden if missing |
+| `workMode` | string              | part-time / remote / hybrid | hidden if missing |
+| `start`    | timestamp           | 2026-08-01                  | `fromDate`        |
+| `end`      | timestamp or `null` | `null` for the current job  | `toDate`          |
+| `summary`  | string              | One sentence.               | `descriptions[0]` |
 
 Sorted newest first by start date. The newest job with no `end` gets the gold dot. Each document
 adds one commit to the commit graph, labelled with its start year.
@@ -62,12 +62,12 @@ web app and the Tauri desktop client for AI meeting transcription and notes."), 
 
 One document per row.
 
-| Field    | Type                  | Sample                                          |
-| -------- | --------------------- | ----------------------------------------------- |
-| `group`  | `"ai"` or `"stack"`   | ai                                              |
-| `name`   | string                | Claude Code                                     |
-| `detail` | string                | My main coding agent, on Treklay and at work    |
-| `order`  | number                | 1                                               |
+| Field    | Type                | Sample                                       |
+| -------- | ------------------- | -------------------------------------------- |
+| `group`  | `"ai"` or `"stack"` | ai                                           |
+| `name`   | string              | Claude Code                                  |
+| `detail` | string              | My main coding agent, on Treklay and at work |
+| `order`  | number              | 1                                            |
 
 Sample rows from the design:
 
@@ -81,13 +81,13 @@ An empty group is not rendered.
 
 ## `education` (new collection)
 
-| Field         | Type   | Sample                              |
-| ------------- | ------ | ----------------------------------- |
-| `degree`      | string | MSc Computer Science                |
-| `institution` | string | Technical University of Denmark     |
-| `start`       | string | 2025                                |
-| `end`         | string | 2027 (expected)                     |
-| `order`       | number | 1                                   |
+| Field         | Type   | Sample                          |
+| ------------- | ------ | ------------------------------- |
+| `degree`      | string | MSc Computer Science            |
+| `institution` | string | Technical University of Denmark |
+| `start`       | string | 2025                            |
+| `end`         | string | 2027 (expected)                 |
+| `order`       | number | 1                               |
 
 The whole Education section is hidden while the collection is empty.
 

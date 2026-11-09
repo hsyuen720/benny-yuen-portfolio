@@ -17,7 +17,15 @@
       "contact": "Contact"
     },
     "heroBanner": {
-      "intro": "Software engineer. Seven years building React and React Native apps for health insurance, hospitality and enterprise teams in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
+      "role": "Software engineer, Copenhagen",
+      "headline": "I ship React and React Native apps people <em>actually use</em>.",
+      "stats": [
+        { "value": "7+", "label": "years shipping" },
+        { "value": "4", "label": "product teams" },
+        { "value": "3", "label": "industries" }
+      ],
+      "cta": "See my work",
+      "intro": "Seven years on health insurance, hospitality and enterprise apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
       "photoPath": "assets/picture-in-hero-banner.jpeg",
       "photoAlt": "Benny Yuen"
     },

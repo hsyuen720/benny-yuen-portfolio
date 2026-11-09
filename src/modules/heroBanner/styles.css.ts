@@ -1,8 +1,9 @@
 import { style } from "@vanilla-extract/css";
 
-import { breakpoint, layout } from "~/styles/theme.css";
+import { breakpoint, colors, fonts, layout } from "~/styles/theme.css";
 
 export const band = style({
+  position: "relative",
   overflow: "hidden",
   borderTop: "none",
 });
@@ -10,63 +11,130 @@ export const band = style({
 export const inner = style({
   position: "relative",
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+  gridTemplateColumns: "minmax(0, 1fr) auto",
   gap: "64px",
-  alignItems: "end",
-  paddingBottom: "240px",
+  alignItems: "center",
+  paddingTop: "48px",
+  paddingBottom: "96px",
   "@media": {
     [`(max-width: ${breakpoint})`]: {
-      gap: "48px",
-      padding: `64px ${layout.gutterMobile} 160px`,
+      gridTemplateColumns: "minmax(0, 1fr)",
+      gap: "40px",
+      padding: `40px ${layout.gutterMobile} 200px`,
     },
   },
 });
 
+// The field sits behind the photo side and fades out towards the text, so it never fights the copy
+const fade = "radial-gradient(ellipse 60% 70% at 65% 65%, #000 35%, transparent 75%)";
 export const terrain = style({
   position: "absolute",
-  left: "50%",
-  top: "170px",
-  width: "min(1180px, 120vw)",
-  transform: "translateX(-38%)",
-  pointerEvents: "none",
+  zIndex: 0,
+  left: "38%",
+  bottom: "-22%",
+  width: "min(1000px, 90vw)",
+  maskImage: fade,
+  WebkitMaskImage: fade,
   "@media": {
-    // Stacked layout: anchor to the bottom padding so the field starts below the photo
-    [`(max-width: ${breakpoint})`]: { top: "auto", bottom: "-220px" },
+    // Stacked layout: a strip under the buttons
+    [`(max-width: ${breakpoint})`]: { left: "-20%", bottom: "-50vw", width: "140vw" },
   },
 });
 
 export const content = style({
   position: "relative",
+  zIndex: 1,
   display: "flex",
   flexDirection: "column",
-  gap: "28px",
+  gap: "24px",
   minWidth: 0,
+  pointerEvents: "none",
 });
 
-export const name = style({
-  fontSize: "clamp(52px, 7vw, 96px)",
-  lineHeight: 1,
-  letterSpacing: "-0.04em",
-  whiteSpace: "nowrap",
+export const eyebrow = style({
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  columnGap: "12px",
+  rowGap: "4px",
+  color: colors.muted,
+  fontSize: "15px",
+  letterSpacing: "0.02em",
+});
+
+export const author = style({
+  color: colors.text,
+  fontWeight: 500,
+  selectors: {
+    "&::after": { content: '"·"', marginLeft: "12px", color: colors.muted },
+  },
+});
+
+export const headline = style({
+  maxWidth: "17ch",
+  fontFamily: fonts.display,
+  fontSize: "clamp(40px, 5.4vw, 76px)",
+  fontWeight: 500,
+  lineHeight: 1.02,
+  letterSpacing: "-0.035em",
+});
+
+export const accent = style({
+  fontStyle: "normal",
+  color: colors.gold,
 });
 
 export const intro = style({
-  maxWidth: "36rem",
-  fontSize: "20px",
-  lineHeight: 1.5,
+  maxWidth: "34rem",
+  color: colors.text2,
+  fontSize: "18px",
+  lineHeight: 1.55,
 });
 
-export const links = style({
-  paddingTop: "4px",
+export const stats = style({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "12px 40px",
+  paddingTop: "20px",
+  borderTop: `1px solid ${colors.line}`,
+  maxWidth: "34rem",
+});
+
+// Value above label, while the dt stays first for screen readers
+export const stat = style({
+  display: "flex",
+  flexDirection: "column-reverse",
+  gap: "2px",
+});
+
+export const statValue = style({
+  fontFamily: fonts.display,
+  fontSize: "28px",
+  lineHeight: 1.1,
+  letterSpacing: "-0.02em",
+  color: colors.text,
+});
+
+export const statLabel = style({
+  fontSize: "14px",
+  color: colors.muted,
+});
+
+export const actions = style({
+  display: "flex",
+  flexWrap: "wrap",
+  alignItems: "center",
+  gap: "12px",
+  paddingTop: "8px",
+  pointerEvents: "auto",
 });
 
 export const photoFrame = style({
   position: "relative",
-  justifySelf: "end",
-  width: "100%",
-  maxWidth: "360px",
+  zIndex: 1,
+  width: "300px",
   "@media": {
-    [`(max-width: ${breakpoint})`]: { justifySelf: "start" },
+    [`(max-width: ${breakpoint})`]: { display: "none" },
   },
 });
 
@@ -78,5 +146,5 @@ export const photo = style({
   objectFit: "cover",
   objectPosition: "50% 28%",
   clipPath:
-    "polygon(0 0, calc(100% - 56px) 0, 100% 56px, 100% 100%, 56px 100%, 0 calc(100% - 56px))",
+    "polygon(0 0, calc(100% - 48px) 0, 100% 48px, 100% 100%, 48px 100%, 0 calc(100% - 48px))",
 });

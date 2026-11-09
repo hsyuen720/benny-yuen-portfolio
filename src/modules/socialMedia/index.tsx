@@ -14,10 +14,12 @@ export type SocialMediaProps = {
   className?: string;
   /** Show the email address as text on the email button (contact section). */
   showEmailAddress?: boolean;
+  /** Keep every button secondary, for when another primary button leads (hero). */
+  allSecondary?: boolean;
 };
 
 const SocialMedia = async (props: SocialMediaProps) => {
-  const { className, showEmailAddress } = props;
+  const { className, showEmailAddress, allSecondary } = props;
   const [t, data] = await Promise.all([
     getTranslations(`${AppTranslation.Portfolio}.socialMedia`),
     getCollection<ISocialMedia>(AppCollection.SocialMedia, { orderBy: "order", order: "asc" }),
@@ -34,7 +36,7 @@ const SocialMedia = async (props: SocialMediaProps) => {
             <Button
               key={item.id}
               href={isEmail ? `mailto:${item.value}` : item.value}
-              variant={isEmail ? "primary" : "secondary"}
+              variant={isEmail && !allSecondary ? "primary" : "secondary"}
               icon={IconSetting[item.id]}
               aria-label={withText ? undefined : t(item.id)}
               title={withText ? undefined : t(item.id)}
