@@ -35,3 +35,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 package-lock.json
+!functions/package-lock.json
+
+# firebase functions build output
+/functions/dist
+/functions/node_modules
+.firebase
+firebase-debug.log
