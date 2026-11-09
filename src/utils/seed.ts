@@ -73,7 +73,7 @@ const seed: Record<string, SeedDoc[]> = {
     },
     {
       id: "ejMc4KaZFExX03mpWJZm",
-      title: "This website",
+      title: "This Website",
       summary: "One-page portfolio whose content updates from Firebase without a redeploy.",
       stack: ["Next.js", "Firebase"],
       links: {
@@ -139,21 +139,21 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "t1",
       group: "ai",
-      name: "AI coding agents",
+      name: "AI Coding Agents",
       detail: "Claude Code, GitHub Copilot and the like do the typing; I own the direction",
       order: 1,
     },
     {
       id: "t2",
       group: "ai",
-      name: "Problem first",
+      name: "Problem First",
       detail: "Agree on the problem and what done looks like before building",
       order: 2,
     },
     {
       id: "t3",
       group: "ai",
-      name: "Quality owned",
+      name: "Quality Owned",
       detail: "Every change is tested and reviewed before it ships",
       order: 3,
     },
@@ -174,7 +174,7 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "t7",
       group: "stack",
-      name: "Backend & services",
+      name: "Backend & Services",
       detail: "Node.js, NestJS, AWS, Azure, GCP",
       order: 3,
     },

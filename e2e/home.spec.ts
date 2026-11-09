@@ -31,7 +31,7 @@ test("See my work scrolls Projects right under the nav", async ({ page }) => {
 
 for (const [label, id] of [
   ["Projects", "projects"],
-  ["How I build", "tools"],
+  ["How I Build", "tools"],
   ["Experience", "experience"],
   ["Contact", "contact"],
 ] as const) {

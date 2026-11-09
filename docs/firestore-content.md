@@ -37,7 +37,7 @@ Sample featured documents from the design:
 - React SVG Annotation: `featured: true`, `order: 2`, summary "An open-source React library for
   drawing freehand lines and shapes on top of any image.", stack `["React", "SVG", "Storybook"]`.
 
-Every non-featured project is listed under "More projects" (first five, then "Show all projects").
+Every non-featured project is listed under "More Projects" (first five, then "Show all projects").
 
 ## `experiences` (edit each document)
 

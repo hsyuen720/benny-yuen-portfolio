@@ -41,6 +41,20 @@ account never needs permission to enable APIs:
 The first deploy of a Firestore trigger can fail while Eventarc's service agent is still being
 granted permissions. Wait a few minutes and re-run the workflow.
 
+Set the Artifact Registry cleanup policy once, or every deploy ends with "could not set up
+cleanup policy" (CI cannot answer the prompt). With gcloud, no Firebase login needed:
+
+```sh
+cat > /tmp/cleanup-policy.json <<'JSON'
+[{ "name": "firebase-functions-cleanup", "action": { "type": "Delete" },
+   "condition": { "tagState": "any", "olderThan": "86400s" } }]
+JSON
+gcloud artifacts repositories set-cleanup-policies gcf-artifacts --location europe-west1 \
+  --project $PROJECT_ID --policy /tmp/cleanup-policy.json --no-dry-run
+```
+
+The `gcf-artifacts` repository exists only after the first deploy has built the functions.
+
 ## 4. Shared secret
 
 Pick one long random value and store it in both places under the same name:
