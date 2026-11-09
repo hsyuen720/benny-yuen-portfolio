@@ -1,112 +1,65 @@
 import clsx from "clsx";
-import { DateTime } from "luxon";
-import { getTranslations } from "next-intl/server";
-import { Fragment } from "react";
-import { FaBusinessTime, FaCodeBranch, FaSuitcase } from "react-icons/fa";
+import { getLocale, getTranslations } from "next-intl/server";
 
-import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
-import Label from "~/components/label";
-import ScrollReveal from "~/components/scrollReveal";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
-import type { IExperience } from "~/types/data";
+import type { IExperience, IHomeContent } from "~/types/data";
 import getCollection from "~/utils/getCollection";
-import getFormat from "~/utils/getFormat";
+import getDocument from "~/utils/getDocument";
+import { sortExperiences, toExperience } from "~/utils/normalize";
 
+import CommitGraph from "./commitGraph";
 import * as styles from "./styles.css";
 import Section from "../section";
-
-// Helper function to safely convert Firebase Timestamp to Date
-const convertToDate = (timestamp: unknown): Date => {
-  if (typeof timestamp === "object" && timestamp !== null) {
-    // If it's a Firestore Timestamp object
-    if ("toDate" in timestamp && typeof timestamp.toDate === "function") {
-      return timestamp.toDate();
-    }
-    // If it's serialized with seconds/nanoseconds
-    else if ("seconds" in timestamp) {
-      return new Date((timestamp as { seconds: number }).seconds * 1000);
-    }
-    // If it's already a Date object
-    else {
-      return new Date(timestamp as string | number | Date);
-    }
-  } else {
-    // Fallback: try to parse as date
-    return new Date(timestamp as string | number | Date);
-  }
-};
+import * as sectionStyles from "../section/styles.css";
 
 const Experiences = async () => {
-  // All four are independent — fetch in parallel
-  const [format, t, ct, experiences] = await Promise.all([
-    getFormat(),
+  const [locale, t, ct, docs, content] = await Promise.all([
+    getLocale(),
     getTranslations(`${AppTranslation.Portfolio}.experience`),
     getTranslations(AppTranslation.Common),
-    getCollection<IExperience>(AppCollection.Experiences, {
-      orderBy: "fromDate",
-      order: "desc",
-    }),
+    // No orderBy: Firestore drops documents that lack the ordered field; we sort below
+    getCollection<IExperience>(AppCollection.Experiences),
+    getDocument<IHomeContent>(AppCollection.Content, "home"),
   ]);
-
-  const startDate = DateTime.fromJSDate(
-    convertToDate(experiences[experiences.length - 1].fromDate),
-  );
-  const numOfYears = Math.ceil(DateTime.now().diff(startDate, "years").years);
+  const experiences = sortExperiences(docs.map(toExperience));
+  const formatDate = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" }).format;
+  const years = experiences.map((e) => (e.start ? String(e.start.getFullYear()) : "")).reverse();
 
   return (
-    <Section id={PortfolioSection.Experience} className={styles.experiences}>
-      <ScrollReveal direction="up">
-        <Heading isSeparatorShown title={t("title")} description={t("subtitle", { numOfYears })} />
-      </ScrollReveal>
-      <div className={styles.timeline}>
-        {experiences.map((experience, index) => {
-          const { id, company, positions, fromDate, toDate, descriptions, technologies } =
-            experience;
-          const intlOption: Intl.DateTimeFormatOptions = { year: "numeric", month: "short" };
-
-          const from = DateTime.fromJSDate(convertToDate(fromDate)).toLocaleString(intlOption);
-          const to = toDate
-            ? DateTime.fromJSDate(convertToDate(toDate)).toLocaleString(intlOption)
-            : ct("date.present");
+    <Section id={PortfolioSection.Experience} innerClassName={sectionStyles.split}>
+      <div className={clsx(sectionStyles.splitAside, styles.aside)}>
+        <Heading title={t("title")} description={content?.experienceIntro || t("intro")} />
+        <CommitGraph
+          className={styles.graph}
+          years={years}
+          label={t("graphLabel", { years: years.join(", ") })}
+        />
+      </div>
+      <ol className={clsx(sectionStyles.splitMain, styles.timeline)}>
+        {experiences.map((job, index) => {
+          const isCurrent = index === 0 && !job.end;
+          const range = `${job.start ? formatDate(job.start) : ""} – ${
+            job.end ? formatDate(job.end) : ct("date.present")
+          }`;
+          const place = [job.location, job.workMode].filter(Boolean).join(", ");
           return (
-            <ScrollReveal key={id ?? index} direction="up" delay={index * 100}>
-              <div className={styles.item}>
-                <Label className={styles.period} icon={FaBusinessTime} title={`${from} - ${to}`} />
-                <div className={styles.separator}>
-                  <div className={clsx(styles.top, styles.line)} />
-                  <div className={styles.dot} />
-                  <div className={clsx(styles.bottom, styles.line)} />
-                </div>
-                <div className={styles.detail}>
-                  <Label icon={FaCodeBranch} className={styles.positions}>
-                    {positions.map((position, index) => (
-                      <Fragment key={index}>
-                        <span className={styles.position}>{format(position)}</span>
-                        {index !== positions.length - 1 && <span> | </span>}
-                      </Fragment>
-                    ))}
-                  </Label>
-                  <Label className={styles.company} icon={FaSuitcase} title={format(company)} />
-                  <ul className={styles.descriptions}>
-                    {descriptions.map((description, index) => (
-                      <li key={index} className={styles.description}>
-                        {format(description)}
-                      </li>
-                    ))}
-                  </ul>
-                  <span className={styles.technologies}>
-                    {technologies.map((technology) => (
-                      <Hashtag key={technology}>#{technology}</Hashtag>
-                    ))}
-                  </span>
-                </div>
-              </div>
-            </ScrollReveal>
+            <li key={job.id} className={styles.item}>
+              <span
+                aria-hidden="true"
+                className={clsx(styles.dot, { [styles.current]: isCurrent })}
+              />
+              <span className={clsx(styles.range, { [styles.currentRange]: isCurrent })}>
+                {range}
+              </span>
+              <h3 className={styles.role}>{[job.role, job.company].filter(Boolean).join(", ")}</h3>
+              {place ? <span className={styles.place}>{place}</span> : null}
+              {job.summary ? <p>{job.summary}</p> : null}
+            </li>
           );
         })}
-      </div>
+      </ol>
     </Section>
   );
 };

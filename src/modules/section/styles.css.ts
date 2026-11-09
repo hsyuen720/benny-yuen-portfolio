@@ -1,21 +1,65 @@
 import { style } from "@vanilla-extract/css";
 
-import { colors, fontSizes, sectionPaddingHorizontal, breakpoint } from "~/styles/theme.css";
+import { breakpoint, colors, layout } from "~/styles/theme.css";
 
 export const section = style({
   position: "relative",
-  minHeight: "max(800px, 100svh)",
-  padding: `8em ${sectionPaddingHorizontal.md}`,
-  fontSize: fontSizes.md,
-  overflowX: "hidden",
+  borderTop: `1px solid ${colors.line}`,
+});
+
+export const inner = style({
+  maxWidth: layout.maxWidth,
+  margin: "0 auto",
+  padding: `96px ${layout.gutter}`,
   "@media": {
     [`(max-width: ${breakpoint})`]: {
-      padding: `8em ${sectionPaddingHorizontal.sm}`,
+      padding: `72px ${layout.gutterMobile}`,
     },
   },
 });
 
-export const isLight = style({
-  backgroundColor: colors.secondary,
-  color: colors.secondaryText,
+/** Two columns: a narrow left heading column and a wide right content column. */
+export const split = style({
+  display: "flex",
+  flexWrap: "wrap",
+  gap: "56px",
+});
+
+export const splitAside = style({
+  flex: "1 1 300px",
+  minWidth: 0,
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  alignSelf: "flex-start",
+});
+
+export const splitMain = style({
+  flex: "999 1 520px",
+  minWidth: 0,
+});
+
+/** A label/value row on a hairline, used by the tools, stack and education lists. */
+export const row = style({
+  display: "grid",
+  gridTemplateColumns: "minmax(0, 160px) minmax(0, 1fr)",
+  gap: "4px 24px",
+  padding: "18px 0",
+  borderTop: `1px solid ${colors.line}`,
+  selectors: {
+    "&:last-child": { borderBottom: `1px solid ${colors.line}` },
+  },
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { gridTemplateColumns: "minmax(0, 1fr)" },
+  },
+});
+
+export const rowLabel = style({
+  color: colors.text,
+});
+
+export const listTitle = style({
+  marginBottom: "12px",
+  fontSize: "24px",
+  letterSpacing: "-0.02em",
 });

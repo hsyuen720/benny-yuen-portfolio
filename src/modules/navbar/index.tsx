@@ -1,68 +1,85 @@
 "use client";
 
-import clsx from "clsx";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import Label from "~/components/label";
 import Logo from "~/components/logo";
 import useHome from "~/contexts/home/useHome";
-import Toggle from "~/modules/navbar/toggle";
 import { PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 
 import * as styles from "./styles.css";
 
-const menuItems = [PortfolioSection.About, PortfolioSection.Experience, PortfolioSection.Projects];
+const links = [
+  PortfolioSection.Projects,
+  PortfolioSection.Tools,
+  PortfolioSection.Experience,
+  PortfolioSection.Contact,
+];
+
+type Indicator = { x: number; y: number; width: number } | null;
 
 const Navbar = () => {
-  const { scroll, currentView } = useHome();
-  const [isScrollStarted, setIsScrollStarted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const { currentView } = useHome();
   const t = useTranslations(`${AppTranslation.Portfolio}.navigation`);
+  const t2 = useTranslations(AppTranslation.Common);
+  const refs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const [indicator, setIndicator] = useState<Indicator>(null);
+
+  const measure = useCallback(() => {
+    const link = refs.current[currentView];
+    setIndicator(
+      link
+        ? {
+            x: link.offsetLeft,
+            y: link.offsetTop + link.offsetHeight - 1,
+            width: link.offsetWidth,
+          }
+        : null,
+    );
+  }, [currentView]);
+
+  useLayoutEffect(measure, [measure]);
 
   useEffect(() => {
-    let isMounted = true;
-    const onScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsScrollStarted(scrollPosition > 100);
-    };
-    if (isMounted) {
-      onScroll();
-    }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      isMounted = false;
-    };
-  }, []);
-
-  const onClick = useCallback(
-    (item: string) => () => {
-      setIsOpen(false);
-      scroll(item);
-    },
-    [scroll],
-  );
-
-  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [measure]);
 
   return (
-    <header
-      id="navbar"
-      className={clsx(styles.navbar, { [styles.isBlurBackground]: isScrollStarted || isOpen })}
-    >
-      <Logo className={styles.logo} onClick={onClick(PortfolioSection.HeroBanner)} />
-      <Toggle className={styles.toggle} isOpen={isOpen} onClick={toggle} />
-      <nav role="navigation" className={clsx(styles.menu, { [styles.isOpen]: isOpen })}>
-        {menuItems.map((item) => (
-          <Label
-            className={clsx(styles.menuItem, { [styles.active]: currentView === item })}
-            title={t(item)}
-            key={item}
-            onClick={onClick(item)}
+    <header className={styles.header}>
+      <nav className={styles.nav} aria-label={t("label")}>
+        <a
+          className={styles.wordmark}
+          href={`#${PortfolioSection.HeroBanner}`}
+          aria-label={t2("author")}
+        >
+          <Logo />
+        </a>
+        <div className={styles.links}>
+          {links.map((id) => (
+            <a
+              key={id}
+              ref={(node) => {
+                refs.current[id] = node;
+              }}
+              className={styles.link}
+              href={`#${id}`}
+              aria-current={currentView === id ? "true" : undefined}
+            >
+              {t(id)}
+            </a>
+          ))}
+          <span
+            aria-hidden="true"
+            className={styles.indicator}
+            style={{
+              opacity: indicator ? 1 : 0,
+              width: indicator?.width ?? 0,
+              transform: indicator ? `translate(${indicator.x}px, ${indicator.y}px)` : undefined,
+            }}
           />
-        ))}
+        </div>
       </nav>
     </header>
   );

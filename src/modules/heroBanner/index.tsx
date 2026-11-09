@@ -1,68 +1,46 @@
+import NextImage from "next/image";
 import { getTranslations } from "next-intl/server";
 
-import Image from "~/components/image";
-import ScrollReveal from "~/components/scrollReveal";
-import TypingWords from "~/components/typingWords";
+import HairlineFigure from "~/components/hairlineFigure";
 import SocialMedia from "~/modules/socialMedia";
-import { PortfolioSection } from "~/settings/constants";
+import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
+import type { IHomeContent } from "~/types/data";
+import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
 
 import * as styles from "./styles.css";
 import Section from "../section";
 
 const HeroBanner = async () => {
-  const t = await getTranslations(`${AppTranslation.Portfolio}.heroBanner`);
-  const profile = await getStorageUrl(t("photoPath"));
-
-  const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 3 + 1,
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 3}s`,
-  }));
+  const [t, ct, content] = await Promise.all([
+    getTranslations(`${AppTranslation.Portfolio}.heroBanner`),
+    getTranslations(AppTranslation.Common),
+    getDocument<IHomeContent>(AppCollection.Content, "home"),
+  ]);
+  const photo = await getStorageUrl(t("photoPath"));
 
   return (
-    <Section id={PortfolioSection.HeroBanner} className={styles.container}>
-      <div className={styles.stars}>
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className={styles.star}
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: star.top,
-              left: star.left,
-              animationDelay: star.animationDelay,
-            }}
-          />
-        ))}
+    <Section id={PortfolioSection.HeroBanner} className={styles.band} innerClassName={styles.inner}>
+      <div aria-hidden="true" className={styles.terrain}>
+        <HairlineFigure figure="Terrain" label="" />
       </div>
-      <ScrollReveal direction="left">
-        <div className={styles.content}>
-          <h2 className={styles.greeting}>{t("greeting")}</h2>
-          <h1 className={styles.introduction}>
-            {t.rich("introduction", {
-              role: (chunks) => <TypingWords words={chunks?.toString().split(", ") ?? []} />,
-            })}
-          </h1>
-          <p className={styles.briefDescription}>{t("description")}</p>
-          <SocialMedia className={styles.socialMedia} />
-        </div>
-      </ScrollReveal>
-      <ScrollReveal direction="right" delay={200}>
-        <Image
-          className={styles.profile}
-          src={profile}
-          alt="profile picture"
-          width={350}
-          height={350}
+      <div className={styles.content}>
+        <h1 className={styles.name}>{ct("author")}</h1>
+        <p className={styles.intro}>{content?.intro || t("intro")}</p>
+        <SocialMedia className={styles.links} />
+      </div>
+      <div className={styles.photoFrame}>
+        <NextImage
+          className={styles.photo}
+          src={photo}
+          alt={t("photoAlt")}
+          width={360}
+          height={450}
+          sizes="(max-width: 720px) 100vw, 360px"
           priority
-          fetchPriority="high"
         />
-      </ScrollReveal>
+      </div>
     </Section>
   );
 };

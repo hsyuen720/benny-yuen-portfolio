@@ -1,86 +1,82 @@
-import { style, keyframes } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-import { colors, ratio, transition, breakpoint } from "~/styles/theme.css";
+import { breakpoint, layout } from "~/styles/theme.css";
 
-const twinkle = keyframes({
-  "0%, 100%": { opacity: 0.3 },
-  "50%": { opacity: 1 },
+export const band = style({
+  overflow: "hidden",
+  borderTop: "none",
 });
 
-export const container = style({
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  alignItems: "center",
-  gap: "3em",
+export const inner = style({
   position: "relative",
-  overflow: "hidden",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 460px), 1fr))",
+  gap: "64px",
+  alignItems: "end",
+  paddingBottom: "240px",
   "@media": {
     [`(max-width: ${breakpoint})`]: {
-      flexDirection: "column-reverse",
-      gap: "2em",
+      gap: "48px",
+      padding: `64px ${layout.gutterMobile} 160px`,
     },
   },
 });
 
-export const stars = style({
+export const terrain = style({
   position: "absolute",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
+  left: "50%",
+  top: "170px",
+  width: "min(1180px, 120vw)",
+  transform: "translateX(-38%)",
   pointerEvents: "none",
-  zIndex: 0,
-});
-
-export const star = style({
-  position: "absolute",
-  backgroundColor: colors.highlight,
-  borderRadius: "50%",
-  animation: `${twinkle} 3s ease-in-out infinite`,
-  boxShadow: `0 0 6px 1px rgba(255, 183, 3, 0.4)`,
+  "@media": {
+    // Stacked layout: anchor to the bottom padding so the field starts below the photo
+    [`(max-width: ${breakpoint})`]: { top: "auto", bottom: "-220px" },
+  },
 });
 
 export const content = style({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
-  justifyContent: "center",
-  gap: "1em",
+  gap: "28px",
+  minWidth: 0,
+});
+
+export const name = style({
+  fontSize: "clamp(52px, 7vw, 96px)",
+  lineHeight: 1,
+  letterSpacing: "-0.04em",
+  whiteSpace: "nowrap",
+});
+
+export const intro = style({
+  maxWidth: "36rem",
+  fontSize: "20px",
+  lineHeight: 1.5,
+});
+
+export const links = style({
+  paddingTop: "4px",
+});
+
+export const photoFrame = style({
   position: "relative",
-  zIndex: 1,
-});
-
-export const greeting = style({
-  fontSize: "1.25em",
-  color: colors.highlight,
-});
-
-export const introduction = style({
-  fontSize: `${1.5 * ratio}em`,
-  letterSpacing: "-0.02em",
-  background: `linear-gradient(135deg, ${colors.primaryText}, ${colors.highlight}, ${colors.primaryAccentText})`,
-  backgroundClip: "text",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundSize: "200% 200%",
-});
-
-export const briefDescription = style({
-  fontSize: "1.25em",
-});
-
-export const socialMedia = style({
-  fontSize: "1em",
-});
-
-export const profile = style({
-  borderRadius: "24% 76% 70% 30% / 22% 30% 70% 78%",
-  transition: transition("slowest", "border-radius"),
-  position: "relative",
-  zIndex: 1,
-  selectors: {
-    "&:hover": {
-      borderRadius: "71% 29% 70% 30% / 62% 73% 27% 38%",
-    },
+  justifySelf: "end",
+  width: "100%",
+  maxWidth: "360px",
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { justifySelf: "start" },
   },
+});
+
+export const photo = style({
+  display: "block",
+  width: "100%",
+  height: "auto",
+  aspectRatio: "4 / 5",
+  objectFit: "cover",
+  objectPosition: "50% 28%",
+  clipPath:
+    "polygon(0 0, calc(100% - 56px) 0, 100% 56px, 100% 100%, 56px 100%, 0 calc(100% - 56px))",
 });
