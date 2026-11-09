@@ -191,7 +191,7 @@ const seed: Record<string, SeedDoc[]> = {
     },
     {
       id: "hkust",
-      degree: "Bachelor's degree in Computer Engineering",
+      degree: "BEng in Computer Engineering",
       institution: "The Hong Kong University of Science and Technology",
       institutionShort: "HKUST",
       start: "2015",

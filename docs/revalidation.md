@@ -69,6 +69,13 @@ for role in roles/cloudfunctions.admin roles/run.admin roles/artifactregistry.ad
   gcloud projects add-iam-policy-binding $PROJECT_ID --member "serviceAccount:$SA" --role $role
 done
 
+# Likely needed (unverified until the first deploy): while deploying, firebase-tools grants the
+# functions' runtime account access to REVALIDATE_SECRET, which needs setIamPolicy on that secret.
+# secretmanager.viewer alone is not enough. Grant admin on that one secret only, not project-wide.
+# Skip this if the first deploy succeeds; run it if it fails with a permission error on the secret.
+gcloud secrets add-iam-policy-binding REVALIDATE_SECRET --project $PROJECT_ID \
+  --member "serviceAccount:$SA" --role roles/secretmanager.admin
+
 # Pool and provider that trust GitHub's OIDC tokens from this repo only
 gcloud iam workload-identity-pools create github --project $PROJECT_ID --location global
 gcloud iam workload-identity-pools providers create-oidc github-repo \
