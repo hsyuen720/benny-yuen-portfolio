@@ -1,21 +1,10 @@
-import { style, keyframes } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 
-const pulse = keyframes({
-  "0%": { opacity: 1 },
-  "50%": { opacity: 0.5 },
-  "100%": { opacity: 1 },
-});
+import { colors, radii } from "~/styles/theme.css";
 
 export const skeleton = style({
-  background: "linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)",
-  backgroundSize: "200% 100%",
-  animation: `${pulse} 1.5s ease-in-out 0.5s infinite`,
-  borderRadius: "4px",
-  "@media": {
-    "(prefers-color-scheme: dark)": {
-      background: "linear-gradient(90deg, #333 25%, #444 50%, #333 75%)",
-    },
-  },
+  backgroundColor: colors.card,
+  borderRadius: radii.tag,
 });
 
 export const text = style({
@@ -24,7 +13,7 @@ export const text = style({
 });
 
 export const rectangular = style({
-  borderRadius: "4px",
+  borderRadius: radii.media,
 });
 
 export const circular = style({

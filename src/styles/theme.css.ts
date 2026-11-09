@@ -1,88 +1,58 @@
 export const colors = {
-  primary: "#070707",
-  highlight: "#ffb703",
-  highlightSecondary: "#0d9488",
-  highlightMuted: "rgba(255, 183, 3, 0.15)",
-  highlightSecondaryMuted: "rgba(13, 148, 136, 0.12)",
-  primaryText: "#f5f5f5",
-  primaryAccentText: "#f8efe0",
-  secondary: "#f8efe0",
-  secondaryText: "#0b0c10",
-  secondaryAccentText: "#183642",
-  surfaceElevated: "rgba(255, 255, 255, 0.03)",
-  surfaceBorder: "rgba(255, 255, 255, 0.06)",
+  deep: "#12110f",
+  page: "#161513",
+  card: "#1c1a18",
+  raised: "#262421",
+  raisedHover: "#2e2b28",
+  text: "#efe9de",
+  text2: "#aaa398",
+  muted: "#8a847a",
+  line: "rgba(239, 233, 222, 0.09)",
+  line2: "rgba(239, 233, 222, 0.16)",
+  gold: "#ffb703",
+  goldHover: "#ffc22e",
+  goldInk: "#1f1600",
 };
 
-export const fontSizes = {
-  xs: "0.75rem",
-  sm: "0.875rem",
-  md: "1rem",
-  lg: "1.125rem",
-  xl: "1.25rem",
-  "2xl": "1.5rem",
-  "3xl": "1.875rem",
-  "4xl": "2.25rem",
-  "5xl": "3rem",
+// Line colours shared by the Hairline figures and the commit graph
+export const hairline = {
+  hi: colors.gold,
+  edge: colors.text2,
+  mid: "#5a554d",
+  lo: "#2e2b27",
 };
 
-export const fontWeights = {
-  light: "300",
-  normal: "400",
-  bold: "700",
+export const fonts = {
+  display: `var(--font-display), ui-sans-serif, system-ui, sans-serif`,
+  body: `var(--font-body), ui-sans-serif, system-ui, sans-serif`,
 };
 
-export const borderRadii = {
-  xs: "0.125rem",
-  sm: "0.25rem",
-  md: "0.375rem",
-  lg: "0.5rem",
-  xl: "0.75rem",
-  "2xl": "1rem",
-  "3xl": "1.5rem",
+export const radii = {
+  button: "10px",
+  tag: "6px",
+  card: "20px",
+  media: "12px",
 };
 
-export const shadows = {
-  sm: "0 1px 2px rgba(0, 0, 0, 0.3)",
-  md: "0 4px 12px rgba(0, 0, 0, 0.25)",
-  lg: "0 8px 24px rgba(0, 0, 0, 0.3)",
-  xl: "0 20px 40px rgba(0, 0, 0, 0.4)",
-  glow: `0 0 20px rgba(255, 183, 3, 0.15)`,
-  goldGlow: "0 0 30px rgba(255, 183, 3, 0.2), 0 0 60px rgba(255, 183, 3, 0.1)",
-  tealGlow: "0 0 30px rgba(13, 148, 136, 0.15)",
+export const layout = {
+  maxWidth: "1160px",
+  gutter: "32px",
+  gutterMobile: "16px",
+  navHeight: "64px",
 };
 
-export const zIndices = {
-  header: "900",
-  modal: "1000",
-  tooltip: "1500",
-};
+export const breakpoint = "720px";
 
-export const ratio = 1.618;
-
-export const breakpoint = "950px";
-
-export const sectionPaddingHorizontal = {
-  sm: "1.5rem",
-  md: "6.5rem",
-};
+export const ease = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 export const durations = {
-  slowest: "500ms",
-  slower: "400ms",
-  slow: "300ms",
-  normal: "200ms",
-  fast: "150ms",
-  faster: "100ms",
-  fastest: "50ms",
+  press: "120ms",
+  hover: "150ms",
+  indicator: "300ms",
+  entrance: "500ms",
 };
 
-export const easings = {
-  smooth: "cubic-bezier(0.4, 0, 0.2, 1)",
-  bounce: "cubic-bezier(0.34, 1.56, 0.64, 1)",
-  decelerate: "cubic-bezier(0, 0, 0.2, 1)",
-};
+export const transition = (duration: keyof typeof durations, ...properties: string[]) =>
+  properties.map((p) => `${p} ${durations[duration]} ${ease}`).join(", ");
 
-// Helper function to create transition strings
-export const transition = (duration: keyof typeof durations, property: string) => {
-  return `${property} ${durations[duration]} ${easings.smooth}`;
-};
+export const reducedMotion = "(prefers-reduced-motion: reduce)";
