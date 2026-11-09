@@ -4,6 +4,7 @@ import {
   currentExperience,
   formatMonthYear,
   isStudying,
+  roleLine,
   toDate,
   yearOf,
   sortExperiences,
@@ -74,6 +75,20 @@ describe("normalize", () => {
     expect(old).toMatchObject({ role: "Programmer", company: "FUJIFILM", summary: "Built a CMS" });
     expect(current.end).toBeNull();
     expect(sortExperiences([old, current]).map((e) => e.id)).toEqual(["new", "old"]);
+  });
+
+  describe("roleLine", () => {
+    it("joins role and location", () => {
+      expect(roleLine({ role: "Software Engineer", location: "Copenhagen" })).toBe(
+        "Software Engineer, Copenhagen",
+      );
+    });
+
+    it("drops a missing part, and is empty when both are missing", () => {
+      expect(roleLine({ role: "Software Engineer" })).toBe("Software Engineer");
+      expect(roleLine({ role: "", location: undefined })).toBe("");
+      expect(roleLine({ role: "  ", location: " Copenhagen " })).toBe("Copenhagen");
+    });
   });
 
   describe("currentExperience", () => {

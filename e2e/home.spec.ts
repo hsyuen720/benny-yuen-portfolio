@@ -55,6 +55,17 @@ test("page never scrolls sideways", async ({ page }) => {
   expect(overflow).toBeLessThanOrEqual(0);
 });
 
+test("nothing hangs below the footer", async ({ page }) => {
+  // A screen taller than the last section is what exposes a glow layer hanging past it
+  await page.setViewportSize({ width: page.viewportSize()!.width, height: 1400 });
+  const gap = await page.evaluate(() => {
+    const footer =
+      document.querySelector("footer")!.getBoundingClientRect().bottom + window.scrollY;
+    return document.documentElement.scrollHeight - Math.round(footer);
+  });
+  expect(gap).toBeLessThanOrEqual(1);
+});
+
 test("every section renders", async ({ page }) => {
   for (const id of ["heroBanner", "projects", "tools", "experience", "education", "contact"]) {
     await expect(page.locator(`section#${id}`)).toBeAttached();

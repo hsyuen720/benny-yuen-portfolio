@@ -10,7 +10,7 @@ import type { IExperience, IHomeContent } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
-import { careerStats, currentExperience, toExperience } from "~/utils/normalize";
+import { careerStats, currentExperience, roleLine, toExperience } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import Section from "../section";
@@ -32,13 +32,15 @@ const HeroBanner = async () => {
   ].filter((stat) => stat.value);
   // The card hides when every job has ended
   const current = currentExperience(experiences);
+  // Follows the current job; the copy is the fallback between jobs
+  const role = (current && roleLine(current)) || t("role");
 
   return (
     <Section id={PortfolioSection.HeroBanner} className={styles.band} innerClassName={styles.inner}>
       <div className={styles.content}>
         <p className={styles.eyebrow}>
           <span className={styles.author}>{ct("author")}</span>
-          <span>{t("role")}</span>
+          <span>{role}</span>
         </p>
         <h1 className={styles.headline}>
           {t.rich("headline", { em: (chunks) => <em className={styles.accent}>{chunks}</em> })}
