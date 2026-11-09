@@ -146,7 +146,7 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "t2",
       group: "ai",
-      name: "Spec first",
+      name: "Problem first",
       detail: "Agree on the problem and what done looks like before building",
       order: 2,
     },
