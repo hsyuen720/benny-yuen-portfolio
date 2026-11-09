@@ -41,7 +41,9 @@ export const image = style({
 
 // Stand-in when a project has no screenshot: the Exploded figure on the media panel
 export const figure = style({
-  width: "min(100%, 420px)",
+  width: "min(100%, 520px)",
+  // The drawing sits low and slightly left inside Hairline's 5:4 box; this centres its resting state
+  translate: "5% -21%",
   selectors: {
     "&[data-hairline]": { vars: { "--hairline-plate": colors.deep } },
   },

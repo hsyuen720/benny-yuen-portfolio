@@ -12,46 +12,57 @@ export const header = style({
 
 export const nav = style({
   maxWidth: layout.maxWidth,
+  height: layout.navHeight,
   margin: "0 auto",
   padding: `0 ${layout.gutter}`,
-  minHeight: layout.navHeight,
   display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  flexWrap: "wrap",
-  gap: "0 16px",
+  alignItems: "stretch",
+  gap: "16px",
   "@media": {
-    [`(max-width: ${breakpoint})`]: { padding: `0 ${layout.gutterMobile}` },
+    [`(max-width: ${breakpoint})`]: { padding: `0 ${layout.gutterMobile}`, gap: "10px" },
   },
 });
 
 export const wordmark = style({
+  display: "flex",
+  alignItems: "center",
+  flexShrink: 0,
   color: colors.text,
   textDecoration: "none",
-  padding: "12px 0",
   "@media": {
-    [`(max-width: ${breakpoint})`]: { padding: "10px 0 0" },
+    [`(max-width: ${breakpoint})`]: { fontSize: "0.85em" },
   },
 });
 
+// One row at every width: on narrow phones the links scroll sideways instead of wrapping.
+// The 1px bottom padding lets the indicator and hover line sit on the header's border.
 export const links = style({
   position: "relative",
   display: "flex",
-  flexWrap: "wrap",
-  alignItems: "center",
+  alignItems: "stretch",
   columnGap: "28px",
+  marginLeft: "auto",
+  minWidth: 0,
+  paddingBottom: "1px",
+  marginBottom: "-1px",
+  overflowX: "auto",
+  overflowY: "hidden",
+  scrollbarWidth: "none",
   fontSize: "15px",
+  selectors: {
+    "&::-webkit-scrollbar": { display: "none" },
+  },
   "@media": {
-    [`(max-width: ${breakpoint})`]: { columnGap: "20px", fontSize: "14px" },
+    [`(max-width: ${breakpoint})`]: { columnGap: "12px", fontSize: "14px" },
   },
 });
 
 export const link = style({
   position: "relative",
-  padding: "20px 0",
-  "@media": {
-    [`(max-width: ${breakpoint})`]: { padding: "8px 0 12px" },
-  },
+  display: "flex",
+  alignItems: "center",
+  flexShrink: 0,
+  whiteSpace: "nowrap",
   color: colors.text2,
   textDecoration: "none",
   transition: transition("hover", "color"),

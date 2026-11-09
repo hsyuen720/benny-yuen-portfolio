@@ -38,7 +38,7 @@ export const layout = {
   maxWidth: "1160px",
   gutter: "32px",
   gutterMobile: "16px",
-  navHeight: "64px",
+  navHeight: "52px",
 };
 
 export const breakpoint = "720px";

@@ -113,6 +113,20 @@ const seed: Record<string, SeedDoc[]> = {
       summary:
         "Built a clinic CMS from scratch and its React Native apps, cut bundle size and re-renders, and trained new developers.",
     },
+    // Ten placeholder jobs to stress the timeline and commit graph
+    ...Array.from({ length: 10 }, (_, i) => {
+      const year = 2018 - i;
+      return {
+        id: `sample-job-${i + 1}`,
+        role: `Sample role ${i + 1}`,
+        company: `Sample company ${i + 1}`,
+        location: "Hong Kong",
+        workMode: "on-site",
+        start: `${year}-01-01`,
+        end: `${year}-12-01`,
+        summary: "Placeholder job to preview a long career on the timeline and commit graph.",
+      };
+    }),
   ],
   [AppCollection.Tools]: [
     {

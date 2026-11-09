@@ -20,7 +20,7 @@ export type CommitGraphProps = {
 const CommitGraph = (props: CommitGraphProps) => {
   const { years, label, className } = props;
   const { el, isInView } = useInView({ once: true, threshold: 0.4 });
-  const { viewBox, board, mainLine, commits } = buildGraph(years.length);
+  const { viewBox, floors } = buildGraph(years.length);
   const headDelay = Math.max(years.length - 1, 0) * STAGGER_MS + RISE_MS;
 
   return (
@@ -31,32 +31,36 @@ const CommitGraph = (props: CommitGraphProps) => {
         role="img"
         aria-label={label}
       >
-        <path className={styles.plate} d={board.sideU} />
-        <path className={styles.plate} d={board.sideV} />
-        <path className={styles.plate} d={board.top} />
-        <path className={styles.line} d={mainLine} />
-        {commits.map((commit, i) => (
-          <g
-            key={i}
-            data-commit
-            className={clsx(styles.commit, { [styles.head]: commit.isHead })}
-            style={{ transitionDelay: `${i * STAGGER_MS}ms` }}
-          >
-            <path className={styles.plate} d={commit.sideU} />
-            <path className={styles.plate} d={commit.sideV} />
-            <path
-              className={clsx(styles.plate, { [styles.headTop]: commit.isHead })}
-              d={commit.top}
-              style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
-            />
-            <text
-              className={clsx(styles.label, { [styles.headLabel]: commit.isHead })}
-              x={commit.label.x}
-              y={commit.label.y}
-              style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
-            >
-              {years[i]}
-            </text>
+        {floors.map(({ board, line, commits }, f) => (
+          <g key={f}>
+            <path className={styles.plate} d={board.sideU} />
+            <path className={styles.plate} d={board.sideV} />
+            <path className={styles.plate} d={board.top} />
+            {line ? <path className={styles.line} d={line} /> : null}
+            {commits.map((commit) => (
+              <g
+                key={commit.index}
+                data-commit
+                className={clsx(styles.commit, { [styles.head]: commit.isHead })}
+                style={{ transitionDelay: `${commit.index * STAGGER_MS}ms` }}
+              >
+                <path className={styles.plate} d={commit.sideU} />
+                <path className={styles.plate} d={commit.sideV} />
+                <path
+                  className={clsx(styles.plate, { [styles.headTop]: commit.isHead })}
+                  d={commit.top}
+                  style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
+                />
+                <text
+                  className={clsx(styles.label, { [styles.headLabel]: commit.isHead })}
+                  x={commit.label.x}
+                  y={commit.label.y}
+                  style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
+                >
+                  {years[commit.index]}
+                </text>
+              </g>
+            ))}
           </g>
         ))}
       </svg>

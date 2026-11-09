@@ -47,6 +47,11 @@ const Navbar = () => {
   const measure = useCallback(() => {
     const link = active ? refs.current[active] : null;
     if (link) {
+      // Keep the active link visible when the row scrolls sideways on narrow phones
+      const row = link.parentElement;
+      if (row && row.scrollWidth > row.clientWidth + 1) {
+        row.scrollTo({ left: link.offsetLeft - (row.clientWidth - link.offsetWidth) / 2 });
+      }
       setPosition({
         x: link.offsetLeft,
         y: link.offsetTop + link.offsetHeight - 1,
