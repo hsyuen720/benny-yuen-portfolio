@@ -78,6 +78,14 @@ export const toExperience = (doc: IExperience): Experience => ({
 export const sortExperiences = (experiences: Experience[]) =>
   [...experiences].sort((a, b) => (b.start?.getTime() ?? 0) - (a.start?.getTime() ?? 0));
 
+/** The newest job that has not ended, if any. */
+export const currentExperience = (experiences: Experience[]) =>
+  sortExperiences(experiences).find((e) => !e.end);
+
+/** Still studying: no end yet, or an end year still ahead ("2027 (expected)"). */
+export const isStudying = (end: string | undefined, thisYear: number) =>
+  !end || parseInt(end, 10) > thisYear;
+
 /** Ascending by `order`; documents without one go last. */
 export const byOrder = <T extends { order?: number }>(a: T, b: T) =>
   (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER);

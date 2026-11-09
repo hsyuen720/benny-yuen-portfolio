@@ -10,7 +10,7 @@ import type { IExperience, IHomeContent } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
-import { sortExperiences, toExperience } from "~/utils/normalize";
+import { currentExperience, toExperience } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import Section from "../section";
@@ -24,8 +24,8 @@ const HeroBanner = async () => {
     getDocument<IHomeContent>(AppCollection.Content, "home"),
     getCollection<IExperience>(AppCollection.Experiences),
   ]);
-  // The newest job without an end date; the card hides when there is none
-  const current = sortExperiences(docs.map(toExperience)).find((e) => !e.end);
+  // The card hides when every job has ended
+  const current = currentExperience(docs.map(toExperience));
   const photo = await getStorageUrl(t("photoPath"));
   const stats = t.raw("stats") as Stat[];
 

@@ -1,5 +1,12 @@
 import type { IExperience, IProject } from "~/types/data";
-import { sortExperiences, sortProjects, toExperience, toProject } from "~/utils/normalize";
+import {
+  currentExperience,
+  isStudying,
+  sortExperiences,
+  sortProjects,
+  toExperience,
+  toProject,
+} from "~/utils/normalize";
 
 const ts = (iso: string) => ({ toDate: () => new Date(iso) });
 
@@ -63,5 +70,39 @@ describe("normalize", () => {
     expect(old).toMatchObject({ role: "Programmer", company: "FUJIFILM", summary: "Built a CMS" });
     expect(current.end).toBeNull();
     expect(sortExperiences([old, current]).map((e) => e.id)).toEqual(["new", "old"]);
+  });
+
+  describe("currentExperience", () => {
+    const job = (id: string, start: string, end: string | null) =>
+      toExperience({ id, company: id, start: ts(start), end: end ? ts(end) : null } as IExperience);
+
+    it("returns the newest job without an end date", () => {
+      const jobs = [job("old", "2019-01-01", "2022-01-01"), job("now", "2026-08-01", null)];
+      expect(currentExperience(jobs)?.id).toBe("now");
+    });
+
+    it("prefers the newest of two open jobs", () => {
+      const jobs = [job("side", "2020-01-01", null), job("main", "2026-08-01", null)];
+      expect(currentExperience(jobs)?.id).toBe("main");
+    });
+
+    it("returns undefined when every job has ended", () => {
+      expect(currentExperience([job("old", "2019-01-01", "2022-01-01")])).toBeUndefined();
+      expect(currentExperience([])).toBeUndefined();
+    });
+  });
+
+  describe("isStudying", () => {
+    it.each([
+      [undefined, true],
+      ["", true],
+      ["2027 (expected)", true],
+      ["2027", true],
+      ["2026", false],
+      ["2019", false],
+      ["Graduated", false],
+    ])("end %p in 2026 -> %p", (end, expected) => {
+      expect(isStudying(end, 2026)).toBe(expected);
+    });
   });
 });

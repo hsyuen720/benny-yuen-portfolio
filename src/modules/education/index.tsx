@@ -7,7 +7,7 @@ import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IEducation } from "~/types/data";
 import getCollection from "~/utils/getCollection";
-import { byOrder } from "~/utils/normalize";
+import { byOrder, isStudying } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import * as timeline from "../experiences/styles.css";
@@ -34,8 +34,7 @@ const Education = async () => {
       </div>
       <ol className={clsx(sectionStyles.splitMain, timeline.timeline)}>
         {[...items].sort(byOrder).map((item) => {
-          // Still studying: no end yet, or an end year still ahead ("2027 (expected)")
-          const isCurrent = !item.end || parseInt(item.end, 10) > thisYear;
+          const isCurrent = isStudying(item.end, thisYear);
           return (
             <li key={item.id} className={timeline.item}>
               <span
