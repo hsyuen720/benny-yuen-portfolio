@@ -97,7 +97,7 @@ const seed: Record<string, SeedDoc[]> = {
       start: "2026-08-01",
       end: null,
       summary:
-        "Building AI meeting transcription and notes across the Next.js web app, the Tauri desktop client, the mobile app and the Django backend.",
+        "Building AI meeting transcription and notes across the Next.js web app, the Tauri desktop client, the Flutter mobile app and the Django backend.",
     },
     {
       id: "sfbyuwHxQNDgsHL197QN",
