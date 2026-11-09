@@ -153,7 +153,7 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "t3",
       group: "ai",
-      name: "Verified",
+      name: "Quality owned",
       detail: "Every change is tested and reviewed before it ships",
       order: 3,
     },
