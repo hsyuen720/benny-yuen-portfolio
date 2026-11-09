@@ -139,22 +139,22 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "t1",
       group: "ai",
-      name: "Claude Code",
-      detail: "Agents build; I plan, write the spec and review every change",
+      name: "AI coding agents",
+      detail: "Claude Code, GitHub Copilot and the like do the typing; I own the direction",
       order: 1,
     },
     {
       id: "t2",
       group: "ai",
       name: "Spec first",
-      detail: "A written spec before any prompt, so the first build is the right one",
+      detail: "Agree on the problem and what done looks like before building",
       order: 2,
     },
     {
       id: "t3",
       group: "ai",
       name: "Verified",
-      detail: "Tests and an agent QA pass on every change, then my review",
+      detail: "Every change is tested and reviewed before it ships",
       order: 3,
     },
     {
@@ -168,7 +168,7 @@ const seed: Record<string, SeedDoc[]> = {
       id: "t6",
       group: "stack",
       name: "Mobile",
-      detail: "React Native, Expo, Detox, Fastlane",
+      detail: "React Native, Expo, Flutter, Fastlane",
       order: 2,
     },
     {
