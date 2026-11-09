@@ -80,6 +80,18 @@ export const toExperience = (doc: IExperience): Experience => ({
 export const sortExperiences = (experiences: Experience[]) =>
   [...experiences].sort((a, b) => (b.start?.getTime() ?? 0) - (a.start?.getTime() ?? 0));
 
+/** Whole years since the first job started, and how many companies (a promotion is one team). */
+export const careerStats = (experiences: Experience[], now: Date) => {
+  const starts = experiences.flatMap((e) => (e.start ? [e.start.getTime()] : []));
+  if (starts.length === 0) return { years: 0, teams: 0 };
+  const first = new Date(Math.min(...starts));
+  const months = (now.getFullYear() - first.getFullYear()) * 12 + now.getMonth() - first.getMonth();
+  return {
+    years: Math.max(0, Math.floor(months / 12)),
+    teams: new Set(experiences.map((e) => e.company)).size,
+  };
+};
+
 /** The newest job that has not ended, if any. */
 export const currentExperience = (experiences: Experience[]) =>
   sortExperiences(experiences).find((e) => !e.end);

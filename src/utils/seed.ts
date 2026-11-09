@@ -1,5 +1,6 @@
-// shortcut: dev-only placeholder content to preview the full design; delete this file and its
-// two call sites (getCollection, getDocument) once Firestore holds the real content.
+// shortcut: dev-only preview of the real content before it is in Firestore (same data as the
+// content draft); delete this file and its two call sites (getCollection, getDocument) once
+// Firestore holds it.
 import { AppCollection } from "~/settings/constants";
 
 type SeedDoc = { id: string } & Record<string, unknown>;
@@ -9,7 +10,7 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "home",
       intro:
-        "Seven years on health insurance, hospitality and enterprise apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
+        "Seven years on health insurance, hospitality and membership rewards apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
       experienceIntro:
         "Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.",
     },
@@ -19,54 +20,72 @@ const seed: Record<string, SeedDoc[]> = {
       id: "treklay",
       title: "Treklay",
       summary:
-        "Shared and personal budgets in one app. Each book and wallet shows its net balance on a single home screen.",
+        "A privacy-first group expense tracker. Shared and personal budgets in one app, each with its net balance on a single home screen.",
       stack: [
-        { label: "App", value: "Expo, React Native" },
-        { label: "API", value: "NestJS, TypeScript" },
-        { label: "Delivery", value: "pnpm monorepo, GitHub Actions, EAS" },
+        {
+          label: "Frontend",
+          value: "Expo, React Native",
+        },
+        {
+          label: "Backend",
+          value: "NestJS, TypeScript",
+        },
+        {
+          label: "Delivery",
+          value: "pnpm monorepo, GitHub Actions, EAS",
+        },
       ],
-      links: { code: "https://github.com/hsyuen720/treklay" },
+      links: {
+        code: "https://github.com/hsyuen720/treklay",
+      },
       featured: true,
       order: 1,
       status: "In development",
     },
     {
-      id: "svg-annotation",
+      id: "dNWMAIFJ9oXmAfGWMJoK",
       title: "React SVG Annotation",
       summary:
         "An open-source React library for drawing freehand lines and shapes on top of any image.",
       stack: ["React", "SVG", "Storybook"],
       links: {
         code: "https://github.com/hsyuen720/react-svg-annotation",
-        demo: "https://example.com",
+        demo: "https://hsyuen720.github.io/react-svg-annotation/?path=/story/svg-annotation--basic",
       },
       featured: true,
       order: 2,
+      status: "live",
     },
     {
-      id: "hkid",
+      id: "n3ZhWtXxI4joBPqYHg1v",
       title: "HKID Tools",
       summary: "Generate and validate Hong Kong identity card numbers for testing.",
-      stack: ["Remix"],
-      links: { code: "https://github.com/hsyuen720/hkid-tools", demo: "https://example.com" },
+      stack: ["Remix", "React"],
+      links: {
+        code: "https://github.com/hsyuen720/hkid-tools",
+        demo: "https://hkid-tools.vercel.app/",
+      },
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/benny-yuen-portfolio-4718c.appspot.com/o/projects%2FScreenshot%202024-02-17%20at%2020.21.56.png?alt=media&token=78995345-ee00-4ff0-9564-49f04be68226",
+      featured: false,
       order: 3,
+      status: "live",
     },
     {
-      id: "portfolio",
+      id: "ejMc4KaZFExX03mpWJZm",
       title: "This website",
       summary: "One-page portfolio whose content updates from Firebase without a redeploy.",
       stack: ["Next.js", "Firebase"],
-      links: { code: "https://github.com/hsyuen720/benny-yuen-portfolio" },
+      links: {
+        code: "https://github.com/hsyuen720/benny-yuen-portfolio",
+        demo: "https://benny-yuen-portfolio.vercel.app/",
+      },
+      image:
+        "https://firebasestorage.googleapis.com/v0/b/benny-yuen-portfolio-4718c.appspot.com/o/projects%2FScreenshot%202024-02-17%20at%2020.17.57.png?alt=media&token=a85933d3-1d03-49d3-a985-96b2ca08bfec",
+      featured: false,
       order: 4,
+      status: "live",
     },
-    ...[5, 6, 7, 8].map((n) => ({
-      id: `sample-${n}`,
-      title: `Sample project ${n}`,
-      summary: "Placeholder row to preview the list and the Show all button.",
-      stack: ["TypeScript"],
-      links: { code: "https://example.com" },
-      order: n,
-    })),
   ],
   [AppCollection.Experiences]: [
     {
@@ -74,14 +93,14 @@ const seed: Record<string, SeedDoc[]> = {
       role: "Software Engineer",
       company: "Jurnie",
       location: "Copenhagen",
-      workMode: "part-time",
+      workMode: "hybrid, part-time",
       start: "2026-08-01",
       end: null,
       summary:
         "Building the Next.js web app and the Tauri desktop client for AI meeting transcription and notes.",
     },
     {
-      id: "melco",
+      id: "sfbyuwHxQNDgsHL197QN",
       role: "Software Engineer",
       company: "Melco Resorts & Entertainment",
       companyShort: "Melco",
@@ -93,7 +112,7 @@ const seed: Record<string, SeedDoc[]> = {
         "Led the rebuild of the MelcoToday app in React, React Native and Node.js, and set the team's Git and documentation practice.",
     },
     {
-      id: "amplify",
+      id: "VmscvKXuOLZDQlTySX1V",
       role: "Frontend Engineer",
       company: "Amplify Health",
       location: "Hong Kong",
@@ -104,60 +123,39 @@ const seed: Record<string, SeedDoc[]> = {
         "Led the mobile team on the AIA Vitality Indonesia app and set up its CI/CD with Detox, Fastlane and Azure Pipelines.",
     },
     {
-      id: "fujifilm",
+      id: "sPz2lDDEeocPSBEBdgkj",
       role: "Analyst Programmer",
       company: "FUJIFILM Business Innovation Hong Kong",
       companyShort: "FBHK",
       location: "Hong Kong",
-      workMode: "started as Programmer",
+      workMode: "on-site",
       start: "2019-07-01",
       end: "2022-11-01",
       summary:
-        "Built a clinic CMS from scratch and its React Native apps, cut bundle size and re-renders, and trained new developers.",
+        "Joined as Programmer and became Analyst Programmer: built a clinic CMS from scratch and its React Native apps, cut bundle size and re-renders, and trained new developers.",
     },
-    // Ten placeholder jobs to stress the timeline and commit graph
-    ...Array.from({ length: 10 }, (_, i) => {
-      const year = 2018 - i;
-      return {
-        id: `sample-job-${i + 1}`,
-        role: `Sample role ${i + 1}`,
-        company: `Sample company ${i + 1}`,
-        location: "Hong Kong",
-        workMode: "on-site",
-        start: `${year}-01-01`,
-        end: `${year}-12-01`,
-        summary: "Placeholder job to preview a long career on the timeline and commit graph.",
-      };
-    }),
   ],
   [AppCollection.Tools]: [
     {
       id: "t1",
       group: "ai",
       name: "Claude Code",
-      detail: "My main coding agent, on Treklay and at work",
+      detail: "Agents build; I plan, write the spec and review every change",
       order: 1,
     },
     {
       id: "t2",
       group: "ai",
-      name: "Specs first",
-      detail: "Every task starts as a written spec before any prompt",
+      name: "Spec first",
+      detail: "A written spec before any prompt, so the first build is the right one",
       order: 2,
     },
     {
       id: "t3",
       group: "ai",
-      name: "Agent pipeline",
-      detail: "A developer agent builds, a QA agent checks, I review",
+      name: "Verified",
+      detail: "Tests and an agent QA pass on every change, then my review",
       order: 3,
-    },
-    {
-      id: "t4",
-      group: "ai",
-      name: "Parallel work",
-      detail: "Git worktrees so several agents can work at once",
-      order: 4,
     },
     {
       id: "t5",
@@ -173,7 +171,13 @@ const seed: Record<string, SeedDoc[]> = {
       detail: "React Native, Expo, Detox, Fastlane",
       order: 2,
     },
-    { id: "t7", group: "stack", name: "Server", detail: "Node.js, NestJS, Firebase", order: 3 },
+    {
+      id: "t7",
+      group: "stack",
+      name: "Backend & services",
+      detail: "Node.js, NestJS, AWS, Azure, GCP",
+      order: 3,
+    },
   ],
   [AppCollection.Education]: [
     {
@@ -182,7 +186,7 @@ const seed: Record<string, SeedDoc[]> = {
       institution: "Technical University of Denmark",
       institutionShort: "DTU",
       start: "2025",
-      end: "2027",
+      end: "2027 (expected)",
       order: 1,
     },
     {

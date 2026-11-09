@@ -10,12 +10,10 @@ import type { IExperience, IHomeContent } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
-import { currentExperience, toExperience } from "~/utils/normalize";
+import { careerStats, currentExperience, toExperience } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import Section from "../section";
-
-type Stat = { value: string; label: string };
 
 const HeroBanner = async () => {
   const [t, ct, content, docs] = await Promise.all([
@@ -24,10 +22,16 @@ const HeroBanner = async () => {
     getDocument<IHomeContent>(AppCollection.Content, "home"),
     getCollection<IExperience>(AppCollection.Experiences),
   ]);
-  // The card hides when every job has ended
-  const current = currentExperience(docs.map(toExperience));
   const photo = await getStorageUrl(t("photoPath"));
-  const stats = t.raw("stats") as Stat[];
+  const experiences = docs.map(toExperience);
+  const { years, teams } = careerStats(experiences, new Date());
+  // Both come from the experience documents, so they never go stale
+  const stats = [
+    { value: years > 0 ? `${years}+` : "", label: t("years") },
+    { value: teams > 0 ? String(teams) : "", label: t("teams") },
+  ].filter((stat) => stat.value);
+  // The card hides when every job has ended
+  const current = currentExperience(experiences);
 
   return (
     <Section id={PortfolioSection.HeroBanner} className={styles.band} innerClassName={styles.inner}>

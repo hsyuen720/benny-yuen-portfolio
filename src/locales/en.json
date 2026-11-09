@@ -18,15 +18,13 @@
     },
     "heroBanner": {
       "role": "Software engineer, Copenhagen",
-      "headline": "I ship React and React Native apps people <em>actually use</em>.",
-      "stats": [
-        { "value": "7+", "label": "years shipping" },
-        { "value": "4", "label": "product teams" }
-      ],
+      "headline": "I ship mobile and web apps people <em>actually use</em>.",
+      "years": "years shipping",
+      "teams": "product teams",
       "cta": "See my work",
       "now": "Now",
       "at": "{role} at {company}",
-      "intro": "Seven years on health insurance, hospitality and enterprise apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
+      "intro": "Seven years on health insurance, hospitality and membership rewards apps in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
       "photoPath": "assets/picture-in-hero-banner.jpeg",
       "photoAlt": "Benny Yuen"
     },
@@ -48,8 +46,8 @@
     },
     "tools": {
       "title": "How I build",
-      "description": "AI agents do much of the typing. I write the specs, review the output and own what ships.",
-      "ai": "AI workflow",
+      "description": "I build with an agentic workflow: agents do the typing, I own the spec and the review, so products ship quickly and correctly.",
+      "ai": "Agentic workflow",
       "stack": "Stack"
     },
     "experience": {

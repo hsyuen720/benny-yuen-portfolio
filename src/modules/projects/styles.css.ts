@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css";
 
-import { glow } from "~/styles/theme.css";
+import { breakpoint, glow } from "~/styles/theme.css";
 
 export const inner = style({
   display: "flex",
@@ -16,8 +16,12 @@ export const header = style({
   gap: "12px 48px",
 });
 
+// One line beside the title on wide screens; wraps under it on phones
 export const subtitle = style({
-  maxWidth: "400px",
+  whiteSpace: "nowrap",
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { whiteSpace: "normal" },
+  },
 });
 
 // Static warm light behind the section's figure

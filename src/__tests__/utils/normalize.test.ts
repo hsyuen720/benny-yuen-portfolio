@@ -1,5 +1,6 @@
 import type { IExperience, IProject } from "~/types/data";
 import {
+  careerStats,
   currentExperience,
   formatMonthYear,
   isStudying,
@@ -152,6 +153,32 @@ describe("normalize", () => {
 
     it("reads the year in Copenhagen time", () => {
       expect(yearOf(newYearCph)).toBe(2026);
+    });
+  });
+
+  describe("careerStats", () => {
+    const job = (company: string, start: string, end: string | null) =>
+      toExperience({
+        id: company,
+        company,
+        start: ts(start),
+        end: end ? ts(end) : null,
+      } as IExperience);
+    const now = new Date("2026-11-09T12:00:00Z");
+
+    it("counts whole years since the first job and each company once", () => {
+      const jobs = [
+        job("FBHK", "2019-07-08", "2020-08-31"),
+        job("FBHK", "2020-09-01", "2022-11-10"),
+        job("Amplify", "2022-11-11", "2024-03-01"),
+        job("Melco", "2024-03-04", "2026-07-31"),
+        job("Jurnie", "2026-08-01", null),
+      ];
+      expect(careerStats(jobs, now)).toEqual({ years: 7, teams: 4 });
+    });
+
+    it("is zero with no dated experience", () => {
+      expect(careerStats([], now)).toEqual({ years: 0, teams: 0 });
     });
   });
 });

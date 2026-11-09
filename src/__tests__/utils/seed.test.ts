@@ -18,7 +18,7 @@ describe("seed", () => {
 
   it("serves seed collections and documents in development with the flag", () => {
     setEnv("development", "1");
-    expect(getSeedCollection("projects")?.length).toBeGreaterThan(5);
+    expect(getSeedCollection("projects")?.length).toBeGreaterThan(0);
     expect(getSeedDocument("content", "home")).toMatchObject({ id: "home" });
     expect(getSeedDocument("content", "missing")).toBeNull();
   });
@@ -26,5 +26,12 @@ describe("seed", () => {
   it("leaves socialMedia to Firestore", () => {
     setEnv("development", "1");
     expect(getSeedCollection("socialMedia")).toBeUndefined();
+  });
+
+  it("holds only real content: no placeholders or example links", () => {
+    setEnv("development", "1");
+    const all = ["content", "projects", "experiences", "tools", "education"] as const;
+    const text = JSON.stringify(all.map((c) => getSeedCollection(c)));
+    expect(text).not.toMatch(/sample|placeholder|example\.com|TODO/i);
   });
 });
