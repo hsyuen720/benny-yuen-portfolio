@@ -35,6 +35,8 @@ account never needs permission to enable APIs:
 - Eventarc API
 - Pub/Sub API
 - Secret Manager API
+- IAM Service Account Credentials API
+- Cloud Billing API (firebase-tools checks billing before deploying)
 
 The first deploy of a Firestore trigger can fail while Eventarc's service agent is still being
 granted permissions. Wait a few minutes and re-run the workflow.
@@ -90,6 +92,20 @@ gcloud iam service-accounts add-iam-policy-binding $SA --project $PROJECT_ID \
 
 # Value for GCP_WORKLOAD_IDENTITY_PROVIDER
 echo projects/$PROJECT_NUMBER/locations/global/workloadIdentityPools/github/providers/github-repo
+```
+
+The first deploy also needs Google's service agents to hold these roles. firebase-tools tries to
+grant them itself, but the CI account cannot change project IAM, so grant them once as an owner:
+
+```sh
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:service-$PROJECT_NUMBER@gcp-sa-pubsub.iam.gserviceaccount.com \
+  --role roles/iam.serviceAccountTokenCreator
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com --role roles/run.invoker
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+  --member serviceAccount:$PROJECT_NUMBER-compute@developer.gserviceaccount.com \
+  --role roles/eventarc.eventReceiver
 ```
 
 If the first deploy reports a missing permission, grant exactly that role to the service account
