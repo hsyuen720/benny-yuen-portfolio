@@ -1,7 +1,7 @@
 // Isometric projection: u runs along the main line, v across it, z is height.
 // Screen x = (u - v)·cos30°, y = (u + v)·sin30° − z.
 const COS = Math.cos(Math.PI / 6);
-const project = (u: number, v: number, z: number): [number, number] => [
+export const project = (u: number, v: number, z: number): [number, number] => [
   (u - v) * COS,
   (u + v) * 0.5 - z,
 ];
@@ -14,7 +14,7 @@ const path = (points: Point3[]) =>
     .join("L")}Z`;
 
 /** The three faces of a box you can see: +u side, +v side, top. */
-const box = (u0: number, u1: number, v0: number, v1: number, z0: number, z1: number) => ({
+export const box = (u0: number, u1: number, v0: number, v1: number, z0: number, z1: number) => ({
   sideU: path([
     [u1, v0, z0],
     [u1, v1, z0],

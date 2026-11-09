@@ -58,7 +58,8 @@
       "graphLabel": "Career drawn as a commit graph: {years}"
     },
     "education": {
-      "title": "Education"
+      "title": "Education",
+      "stackLabel": "Education drawn as a stack of books, one per degree: {years}"
     },
     "contact": {
       "title": "Get in touch",

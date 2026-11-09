@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { getTranslations } from "next-intl/server";
 
-import HairlineFigure from "~/components/hairlineFigure";
 import Heading from "~/components/heading";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
@@ -9,6 +8,7 @@ import type { IEducation } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import { byOrder, isStudying } from "~/utils/normalize";
 
+import BookStack from "./bookStack";
 import * as styles from "./styles.css";
 import * as timeline from "../experiences/styles.css";
 import Section from "../section";
@@ -21,6 +21,11 @@ const Education = async () => {
   ]);
   if (items.length === 0) return null;
   const thisYear = new Date().getFullYear();
+  const sorted = [...items].sort(byOrder);
+  // Oldest first, labelled with the year each degree ends
+  const years = sorted
+    .map((item) => (item.end || item.start || "").match(/\d{4}/)?.[0] ?? "")
+    .reverse();
 
   return (
     <Section
@@ -30,10 +35,14 @@ const Education = async () => {
     >
       <div className={clsx(sectionStyles.splitAside, timeline.aside)}>
         <Heading title={t("title")} />
-        <HairlineFigure className={styles.figure} figure="Riffle" label={t("title")} />
+        <BookStack
+          className={styles.figure}
+          years={years}
+          label={t("stackLabel", { years: years.join(", ") })}
+        />
       </div>
       <ol className={clsx(sectionStyles.splitMain, timeline.timeline)}>
-        {[...items].sort(byOrder).map((item) => {
+        {sorted.map((item) => {
           const isCurrent = isStudying(item.end, thisYear);
           return (
             <li key={item.id} className={timeline.item}>
