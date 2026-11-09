@@ -93,6 +93,10 @@ export const careerStats = (experiences: Experience[], now: Date) => {
 };
 
 /** The newest job that has not ended, if any. */
+/** "Software Engineer, Copenhagen" */
+export const roleLine = (experience: Pick<Experience, "role" | "location">) =>
+  [experience.role, experience.location].filter(Boolean).join(", ");
+
 export const currentExperience = (experiences: Experience[]) =>
   sortExperiences(experiences).find((e) => !e.end);
 

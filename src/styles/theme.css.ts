@@ -27,6 +27,9 @@ export const hairline = {
 // inside its band, and scrolls on the compositor (no per-frame repaint, unlike a fixed
 // background). Spread it into the band's style; the band must be a flex column (sections are).
 export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) => ({
+  // A band shorter than the screen would let the glow layer hang past it and lengthen the page;
+  // clip (unlike hidden) is not a scroll container, so the sticky layer still follows the viewport
+  overflow: "clip" as const,
   selectors: {
     "&::before": {
       content: '""',
