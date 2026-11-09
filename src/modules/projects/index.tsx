@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { getTranslations } from "next-intl/server";
 
 import Heading from "~/components/heading";
@@ -28,7 +29,7 @@ const Projects = async () => {
   return (
     <Section
       id={PortfolioSection.Projects}
-      className={sectionStyles.deep}
+      className={clsx(sectionStyles.deep, styles.band)}
       innerClassName={styles.inner}
     >
       <div className={styles.header}>

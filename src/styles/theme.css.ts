@@ -27,6 +27,15 @@ export const hairline = {
 export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) =>
   `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`;
 
+// Frosted surface for cards that sit over a glow; on plain black it reads as a normal card
+export const glass = {
+  backgroundColor: "rgba(38, 36, 33, 0.55)",
+  backdropFilter: "blur(16px) saturate(140%)",
+  WebkitBackdropFilter: "blur(16px) saturate(140%)",
+  border: `1px solid ${colors.line2}`,
+  boxShadow: "inset 0 1px 0 rgba(239, 233, 222, 0.06)",
+};
+
 export const fonts = {
   display: `var(--font-display), ui-sans-serif, system-ui, sans-serif`,
   body: `var(--font-body), ui-sans-serif, system-ui, sans-serif`,

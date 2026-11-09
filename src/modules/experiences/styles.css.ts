@@ -1,6 +1,6 @@
 import { keyframes, style } from "@vanilla-extract/css";
 
-import { breakpoint, colors, layout, reducedMotion } from "~/styles/theme.css";
+import { breakpoint, colors, layout, reducedMotion, glow } from "~/styles/theme.css";
 
 export const aside = style({
   position: "sticky",
@@ -99,4 +99,9 @@ export const role = style({
 export const place = style({
   fontSize: "15px",
   color: colors.muted,
+});
+
+// Static warm light behind the section's figure
+export const band = style({
+  backgroundImage: glow("22%", "30%", "38% 40%"),
 });

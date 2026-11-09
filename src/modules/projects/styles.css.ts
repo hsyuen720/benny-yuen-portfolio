@@ -1,5 +1,7 @@
 import { style } from "@vanilla-extract/css";
 
+import { glow } from "~/styles/theme.css";
+
 export const inner = style({
   display: "flex",
   flexDirection: "column",
@@ -16,4 +18,9 @@ export const header = style({
 
 export const subtitle = style({
   maxWidth: "400px",
+});
+
+// Static warm light behind the section's figure
+export const band = style({
+  backgroundImage: glow("50%", "40%", "55% 45%", 0.08),
 });

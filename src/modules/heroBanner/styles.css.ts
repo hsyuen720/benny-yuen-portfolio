@@ -3,6 +3,7 @@ import { keyframes, style } from "@vanilla-extract/css";
 import {
   breakpoint,
   colors,
+  glass,
   glow,
   ease,
   fonts,
@@ -169,8 +170,7 @@ export const now = style({
   gap: "10px",
   maxWidth: "calc(100% + 16px)",
   padding: "12px 16px",
-  backgroundColor: colors.raised,
-  border: `1px solid ${colors.line2}`,
+  ...glass,
   borderRadius: radii.button,
   fontSize: "15px",
   color: colors.text,

@@ -1,14 +1,13 @@
 import { globalStyle, style } from "@vanilla-extract/css";
 
-import { breakpoint, colors, radii } from "~/styles/theme.css";
+import { breakpoint, colors, glass, radii } from "~/styles/theme.css";
 
 export const card = style({
   display: "grid",
   gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
   alignItems: "stretch",
+  ...glass,
   borderRadius: radii.card,
-  border: `1px solid ${colors.line}`,
-  backgroundColor: colors.card,
   overflow: "hidden",
 });
 

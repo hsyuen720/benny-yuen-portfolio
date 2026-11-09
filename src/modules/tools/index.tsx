@@ -21,7 +21,11 @@ const Tools = async () => {
   ]);
 
   return (
-    <Section id={PortfolioSection.Tools} innerClassName={sectionStyles.split}>
+    <Section
+      id={PortfolioSection.Tools}
+      className={styles.band}
+      innerClassName={sectionStyles.split}
+    >
       <div className={sectionStyles.splitAside}>
         <Heading title={t("title")} description={t("description")} />
         <HairlineFigure className={styles.figure} figure="Keyboard" label={t("title")} />

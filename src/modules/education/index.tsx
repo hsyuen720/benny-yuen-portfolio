@@ -23,7 +23,11 @@ const Education = async () => {
   const thisYear = new Date().getFullYear();
 
   return (
-    <Section id={PortfolioSection.Education} innerClassName={sectionStyles.split}>
+    <Section
+      id={PortfolioSection.Education}
+      className={styles.band}
+      innerClassName={sectionStyles.split}
+    >
       <div className={clsx(sectionStyles.splitAside, timeline.aside)}>
         <Heading title={t("title")} />
         <HairlineFigure className={styles.figure} figure="Riffle" label={t("title")} />

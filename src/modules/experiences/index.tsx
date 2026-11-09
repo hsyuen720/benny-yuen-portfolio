@@ -30,7 +30,7 @@ const Experiences = async () => {
   return (
     <Section
       id={PortfolioSection.Experience}
-      className={sectionStyles.deep}
+      className={clsx(sectionStyles.deep, styles.band)}
       innerClassName={sectionStyles.split}
     >
       <div className={clsx(sectionStyles.splitAside, styles.aside)}>
