@@ -10,5 +10,5 @@ export const figure = style({
 
 // Static warm light behind the section's figure
 export const band = style({
-  backgroundImage: glow("22%", "55%"),
+  ...glow("22%", "55%"),
 });

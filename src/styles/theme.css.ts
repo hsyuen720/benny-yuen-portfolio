@@ -22,10 +22,12 @@ export const hairline = {
   lo: "#2e2b27",
 };
 
-// A faint, static warm light behind the main visual of a section (photo, figure).
-// Painted on the band so it never moves with scroll.
-export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) =>
-  `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`;
+// A faint warm light behind the main visual of a section (photo, figure). Fixed to the
+// viewport so it stays in view through long sections, and only paints inside its band.
+export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) => ({
+  backgroundImage: `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`,
+  backgroundAttachment: "fixed",
+});
 
 // Frosted surface for cards that sit over a glow; on plain black it reads as a normal card
 export const glass = {

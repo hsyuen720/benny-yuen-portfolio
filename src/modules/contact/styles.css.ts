@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 import { breakpoint, colors, glow, layout } from "~/styles/theme.css";
 
 export const band = style({
-  backgroundImage: glow("72%", "50%"),
+  ...glow("72%", "50%"),
 });
 
 export const inner = style({

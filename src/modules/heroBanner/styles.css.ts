@@ -14,7 +14,7 @@ import {
 
 export const band = style({
   position: "relative",
-  backgroundImage: glow("76%", "54%", "48% 70%", 0.13),
+  ...glow("76%", "54%", "48% 70%", 0.13),
   overflow: "hidden",
   borderTop: "none",
 });

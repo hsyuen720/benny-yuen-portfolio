@@ -22,5 +22,5 @@ export const subtitle = style({
 
 // Static warm light behind the section's figure
 export const band = style({
-  backgroundImage: glow("50%", "40%", "55% 45%", 0.08),
+  ...glow("50%", "55%", "55% 50%", 0.08),
 });
