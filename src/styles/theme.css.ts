@@ -22,6 +22,11 @@ export const hairline = {
   lo: "#2e2b27",
 };
 
+// A faint, static warm light behind the main visual of a section (photo, figure).
+// Painted on the band so it never moves with scroll.
+export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) =>
+  `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`;
+
 export const fonts = {
   display: `var(--font-display), ui-sans-serif, system-ui, sans-serif`,
   body: `var(--font-body), ui-sans-serif, system-ui, sans-serif`,

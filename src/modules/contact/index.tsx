@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { getTranslations } from "next-intl/server";
 
 import HairlineFigure from "~/components/hairlineFigure";
@@ -18,7 +19,7 @@ const Contact = async () => {
     <>
       <Section
         id={PortfolioSection.Contact}
-        className={sectionStyles.deep}
+        className={clsx(sectionStyles.deep, styles.band)}
         innerClassName={styles.inner}
       >
         <div className={styles.content}>

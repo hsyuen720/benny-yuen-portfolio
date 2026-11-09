@@ -1,9 +1,19 @@
 import { keyframes, style } from "@vanilla-extract/css";
 
-import { breakpoint, colors, ease, fonts, layout, radii, reducedMotion } from "~/styles/theme.css";
+import {
+  breakpoint,
+  colors,
+  glow,
+  ease,
+  fonts,
+  layout,
+  radii,
+  reducedMotion,
+} from "~/styles/theme.css";
 
 export const band = style({
   position: "relative",
+  backgroundImage: glow("76%", "54%", "48% 70%", 0.13),
   overflow: "hidden",
   borderTop: "none",
 });
@@ -117,12 +127,21 @@ export const visual = style({
   position: "relative",
   zIndex: 1,
   width: "380px",
+  // Offset outline behind the photo: depth without hiding the glow
+  selectors: {
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      inset: "16px -16px -16px 16px",
+      border: `1px solid ${colors.line2}`,
+      borderRadius: radii.card,
+    },
+  },
   "@media": {
     [`(max-width: ${breakpoint})`]: { width: "100%", maxWidth: "420px" },
   },
 });
 
-// Offset hairline frame behind the photo: depth without decoration
 export const photo = style({
   display: "block",
   width: "100%",
@@ -131,7 +150,7 @@ export const photo = style({
   objectFit: "cover",
   objectPosition: "50% 28%",
   borderRadius: radii.card,
-  boxShadow: `16px 16px 0 -1px ${colors.page}, 16px 16px 0 0 ${colors.line2}`,
+  position: "relative",
 });
 
 const pulse = keyframes({
