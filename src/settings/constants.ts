@@ -1,14 +1,19 @@
 export const PortfolioSection = {
   HeroBanner: "heroBanner",
-  About: "about",
-  Experience: "experience",
   Projects: "projects",
+  Tools: "tools",
+  Experience: "experience",
+  Education: "education",
+  Contact: "contact",
 };
 
 export const AppCollection = {
   Experiences: "experiences",
   Projects: "projects",
   SocialMedia: "socialMedia",
+  Tools: "tools",
+  Education: "education",
+  Content: "content",
 };
 
 export const SocialMedia = {

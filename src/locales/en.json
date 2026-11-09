@@ -1,50 +1,60 @@
 {
   "common": {
     "author": "Benny Yuen",
-    "title": "Benny Yuen | Frontend Developer",
-    "description": "Benny Yuen's Personal Website",
-
-    "text": {
-      "loading": "Loading...",
-      "noData": "No data found"
-    },
+    "title": "Benny Yuen, software engineer",
+    "description": "Benny Yuen is a software engineer in Copenhagen who builds React, React Native and Next.js apps.",
 
     "date": {
-      "invalid": "Invalid Date",
-      "present": "Present"
+      "present": "present"
     }
   },
   "portfolio": {
     "navigation": {
-      "about": "About",
+      "label": "Sections",
+      "projects": "Projects",
+      "tools": "How I build",
       "experience": "Experience",
-      "projects": "Projects"
+      "contact": "Contact"
     },
     "heroBanner": {
-      "greeting": "Hello👋, I am Benny👨🏻‍💻!",
-      "introduction": "I am a <role>Frontend Developer!, Mobile Developer!, Full Stack Engineer</role>",
-      "description": "I am a passionate developer who loves to build things that make people's lives easier.",
-      "photoPath": "assets/picture-in-hero-banner.jpeg"
+      "intro": "Software engineer. Seven years building React and React Native apps for health insurance, hospitality and enterprise teams in Hong Kong. Now in Copenhagen, building AI meeting notes at Jurnie.",
+      "photoPath": "assets/picture-in-hero-banner.jpeg",
+      "photoAlt": "Benny Yuen"
     },
-    "about": {
-      "title": "About Me",
-      "subtitle": "A bit about me",
-      "photoDescription": "Connect with me on LinkedIn!😉 🤝",
-      "heading": "Who am I",
-      "description": "I am an experienced frontend developer with a strong passion for creating responsive and engaging web/mobile applications. I take pride in my work ethic, problem solving skills, and attention to detail. My main focus is on building interactive application that empower others by allowing them to engage with their own content and share it with others through various forms of technology.",
-      "techStack": "<tech>Frontend Development</tech><tech>Mobile Development</tech><tech>React</tech><tech>React Native</tech><tech>NextJS</tech><tech>Remix</tech>",
-      "photoPath": "assets/picture-in-about.jpg"
-    },
-    "experience": {
-      "title": "Experience",
-      "subtitle": "I started the journey for {numOfYears} years🤓"
+    "socialMedia": {
+      "email": "Email Benny",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     },
     "projects": {
       "title": "Projects",
-      "subtitle": "A demo is worth a thousand words😉"
+      "subtitle": "Apps, libraries and tools I design, build and maintain on my own.",
+      "more": "More projects",
+      "showAll": "Show all projects",
+      "code": "Code",
+      "demo": "Demo",
+      "live": "Live",
+      "viewOnGithub": "View on GitHub",
+      "stack": "Stack"
     },
-    "footer": {
-      "copyright": "Copyright @{year} {name}. All rights reserved."
+    "tools": {
+      "title": "How I build",
+      "description": "AI agents do much of the typing. I write the specs, review the output and own what ships.",
+      "ai": "AI workflow",
+      "stack": "Stack"
+    },
+    "experience": {
+      "title": "Experience",
+      "intro": "Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.",
+      "graphLabel": "Career drawn as a commit graph: {years}"
+    },
+    "education": {
+      "title": "Education"
+    },
+    "contact": {
+      "title": "Get in touch",
+      "description": "Open to on-site, hybrid and remote roles. Email is the fastest way to reach me.",
+      "copyright": "© {year} {name}"
     }
   }
 }
