@@ -75,15 +75,20 @@ export const link = style({
   },
 });
 
+// A 1px-wide bar stretched with scaleX: only transform and opacity animate, so it stays on the GPU
 export const indicator = style({
   position: "absolute",
   zIndex: 1,
   top: 0,
   left: 0,
+  width: "1px",
   height: "2px",
   backgroundColor: colors.gold,
+  transformOrigin: "left",
   pointerEvents: "none",
-  transition: [transition("indicator", "transform", "width"), transition("hover", "opacity")].join(
-    ", ",
-  ),
+  transition: transition("hover", "opacity"),
+});
+
+export const slide = style({
+  transition: `${transition("indicator", "transform")}, ${transition("hover", "opacity")}`,
 });
