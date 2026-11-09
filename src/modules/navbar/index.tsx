@@ -33,6 +33,7 @@ const Navbar = () => {
   const t = useTranslations(`${AppTranslation.Portfolio}.navigation`);
   const t2 = useTranslations(AppTranslation.Common);
   const refs = useRef<Record<string, HTMLAnchorElement | null>>({});
+  const headerRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<string | null>(null);
   // Last measured position, kept while hidden so the line fades in place instead of sliding from 0
   const [position, setPosition] = useState<Position | null>(null);
@@ -61,6 +62,17 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", measure);
   }, [measure]);
 
+  // Publish the header's real height (it wraps on phones) so anchored sections stop right under it
+  useEffect(() => {
+    const header = headerRef.current;
+    if (!header || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(() => {
+      document.documentElement.style.setProperty("--nav-height", `${header.offsetHeight}px`);
+    });
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+
   // While hidden the line must not slide: when it comes back it fades in at its new link.
   // The slide is re-enabled one frame after that placement.
   useEffect(() => {
@@ -74,7 +86,7 @@ const Navbar = () => {
   }, [position, active, canSlide]);
 
   return (
-    <header className={styles.header}>
+    <header ref={headerRef} className={styles.header}>
       <nav className={styles.nav} aria-label={t("label")}>
         <a
           className={styles.wordmark}

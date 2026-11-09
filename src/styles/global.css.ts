@@ -59,8 +59,9 @@ globalStyle("a:focus-visible, button:focus-visible", {
   borderRadius: "6px",
 });
 
+// --nav-height is set by the navbar; minus 1px tucks the section's top hairline under the header's
 globalStyle("section[id]", {
-  scrollMarginTop: "80px",
+  scrollMarginTop: "calc(var(--nav-height, 65px) - 1px)",
 });
 
 globalStyle("::selection", {
