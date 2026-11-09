@@ -51,4 +51,25 @@ describe("BookStack", () => {
     expect(screen.getByRole("img", { name: "Education as books" })).toBeInTheDocument();
     expect(books(container)).toHaveLength(0);
   });
+
+  it("hangs the ribbon on the degree in progress, not simply the top book", () => {
+    const ribbons = (items: { title: string; years: string; current?: boolean }[]) => {
+      const { container, unmount } = render(<BookStack books={items} label="Education" />);
+      const found = Array.from(books(container)).map((b) => !!b.querySelector("[data-ribbon]"));
+      unmount();
+      return found;
+    };
+    expect(
+      ribbons([
+        { title: "BSc", years: "2015 – 2019" },
+        { title: "MSc", years: "2020 – 2022" },
+      ]),
+    ).toEqual([false, false]);
+    expect(
+      ribbons([
+        { title: "BSc", years: "2015 – 2019", current: true },
+        { title: "Cert", years: "2020" },
+      ]),
+    ).toEqual([true, false]);
+  });
 });

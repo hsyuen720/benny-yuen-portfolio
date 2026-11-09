@@ -7,7 +7,7 @@ import { AppTranslation } from "~/settings/i18n";
 import type { IExperience, IHomeContent } from "~/types/data";
 import getCollection from "~/utils/getCollection";
 import getDocument from "~/utils/getDocument";
-import { sortExperiences, toExperience } from "~/utils/normalize";
+import { formatMonthYear, sortExperiences, toExperience, yearOf } from "~/utils/normalize";
 
 import CommitGraph from "./commitGraph";
 import * as styles from "./styles.css";
@@ -26,20 +26,19 @@ const Experiences = async () => {
     getDocument<IHomeContent>(AppCollection.Content, "home"),
   ]);
   const experiences = sortExperiences(docs.map(toExperience));
-  const formatDate = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" }).format;
+  const formatDate = (date: Date) => formatMonthYear(date, locale);
   // The graph shows the latest few jobs, oldest first; the root node sums up the rest
   const jobs = experiences
     .slice(0, GRAPH_JOBS)
     .map((e, index) => ({
       company: e.companyShort,
-      years: e.start
-        ? `${e.start.getFullYear()} – ${e.end ? e.end.getFullYear() : ct("date.present")}`
-        : "",
+      years: e.start ? `${yearOf(e.start)} – ${e.end ? yearOf(e.end) : ct("date.present")}` : "",
       current: index === 0 && !e.end,
     }))
     .reverse();
   const earlier = experiences.length - jobs.length;
-  const firstYear = experiences.at(-1)?.start?.getFullYear();
+  const firstStart = experiences.at(-1)?.start;
+  const firstYear = firstStart ? yearOf(firstStart) : undefined;
   const since =
     firstYear === undefined
       ? undefined

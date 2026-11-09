@@ -47,7 +47,9 @@ jobs:
 
       # SITE_URL is a non-secret params value; firebase reads it from functions/.env
       - name: Write params
-        run: echo "SITE_URL=${{ vars.SITE_URL }}" > .env
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: echo "SITE_URL=$SITE_URL" > .env
 
       - name: Deploy
         run: npx --yes firebase-tools@15.35.0 deploy --only functions --project "${{ vars.FIREBASE_PROJECT_ID }}" --non-interactive

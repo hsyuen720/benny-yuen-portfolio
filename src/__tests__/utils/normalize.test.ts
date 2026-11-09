@@ -1,7 +1,10 @@
 import type { IExperience, IProject } from "~/types/data";
 import {
   currentExperience,
+  formatMonthYear,
   isStudying,
+  toDate,
+  yearOf,
   sortExperiences,
   sortProjects,
   toExperience,
@@ -100,7 +103,8 @@ describe("normalize", () => {
       ["2027", true],
       ["2026", false],
       ["2019", false],
-      ["Graduated", false],
+      ["Present", true],
+      ["in progress", true],
     ])("end %p in 2026 -> %p", (end, expected) => {
       expect(isStudying(end, 2026)).toBe(expected);
     });
@@ -116,6 +120,38 @@ describe("normalize", () => {
       const without = toExperience({ id: "a", company: "Amplify Health" } as IExperience);
       expect(withShort.companyShort).toBe("Melco");
       expect(without.companyShort).toBe("Amplify Health");
+    });
+  });
+
+  describe("toDate", () => {
+    it("reads a Timestamp serialized by the cache as {seconds, nanoseconds}", () => {
+      expect(toDate({ seconds: 1785542400, nanoseconds: 0 } as never)?.toISOString()).toBe(
+        "2026-08-01T00:00:00.000Z",
+      );
+    });
+
+    it("treats a legacy null end as no date", () => {
+      const job = toExperience({
+        id: "x",
+        company: "C",
+        fromDate: ts("2019-07-08"),
+        toDate: null,
+      } as IExperience);
+      expect(job.end).toBeNull();
+    });
+  });
+
+  describe("site time zone", () => {
+    // 1 Aug 2026 00:00 in Copenhagen is 31 Jul 22:00 UTC, which is what the console stores
+    const augFirstCph = new Date("2026-07-31T22:00:00Z");
+    const newYearCph = new Date("2025-12-31T23:30:00Z");
+
+    it("formats month and year in Copenhagen time, not the server's", () => {
+      expect(formatMonthYear(augFirstCph, "en")).toBe("Aug 2026");
+    });
+
+    it("reads the year in Copenhagen time", () => {
+      expect(yearOf(newYearCph)).toBe(2026);
     });
   });
 });

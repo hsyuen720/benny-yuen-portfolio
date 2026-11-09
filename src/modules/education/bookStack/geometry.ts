@@ -47,9 +47,9 @@ const fit = (text: string) =>
   text.length > SPINE_CHARS ? `${text.slice(0, SPINE_CHARS - 1).trimEnd()}…` : text;
 
 /** A pile of books, oldest at the bottom, one per degree. */
-export const buildBooks = (titles: string[]) => {
-  const count = titles.length;
-  const books = titles.map((title, i) => {
+export const buildBooks = (items: { title: string; current?: boolean }[]) => {
+  const count = items.length;
+  const books = items.map(({ title, current }, i) => {
     const du = i % 2 === 0 ? 0 : SHIFT;
     const dv = i % 2 === 0 ? 0 : -SHIFT / 2;
     const [u0, u1, v0, v1] = [du, LENGTH + du, dv, DEPTH + dv];
@@ -68,7 +68,7 @@ export const buildBooks = (titles: string[]) => {
     };
     // Bookmark ribbon hanging over the front face of the book being read
     const ribbonU = u1 - 104; // clear of the years at the right end
-    const ribbon = isTop
+    const ribbon = current
       ? `M${fmt(project(ribbonU, v1, z1))}L${fmt(project(ribbonU + 12, v1, z1))}L${fmt(
           project(ribbonU + 12, v1, z0 - 14),
         )}L${fmt(project(ribbonU + 6, v1, z0 - 8))}L${fmt(project(ribbonU, v1, z0 - 14))}Z`

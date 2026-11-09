@@ -186,9 +186,10 @@ const seed: Record<string, SeedDoc[]> = {
       order: 1,
     },
     {
-      id: "bachelor",
-      degree: "Bachelor's degree (placeholder)",
-      institution: "University (placeholder)",
+      id: "hkust",
+      degree: "Bachelor's degree in Computer Engineering",
+      institution: "The Hong Kong University of Science and Technology",
+      institutionShort: "HKUST",
       start: "2015",
       end: "2019",
       order: 2,

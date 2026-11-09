@@ -31,7 +31,11 @@ const getDocument = <T = object>(
       revalidate: revalidateTime,
       tags: [collection, id],
     },
-  )();
+  )().catch((error: unknown) => {
+    // A denied or failed read must not take the page down: callers fall back to the bundled copy
+    console.error(`getDocument(${collection}/${id}) failed`, error);
+    return null;
+  });
 };
 
 export default getDocument;

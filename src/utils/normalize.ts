@@ -84,9 +84,28 @@ export const sortExperiences = (experiences: Experience[]) =>
 export const currentExperience = (experiences: Experience[]) =>
   sortExperiences(experiences).find((e) => !e.end);
 
-/** Still studying: no end yet, or an end year still ahead ("2027 (expected)"). */
-export const isStudying = (end: string | undefined, thisYear: number) =>
-  !end || parseInt(end, 10) > thisYear;
+/**
+ * Still studying: no end year (empty, "Present", "in progress"), or an end year still ahead
+ * ("2027 (expected)").
+ */
+export const isStudying = (end: string | undefined, thisYear: number) => {
+  const year = end?.match(/\d{4}/)?.[0];
+  return !year || Number(year) > thisYear;
+};
+
+// Dates are entered in the Firebase console at local midnight in Copenhagen; read them there,
+// not in the server's time zone (UTC on Vercel), or 1 Aug shows as Jul.
+const SITE_TIME_ZONE = "Europe/Copenhagen";
+
+export const formatMonthYear = (date: Date, locale: string) =>
+  new Intl.DateTimeFormat(locale, {
+    month: "short",
+    year: "numeric",
+    timeZone: SITE_TIME_ZONE,
+  }).format(date);
+
+export const yearOf = (date: Date) =>
+  Number(new Intl.DateTimeFormat("en", { year: "numeric", timeZone: SITE_TIME_ZONE }).format(date));
 
 /** Ascending by `order`; documents without one go last. */
 export const byOrder = <T extends { order?: number }>(a: T, b: T) =>

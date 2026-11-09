@@ -6,7 +6,7 @@ import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IEducation } from "~/types/data";
 import getCollection from "~/utils/getCollection";
-import { byOrder, isStudying } from "~/utils/normalize";
+import { byOrder, isStudying, yearOf } from "~/utils/normalize";
 
 import BookStack from "./bookStack";
 import * as styles from "./styles.css";
@@ -20,12 +20,16 @@ const Education = async () => {
     getCollection<IEducation>(AppCollection.Education),
   ]);
   if (items.length === 0) return null;
-  const thisYear = new Date().getFullYear();
+  const thisYear = yearOf(new Date());
   const sorted = [...items].sort(byOrder);
   const range = (item: IEducation) => [item.start, item.end].filter(Boolean).join(" – ");
   // Oldest first; each spine carries the school, the drawing's label reads the full names
   const books = sorted
-    .map((item) => ({ title: item.institutionShort || item.institution, years: range(item) }))
+    .map((item) => ({
+      title: item.institutionShort || item.institution,
+      years: range(item),
+      current: isStudying(item.end, thisYear),
+    }))
     .reverse();
 
   return (

@@ -12,7 +12,7 @@ const RISE_MS = 520;
 
 export type BookStackProps = {
   /** One book per degree, oldest first. */
-  books: { title: string; years: string }[];
+  books: { title: string; years: string; current?: boolean }[];
   label: string;
   className?: string;
 };
@@ -20,7 +20,7 @@ export type BookStackProps = {
 const BookStack = (props: BookStackProps) => {
   const { books: items, label, className } = props;
   const { el, isInView } = useInView({ once: true, threshold: 0.4 });
-  const { viewBox, books } = buildBooks(items.map((item) => item.title));
+  const { viewBox, books } = buildBooks(items);
   const topDelay = Math.max(items.length - 1, 0) * STAGGER_MS + RISE_MS;
 
   return (
@@ -51,6 +51,7 @@ const BookStack = (props: BookStackProps) => {
             </text>
             {book.ribbon ? (
               <path
+                data-ribbon
                 className={styles.ribbon}
                 d={book.ribbon}
                 style={{ transitionDelay: `${topDelay}ms` }}

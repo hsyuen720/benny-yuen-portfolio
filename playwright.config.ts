@@ -1,6 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 3000;
+// Own port, so a local `yarn dev` without the seed is never reused by mistake
+const PORT = 3100;
 
 // E2E runs against the dev server with the seed content, so results never depend on Firestore
 export default defineConfig({
@@ -18,7 +19,7 @@ export default defineConfig({
     { name: "mobile", use: { ...devices["Pixel 7"] } },
   ],
   webServer: {
-    command: "yarn dev",
+    command: `yarn dev -p ${PORT}`,
     env: { USE_SEED_DATA: "1" },
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,

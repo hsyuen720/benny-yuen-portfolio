@@ -54,8 +54,8 @@ const ProjectCard = (props: ProjectCardProps) => {
         {isLarge ? (
           stack.length > 0 ? (
             <dl className={styles.rows}>
-              {rows.map((row) => (
-                <div key={row.label} className={styles.row}>
+              {rows.map((row, i) => (
+                <div key={i} className={styles.row}>
                   <dt className={styles.rowLabel}>{row.label}</dt>
                   <dd className={styles.rowValue}>{row.value}</dd>
                 </div>

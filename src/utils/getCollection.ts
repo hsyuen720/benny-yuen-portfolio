@@ -42,7 +42,11 @@ const getCollection = <T = object>(
       revalidate: revalidateTime,
       tags: [collection],
     },
-  )();
+  )().catch((error: unknown) => {
+    // A denied or failed read must not take the page down: the section falls back to its bundled copy
+    console.error(`getCollection(${collection}) failed`, error);
+    return [] as Array<T>;
+  });
 };
 
 export default getCollection;

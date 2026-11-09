@@ -1,9 +1,19 @@
+import { timingSafeEqual } from "node:crypto";
+
 import { revalidateTag } from "next/cache";
 import { type NextRequest, NextResponse } from "next/server";
 
 import { AppCollection } from "~/settings/constants";
 
 const tags = Object.values(AppCollection);
+
+// Constant-time comparison so the secret can't be guessed from response timing
+const matches = (given: string | null, expected: string) => {
+  if (given === null) return false;
+  const a = Buffer.from(given);
+  const b = Buffer.from(expected);
+  return a.length === b.length && timingSafeEqual(a, b);
+};
 
 // Each Firestore collection is cached under its own tag (see getCollection / getDocument).
 // ?tag=<collection> refreshes one; no tag refreshes all of them.
@@ -13,7 +23,7 @@ const handler = (request: NextRequest) => {
     // Deprecated: query-param secret kept for one release so old callers keep working
     request.nextUrl.searchParams.get("secret");
 
-  if (!process.env.REVALIDATE_SECRET || secret !== process.env.REVALIDATE_SECRET) {
+  if (!process.env.REVALIDATE_SECRET || !matches(secret, process.env.REVALIDATE_SECRET)) {
     return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
   }
 
