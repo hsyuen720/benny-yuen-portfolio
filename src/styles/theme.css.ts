@@ -22,21 +22,26 @@ export const hairline = {
   lo: "#2e2b27",
 };
 
-// A faint warm light behind the main visual of a section (photo, figure). Fixed to the
-// viewport so it stays in view through long sections, and only paints inside its band.
+// A faint warm light behind the main visual of a section (photo, figure). It is a sticky,
+// screen-sized layer inside the band: it stays in view through long sections, only paints
+// inside its band, and scrolls on the compositor (no per-frame repaint, unlike a fixed
+// background). Spread it into the band's style; the band must be a flex column (sections are).
 export const glow = (x: string, y: string, size = "38% 55%", strength = 0.09) => ({
-  backgroundImage: `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`,
-  backgroundAttachment: "fixed",
+  selectors: {
+    "&::before": {
+      content: '""',
+      position: "sticky" as const,
+      top: layout.navHeight,
+      display: "block",
+      flexShrink: 0,
+      height: `calc(100svh - ${layout.navHeight})`,
+      // Takes no room in the layout: the section's content starts at the band's top
+      marginBottom: `calc(${layout.navHeight} - 100svh)`,
+      pointerEvents: "none" as const,
+      backgroundImage: `radial-gradient(ellipse ${size} at ${x} ${y}, rgba(255, 183, 3, ${strength}), transparent 70%)`,
+    },
+  },
 });
-
-// Frosted surface for cards that sit over a glow; on plain black it reads as a normal card
-export const glass = {
-  backgroundColor: "rgba(38, 36, 33, 0.55)",
-  backdropFilter: "blur(16px) saturate(140%)",
-  WebkitBackdropFilter: "blur(16px) saturate(140%)",
-  border: `1px solid ${colors.line2}`,
-  boxShadow: "inset 0 1px 0 rgba(239, 233, 222, 0.06)",
-};
 
 export const fonts = {
   display: `var(--font-display), ui-sans-serif, system-ui, sans-serif`,

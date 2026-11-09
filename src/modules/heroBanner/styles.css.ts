@@ -3,7 +3,6 @@ import { keyframes, style } from "@vanilla-extract/css";
 import {
   breakpoint,
   colors,
-  glass,
   glow,
   ease,
   fonts,
@@ -128,7 +127,7 @@ export const visual = style({
   position: "relative",
   zIndex: 1,
   width: "380px",
-  // Offset outline behind the photo: depth without hiding the glow
+  // Offset outline behind the photo
   selectors: {
     "&::before": {
       content: '""',
@@ -170,7 +169,8 @@ export const now = style({
   gap: "10px",
   maxWidth: "calc(100% + 16px)",
   padding: "12px 16px",
-  ...glass,
+  backgroundColor: colors.raised,
+  border: `1px solid ${colors.line2}`,
   borderRadius: radii.button,
   fontSize: "15px",
   color: colors.text,

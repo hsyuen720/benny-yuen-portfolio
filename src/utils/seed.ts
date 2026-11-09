@@ -106,8 +106,8 @@ const seed: Record<string, SeedDoc[]> = {
     {
       id: "fujifilm",
       role: "Analyst Programmer",
-      company: "FUJIFILM Business Innovation",
-      companyShort: "FUJIFILM",
+      company: "FUJIFILM Business Innovation Hong Kong",
+      companyShort: "FBHK",
       location: "Hong Kong",
       workMode: "started as Programmer",
       start: "2019-07-01",

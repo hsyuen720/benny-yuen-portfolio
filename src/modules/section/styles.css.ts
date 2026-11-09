@@ -21,6 +21,7 @@ export const deep = style({
 });
 
 export const inner = style({
+  position: "relative", // paints above the band's glow layer
   width: "100%",
   maxWidth: layout.maxWidth,
   margin: "0 auto",
