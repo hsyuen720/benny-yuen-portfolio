@@ -81,13 +81,14 @@ An empty group is not rendered.
 
 ## `education` (new collection)
 
-| Field         | Type   | Sample                          |
-| ------------- | ------ | ------------------------------- |
-| `degree`      | string | MSc Computer Science            |
-| `institution` | string | Technical University of Denmark |
-| `start`       | string | 2025                            |
-| `end`         | string | 2027 (expected)                 |
-| `order`       | number | 1                               |
+| Field              | Type   | Sample                                                               |
+| ------------------ | ------ | -------------------------------------------------------------------- |
+| `degree`           | string | MSc Computer Science                                                 |
+| `institution`      | string | Technical University of Denmark                                      |
+| `institutionShort` | string | DTU (optional, shown on the book spine; falls back to `institution`) |
+| `start`            | string | 2025                                                                 |
+| `end`              | string | 2027 (expected)                                                      |
+| `order`            | number | 1                                                                    |
 
 The whole Education section is hidden while the collection is empty.
 

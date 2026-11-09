@@ -65,6 +65,8 @@ export interface IEducation {
   id: string;
   degree: string;
   institution: string;
+  /** Short school name for the book spine, e.g. "DTU". Falls back to `institution`. */
+  institutionShort?: string;
   start?: string;
   end?: string;
   order?: number;

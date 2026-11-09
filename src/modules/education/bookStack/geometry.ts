@@ -1,33 +1,51 @@
 import { box, project } from "~/modules/experiences/commitGraph/geometry";
 
-const LENGTH = 150; // along u
-const DEPTH = 100; // along v
-const THICK = 30; // one book per degree
-const SHIFT = 12; // alternate books slide a little so the pile looks hand-stacked
+const LENGTH = 230; // along u: long enough for a degree name on the spine
+const DEPTH = 120; // along v
+const THICK = 34; // one book per degree
+const SHIFT = 14; // alternate books slide a little so the pile looks hand-stacked
+const SPINE_CHARS = 21; // what fits on the spine at the label size; the full name is in aria-label
+const COS = Math.cos(Math.PI / 6);
 const fmt = ([x, y]: [number, number]) => `${x.toFixed(1)} ${y.toFixed(1)}`;
 
+const fit = (text: string) =>
+  text.length > SPINE_CHARS ? `${text.slice(0, SPINE_CHARS - 1).trimEnd()}…` : text;
+
 /** A pile of books, oldest at the bottom, one per degree. */
-export const buildBooks = (count: number) => {
-  const books = Array.from({ length: count }, (_, i) => {
+export const buildBooks = (titles: string[]) => {
+  const count = titles.length;
+  const books = titles.map((title, i) => {
     const du = i % 2 === 0 ? 0 : SHIFT;
     const dv = i % 2 === 0 ? 0 : -SHIFT / 2;
     const [u0, u1, v0, v1] = [du, LENGTH + du, dv, DEPTH + dv];
     const z0 = i * THICK;
     const z1 = z0 + THICK;
-    // Page edges on the two visible sides, inset from the covers
-    const pageLines = [THICK / 3, (2 * THICK) / 3].flatMap((h) => [
-      `M${fmt(project(u1, v0 + 6, z0 + h))}L${fmt(project(u1, v1 - 6, z0 + h))}`,
-      `M${fmt(project(u0 + 6, v1, z0 + h))}L${fmt(project(u1 - 6, v1, z0 + h))}`,
-    ]);
-    // Label just outside the book's right-most corner (u1, v0)
-    const [cx, cy] = project(u1, v0, z0 + THICK / 2);
-    const [lx, ly] = [cx + 12, cy];
+    const isTop = i === count - 1;
+    // Page edges on the short visible side
+    const pages = [THICK / 3, (2 * THICK) / 3]
+      .map((h) => `M${fmt(project(u1, v0 + 6, z0 + h))}L${fmt(project(u1, v1 - 6, z0 + h))}`)
+      .join("");
+    // Spine text lies on the long front face (v = v1): x runs along u, y stays vertical.
+    // Name from the left end, years from the right end.
+    const onSpine = (u: number) => {
+      const [x, y] = project(u, v1, z0 + THICK / 2 - 5);
+      return `matrix(${COS.toFixed(4)} 0.5 0 1 ${x.toFixed(1)} ${y.toFixed(1)})`;
+    };
+    // Bookmark ribbon hanging over the front face of the book being read
+    const ribbonU = u1 - 104; // clear of the years at the right end
+    const ribbon = isTop
+      ? `M${fmt(project(ribbonU, v1, z1))}L${fmt(project(ribbonU + 12, v1, z1))}L${fmt(
+          project(ribbonU + 12, v1, z0 - 14),
+        )}L${fmt(project(ribbonU + 6, v1, z0 - 8))}L${fmt(project(ribbonU, v1, z0 - 14))}Z`
+      : "";
     return {
       ...box(u0, u1, v0, v1, z0, z1),
-      pages: pageLines.join(""),
-      isTop: i === count - 1,
+      pages,
+      ribbon,
+      isTop,
       index: i,
-      label: { x: lx, y: ly + 3 },
+      spine: { text: fit(title), transform: onSpine(u0 + 12) },
+      years: { transform: onSpine(u1 - 12) },
     };
   });
 
@@ -35,10 +53,10 @@ export const buildBooks = (count: number) => {
   const corners = [
     project(0, 0, top),
     project(LENGTH + SHIFT, -SHIFT, top),
-    project(0, DEPTH, 0),
-    project(LENGTH + SHIFT, DEPTH, 0),
+    project(0, DEPTH, -16), // ribbon tail can hang below the bottom book
+    project(LENGTH + SHIFT, DEPTH, -16),
   ];
-  const xs = [...corners.map(([x]) => x), Math.max(...corners.map(([x]) => x)) + 48]; // year labels
+  const xs = corners.map(([x]) => x);
   const ys = corners.map(([, y]) => y);
   const pad = 8;
   const minX = Math.min(...xs) - pad;

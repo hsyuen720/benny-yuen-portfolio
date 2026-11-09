@@ -178,6 +178,7 @@ const seed: Record<string, SeedDoc[]> = {
       id: "dtu",
       degree: "MSc Computer Science",
       institution: "Technical University of Denmark",
+      institutionShort: "DTU",
       start: "2025",
       end: "2027",
       order: 1,

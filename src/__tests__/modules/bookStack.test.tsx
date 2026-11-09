@@ -5,15 +5,34 @@ import BookStack from "~/modules/education/bookStack";
 const books = (container: HTMLElement) => container.querySelectorAll("[data-book]");
 
 describe("BookStack", () => {
-  it.each([1, 2, 5])("draws %i books for %i degrees", (count) => {
-    const years = Array.from({ length: count }, (_, i) => String(2015 + i * 4));
-    const { container } = render(<BookStack years={years} label="Education" />);
+  const degrees = (count: number) =>
+    Array.from({ length: count }, (_, i) => ({
+      title: `Degree ${i}`,
+      years: `${2015 + i} – ${2019 + i}`,
+    }));
+
+  it.each([1, 2, 5])("draws %i books with name and years for %i degrees", (count) => {
+    const items = degrees(count);
+    const { container } = render(<BookStack books={items} label="Education" />);
     expect(books(container)).toHaveLength(count);
-    years.forEach((year) => expect(screen.getByText(year)).toBeInTheDocument());
+    items.forEach(({ title, years }) => {
+      expect(screen.getByText(title)).toBeInTheDocument();
+      expect(screen.getByText(years)).toBeInTheDocument();
+    });
+  });
+
+  it("shortens a long degree name on the spine", () => {
+    render(
+      <BookStack
+        books={[{ title: "Master of Science in Computer Science and Engineering", years: "2025" }]}
+        label="Education"
+      />,
+    );
+    expect(screen.getByText(/…$/)).toBeInTheDocument();
   });
 
   it("stacks each newer book above the older one", () => {
-    const { container } = render(<BookStack years={["2019", "2027"]} label="Education" />);
+    const { container } = render(<BookStack books={degrees(2)} label="Education" />);
     const topY = (g: Element) =>
       Math.min(
         ...g
@@ -28,7 +47,7 @@ describe("BookStack", () => {
   });
 
   it("has an accessible name and renders nothing for no degrees", () => {
-    const { container } = render(<BookStack years={[]} label="Education as books" />);
+    const { container } = render(<BookStack books={[]} label="Education as books" />);
     expect(screen.getByRole("img", { name: "Education as books" })).toBeInTheDocument();
     expect(books(container)).toHaveLength(0);
   });

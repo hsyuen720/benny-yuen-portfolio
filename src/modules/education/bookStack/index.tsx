@@ -12,18 +12,18 @@ const STAGGER_MS = 260;
 const RISE_MS = 520;
 
 export type BookStackProps = {
-  /** One label per degree, oldest first (e.g. the end year). */
-  years: string[];
+  /** One book per degree, oldest first. */
+  books: { title: string; years: string }[];
   label: string;
   className?: string;
 };
 
 // Same drawing language and entrance as the experience commit graph
 const BookStack = (props: BookStackProps) => {
-  const { years, label, className } = props;
+  const { books: items, label, className } = props;
   const { el, isInView } = useInView({ once: true, threshold: 0.4 });
-  const { viewBox, books } = buildBooks(years.length);
-  const topDelay = Math.max(years.length - 1, 0) * STAGGER_MS + RISE_MS;
+  const { viewBox, books } = buildBooks(items.map((item) => item.title));
+  const topDelay = Math.max(items.length - 1, 0) * STAGGER_MS + RISE_MS;
 
   return (
     <div ref={el} className={className}>
@@ -48,13 +48,21 @@ const BookStack = (props: BookStackProps) => {
               style={book.isTop ? { transitionDelay: `${topDelay}ms` } : undefined}
             />
             <path className={graph.line} d={book.pages} />
+            <text className={styles.spine} transform={book.spine.transform}>
+              {book.spine.text}
+            </text>
+            {book.ribbon ? (
+              <path
+                className={styles.ribbon}
+                d={book.ribbon}
+                style={{ transitionDelay: `${topDelay}ms` }}
+              />
+            ) : null}
             <text
-              className={clsx(graph.label, styles.label, { [graph.headLabel]: book.isTop })}
-              x={book.label.x}
-              y={book.label.y}
-              style={book.isTop ? { transitionDelay: `${topDelay}ms` } : undefined}
+              className={clsx(styles.years, { [styles.topYears]: book.isTop })}
+              transform={book.years.transform}
             >
-              {years[book.index]}
+              {items[book.index].years}
             </text>
           </g>
         ))}

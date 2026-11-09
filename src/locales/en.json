@@ -59,7 +59,7 @@
     },
     "education": {
       "title": "Education",
-      "stackLabel": "Education drawn as a stack of books, one per degree: {years}"
+      "stackLabel": "Education drawn as a stack of books, one per degree: {degrees}"
     },
     "contact": {
       "title": "Get in touch",

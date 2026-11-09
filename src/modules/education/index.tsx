@@ -22,9 +22,10 @@ const Education = async () => {
   if (items.length === 0) return null;
   const thisYear = new Date().getFullYear();
   const sorted = [...items].sort(byOrder);
-  // Oldest first, labelled with the year each degree ends
-  const years = sorted
-    .map((item) => (item.end || item.start || "").match(/\d{4}/)?.[0] ?? "")
+  const range = (item: IEducation) => [item.start, item.end].filter(Boolean).join(" – ");
+  // Oldest first; each spine carries the school, the drawing's label reads the full names
+  const books = sorted
+    .map((item) => ({ title: item.institutionShort || item.institution, years: range(item) }))
     .reverse();
 
   return (
@@ -37,8 +38,10 @@ const Education = async () => {
         <Heading title={t("title")} />
         <BookStack
           className={styles.figure}
-          years={years}
-          label={t("stackLabel", { years: years.join(", ") })}
+          books={books}
+          label={t("stackLabel", {
+            degrees: sorted.map((item) => `${item.degree}, ${item.institution}`).join("; "),
+          })}
         />
       </div>
       <ol className={clsx(sectionStyles.splitMain, timeline.timeline)}>
@@ -51,7 +54,7 @@ const Education = async () => {
                 className={clsx(timeline.dot, { [timeline.current]: isCurrent })}
               />
               <span className={clsx(timeline.range, { [timeline.currentRange]: isCurrent })}>
-                {[item.start, item.end].filter(Boolean).join(" – ")}
+                {range(item)}
               </span>
               <h3 className={timeline.role}>{item.degree}</h3>
               <span className={timeline.place}>{item.institution}</span>
