@@ -1,11 +1,11 @@
 "use client";
 
-import { Exploded, Hub, Keyboard } from "@lucasmarkes/hairline/react";
+import { Exploded, Hub, Keyboard, Riffle } from "@lucasmarkes/hairline/react";
 import { useEffect, useState } from "react";
 
 import useInView from "~/hooks/useInView";
 
-const figures = { Exploded, Hub, Keyboard };
+const figures = { Exploded, Hub, Keyboard, Riffle };
 
 // Hairline's `play` loops until the pointer arrives, so we switch it off after one tour.
 // shortcut: one fixed length for every figure, measure per figure if a tour gets cut short.
