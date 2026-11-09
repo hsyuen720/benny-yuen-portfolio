@@ -1,9 +1,9 @@
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
+import { LuGithub, LuLinkedin, LuMail } from "react-icons/lu";
 
 import { SocialMedia } from "~/settings/constants";
 
 export const IconSetting = {
-  [SocialMedia.Github]: FaGithub,
-  [SocialMedia.Linkedin]: FaLinkedin,
-  [SocialMedia.Email]: FaEnvelope,
+  [SocialMedia.Github]: LuGithub,
+  [SocialMedia.Linkedin]: LuLinkedin,
+  [SocialMedia.Email]: LuMail,
 };

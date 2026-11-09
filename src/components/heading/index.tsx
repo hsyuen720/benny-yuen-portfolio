@@ -1,23 +1,19 @@
 import clsx from "clsx";
 
-import Label from "~/components/label";
-
 import * as styles from "./styles.css";
 
-export type SectionTitleProps = {
-  title?: string;
+export type HeadingProps = {
+  title: string;
   description?: string;
-  isDark?: boolean;
-  isSeparatorShown?: boolean;
+  className?: string;
 };
 
-const Heading = (props: SectionTitleProps) => {
-  const { title, description, isDark, isSeparatorShown } = props;
+const Heading = (props: HeadingProps) => {
+  const { title, description, className } = props;
   return (
-    <div className={clsx(styles.sectionTitle, { [styles.isDark]: isDark })}>
-      {description ? <Label className={styles.description} tag="span" title={description} /> : null}
-      <Label className={styles.title} tag="h2" title={title} />
-      {isSeparatorShown ? <div className={styles.separator} /> : null}
+    <div className={clsx(styles.container, className)}>
+      <h2 className={styles.title}>{title}</h2>
+      {description ? <p className={styles.description}>{description}</p> : null}
     </div>
   );
 };

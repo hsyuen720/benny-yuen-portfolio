@@ -19,10 +19,10 @@ describe("Home Context", () => {
     const { result } = renderHook(() => useHome(), { wrapper });
 
     act(() => {
-      result.current.focus(PortfolioSection.About);
+      result.current.focus(PortfolioSection.Projects);
     });
 
-    expect(result.current.currentView).toBe(PortfolioSection.About);
+    expect(result.current.currentView).toBe(PortfolioSection.Projects);
   });
 
   it("should change view multiple times", () => {
@@ -39,9 +39,9 @@ describe("Home Context", () => {
     expect(result.current.currentView).toBe(PortfolioSection.Projects);
 
     act(() => {
-      result.current.focus(PortfolioSection.About);
+      result.current.focus(PortfolioSection.Projects);
     });
-    expect(result.current.currentView).toBe(PortfolioSection.About);
+    expect(result.current.currentView).toBe(PortfolioSection.Projects);
   });
 
   it("should scroll to element when scroll is called", () => {
@@ -49,7 +49,7 @@ describe("Home Context", () => {
 
     // Create a mock element
     const mockElement = document.createElement("div");
-    mockElement.id = PortfolioSection.About;
+    mockElement.id = PortfolioSection.Projects;
     Object.defineProperty(mockElement, "offsetTop", {
       value: 500,
       writable: true,
@@ -61,7 +61,7 @@ describe("Home Context", () => {
     window.scrollTo = scrollToMock;
 
     act(() => {
-      result.current.scroll(PortfolioSection.About);
+      result.current.scroll(PortfolioSection.Projects);
     });
 
     expect(scrollToMock).toHaveBeenCalledWith({

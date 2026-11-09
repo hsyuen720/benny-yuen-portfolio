@@ -1,114 +1,107 @@
 import { style } from "@vanilla-extract/css";
 
-import {
-  colors,
-  transition,
-  zIndices,
-  sectionPaddingHorizontal,
-  breakpoint,
-} from "~/styles/theme.css";
+import { breakpoint, colors, layout, transition } from "~/styles/theme.css";
 
-export const navbar = style({
-  position: "fixed",
+export const header = style({
+  position: "sticky",
   top: 0,
-  right: 0,
-  left: 0,
-  zIndex: zIndices.header,
-  padding: `1em ${sectionPaddingHorizontal.md}`,
-  transition: transition("fast", "background-color"),
-  backgroundColor: "transparent",
+  zIndex: 10,
+  backgroundColor: `color-mix(in oklab, ${colors.page} 82%, transparent)`,
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  borderBottom: `1px solid ${colors.line}`,
+});
+
+export const nav = style({
+  maxWidth: layout.maxWidth,
+  height: layout.navHeight,
+  margin: "0 auto",
+  padding: `0 ${layout.gutter}`,
   display: "flex",
-  flexDirection: "row",
+  alignItems: "stretch",
+  gap: "16px",
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { padding: `0 ${layout.gutterMobile}`, gap: "10px" },
+  },
+});
+
+export const wordmark = style({
+  display: "flex",
   alignItems: "center",
-  flexWrap: "wrap",
+  flexShrink: 0,
+  color: colors.text,
+  textDecoration: "none",
   "@media": {
-    [`(max-width: ${breakpoint})`]: {
-      padding: `1em ${sectionPaddingHorizontal.sm}`,
-    },
+    [`(max-width: ${breakpoint})`]: { fontSize: "0.85em" },
   },
 });
 
-export const isBlurBackground = style({
-  backgroundColor: `rgba(${parseInt(colors.primary.slice(1, 3), 16)}, ${parseInt(colors.primary.slice(3, 5), 16)}, ${parseInt(colors.primary.slice(5, 7), 16)}, 0.75)`,
-  backdropFilter: "blur(20px)",
-  borderBottom: `1px solid rgba(255, 255, 255, 0.08)`,
-});
-
-export const logo = style({
-  cursor: "pointer",
-});
-
-export const toggle = style({
-  display: "none !important",
-  marginLeft: "auto",
-  "@media": {
-    [`(max-width: ${breakpoint})`]: {
-      display: "block !important",
-    },
-  },
-});
-
-export const menu = style({
-  marginLeft: "auto",
-  display: "flex",
-  flexDirection: "row",
-  gap: "0.5em",
-  "@media": {
-    [`(max-width: ${breakpoint})`]: {
-      gap: "0.75em",
-      width: "100%",
-      flexDirection: "column",
-      alignItems: "center",
-      maxHeight: 0,
-      opacity: 0,
-      pointerEvents: "none",
-      overflow: "hidden",
-      transition: `max-height 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)`,
-    },
-  },
-});
-
-export const isOpen = style({
-  "@media": {
-    [`(max-width: ${breakpoint})`]: {
-      maxHeight: "100svh",
-      opacity: 1,
-      pointerEvents: "all",
-    },
-  },
-});
-
-export const menuItem = style({
-  cursor: "pointer",
-  transition: transition("normal", "color"),
+// One row at every width: on narrow phones the links scroll sideways instead of wrapping.
+// The 1px bottom padding lets the indicator and hover line sit on the header's border.
+export const links = style({
   position: "relative",
+  display: "flex",
+  alignItems: "stretch",
+  columnGap: "28px",
+  marginLeft: "auto",
+  minWidth: 0,
+  paddingBottom: "1px",
+  marginBottom: "-1px",
+  overflowX: "auto",
+  overflowY: "hidden",
+  scrollbarWidth: "none",
+  fontSize: "15px",
   selectors: {
-    "&:hover": {
-      color: colors.highlight,
-    },
+    "&::-webkit-scrollbar": { display: "none" },
+  },
+  "@media": {
+    [`(max-width: ${breakpoint})`]: { columnGap: "12px", fontSize: "14px" },
+  },
+});
+
+export const link = style({
+  position: "relative",
+  display: "flex",
+  alignItems: "center",
+  flexShrink: 0,
+  whiteSpace: "nowrap",
+  color: colors.text2,
+  textDecoration: "none",
+  transition: transition("hover", "color"),
+  selectors: {
+    "&:hover, &[aria-current]": { color: colors.text },
+    // Hover line sits where the gold indicator does (on the header's bottom edge) and grows from the left
     "&::after": {
       content: '""',
       position: "absolute",
-      bottom: "-2px",
       left: 0,
-      width: "100%",
+      right: 0,
+      bottom: "-1px",
       height: "2px",
-      backgroundColor: colors.highlight,
+      backgroundColor: colors.text2,
       transform: "scaleX(0)",
       transformOrigin: "left",
-      transition: transition("slow", "transform"),
+      transition: transition("hover", "transform"),
     },
-    "&:hover::after": {
-      transform: "scaleX(1)",
-    },
+    // The active link already carries the gold indicator
+    "&:hover:not([aria-current])::after": { transform: "scaleX(1)" },
   },
 });
 
-export const active = style({
-  color: colors.highlight,
-  selectors: {
-    "&::after": {
-      transform: "scaleX(1)",
-    },
-  },
+// A 1px-wide bar stretched with scaleX: only transform and opacity animate, so it stays on the GPU
+export const indicator = style({
+  position: "absolute",
+  zIndex: 1,
+  top: 0,
+  left: 0,
+  width: "1px",
+  height: "2px",
+  backgroundColor: colors.gold,
+  transformOrigin: "left",
+  pointerEvents: "none",
+  transition: transition("hover", "opacity"),
+});
+
+export const slide = style({
+  transition: `${transition("indicator", "transform")}, ${transition("hover", "opacity")}`,
 });

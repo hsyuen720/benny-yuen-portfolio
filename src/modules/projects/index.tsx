@@ -1,89 +1,55 @@
-import Image from "next/image";
+import clsx from "clsx";
 import { getTranslations } from "next-intl/server";
-import { FaCode, FaLink, FaVial } from "react-icons/fa";
 
-import Button from "~/components/button";
-import Hashtag from "~/components/hashtag";
 import Heading from "~/components/heading";
-import Label from "~/components/label";
-import ScrollReveal from "~/components/scrollReveal";
 import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
 import type { IProject } from "~/types/data";
 import getCollection from "~/utils/getCollection";
-import getFormat from "~/utils/getFormat";
+import { sortProjects, toProject } from "~/utils/normalize";
 
+import MoreProjects from "./moreProjects";
+import ProjectCard from "./projectCard";
 import * as styles from "./styles.css";
 import Section from "../section";
+import * as sectionStyles from "../section/styles.css";
+
+const MAX_FEATURED = 2;
 
 const Projects = async () => {
-  // All three are independent — fetch in parallel
-  const [format, t, projects] = await Promise.all([
-    getFormat(),
+  const [t, docs] = await Promise.all([
     getTranslations(`${AppTranslation.Portfolio}.projects`),
-    getCollection<IProject>(AppCollection.Projects, {
-      orderBy: "date",
-      order: "desc",
-    }),
+    // No orderBy: Firestore drops documents that lack the ordered field; we sort below
+    getCollection<IProject>(AppCollection.Projects),
   ]);
+  const projects = sortProjects(docs.map(toProject));
+  const featured = projects.filter((p) => p.featured).slice(0, MAX_FEATURED);
+  const others = projects.filter((p) => !featured.includes(p));
+
   return (
-    <Section isLight id={PortfolioSection.Projects} className={styles.projects}>
-      <ScrollReveal direction="up">
-        <Heading isDark title={t("title")} description={t("subtitle")} />
-      </ScrollReveal>
-      <div className={styles.content}>
-        {projects.map((project, index) => {
-          const { photo, name, description, technologies, url, repository } = project;
-
-          // Use GitHub OG image as fallback when no photo but has repository URL
-          const getGitHubOgImage = (repoUrl: string) => {
-            const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
-            if (match) {
-              const [, owner, repo] = match;
-              return `https://opengraph.githubassets.com/1/${owner}/${repo.replace(/\.git$/, "")}`;
-            }
-            return null;
-          };
-
-          const imageUrl = photo || (repository ? getGitHubOgImage(repository) : null);
-          const isGitHubOgImage = !photo && !!imageUrl;
-
-          return (
-            <ScrollReveal key={index} direction="up" delay={index * 100}>
-              <div className={styles.project}>
-                {imageUrl ? (
-                  <Image
-                    className={styles.photo}
-                    src={imageUrl}
-                    alt="Project Image"
-                    fill
-                    sizes="18em"
-                    loading="lazy"
-                    unoptimized={isGitHubOgImage}
-                  />
-                ) : null}
-                <div className={styles.detail}>
-                  <Label className={styles.name} tag="h3" icon={FaVial} title={format(name)} />
-                  <p className={styles.projectDescription}>{format(description)}</p>
-                  <div className={styles.footer}>
-                    <div className={styles.technologies}>
-                      {technologies.map((technology, index) => (
-                        <Hashtag key={index}>#{technology}</Hashtag>
-                      ))}
-                    </div>
-                    <div className={styles.links}>
-                      {repository ? (
-                        <Button tag="a" icon={FaCode} href={repository} target="_blank" />
-                      ) : null}
-                      {url ? <Button tag="a" icon={FaLink} href={url} target="_blank" /> : null}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          );
-        })}
+    <Section
+      id={PortfolioSection.Projects}
+      className={clsx(sectionStyles.deep, styles.band)}
+      innerClassName={styles.inner}
+    >
+      <div className={styles.header}>
+        <Heading title={t("title")} />
+        <p className={styles.subtitle}>{t("subtitle")}</p>
       </div>
+      {featured.map((project, index) => (
+        <ProjectCard key={project.id} project={project} size={index === 0 ? "large" : "small"} />
+      ))}
+      {others.length > 0 ? (
+        <MoreProjects
+          projects={others}
+          labels={{
+            title: t("more"),
+            showAll: t("showAll"),
+            code: t("code"),
+            live: t("live"),
+          }}
+        />
+      ) : null}
     </Section>
   );
 };

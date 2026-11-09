@@ -3,5 +3,6 @@ import { style } from "@vanilla-extract/css";
 export const container = style({
   display: "flex",
   flexWrap: "wrap",
-  gap: "inherit",
+  alignItems: "center",
+  gap: "12px",
 });

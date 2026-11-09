@@ -1,68 +1,83 @@
+import NextImage from "next/image";
 import { getTranslations } from "next-intl/server";
+import { LuArrowRight } from "react-icons/lu";
 
-import Image from "~/components/image";
-import ScrollReveal from "~/components/scrollReveal";
-import TypingWords from "~/components/typingWords";
+import Button from "~/components/button";
 import SocialMedia from "~/modules/socialMedia";
-import { PortfolioSection } from "~/settings/constants";
+import { AppCollection, PortfolioSection } from "~/settings/constants";
 import { AppTranslation } from "~/settings/i18n";
+import type { IExperience, IHomeContent } from "~/types/data";
+import getCollection from "~/utils/getCollection";
+import getDocument from "~/utils/getDocument";
 import getStorageUrl from "~/utils/getStorageUrl";
+import { careerStats, currentExperience, toExperience } from "~/utils/normalize";
 
 import * as styles from "./styles.css";
 import Section from "../section";
 
 const HeroBanner = async () => {
-  const t = await getTranslations(`${AppTranslation.Portfolio}.heroBanner`);
-  const profile = await getStorageUrl(t("photoPath"));
-
-  const stars = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 3 + 1,
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    animationDelay: `${Math.random() * 3}s`,
-  }));
+  const [t, ct, content, docs] = await Promise.all([
+    getTranslations(`${AppTranslation.Portfolio}.heroBanner`),
+    getTranslations(AppTranslation.Common),
+    getDocument<IHomeContent>(AppCollection.Content, "home"),
+    getCollection<IExperience>(AppCollection.Experiences),
+  ]);
+  const photo = await getStorageUrl(t("photoPath"));
+  const experiences = docs.map(toExperience);
+  const { years, teams } = careerStats(experiences, new Date());
+  // Both come from the experience documents, so they never go stale
+  const stats = [
+    { value: years > 0 ? `${years}+` : "", label: t("years") },
+    { value: teams > 0 ? String(teams) : "", label: t("teams") },
+  ].filter((stat) => stat.value);
+  // The card hides when every job has ended
+  const current = currentExperience(experiences);
 
   return (
-    <Section id={PortfolioSection.HeroBanner} className={styles.container}>
-      <div className={styles.stars}>
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className={styles.star}
-            style={{
-              width: `${star.size}px`,
-              height: `${star.size}px`,
-              top: star.top,
-              left: star.left,
-              animationDelay: star.animationDelay,
-            }}
-          />
-        ))}
-      </div>
-      <ScrollReveal direction="left">
-        <div className={styles.content}>
-          <h2 className={styles.greeting}>{t("greeting")}</h2>
-          <h1 className={styles.introduction}>
-            {t.rich("introduction", {
-              role: (chunks) => <TypingWords words={chunks?.toString().split(", ") ?? []} />,
-            })}
-          </h1>
-          <p className={styles.briefDescription}>{t("description")}</p>
-          <SocialMedia className={styles.socialMedia} />
+    <Section id={PortfolioSection.HeroBanner} className={styles.band} innerClassName={styles.inner}>
+      <div className={styles.content}>
+        <p className={styles.eyebrow}>
+          <span className={styles.author}>{ct("author")}</span>
+          <span>{t("role")}</span>
+        </p>
+        <h1 className={styles.headline}>
+          {t.rich("headline", { em: (chunks) => <em className={styles.accent}>{chunks}</em> })}
+        </h1>
+        <p className={styles.intro}>{content?.intro || t("intro")}</p>
+        <dl className={styles.stats}>
+          {stats.map((stat) => (
+            <div key={stat.label} className={styles.stat}>
+              <dt className={styles.statLabel}>{stat.label}</dt>
+              <dd className={styles.statValue}>{stat.value}</dd>
+            </div>
+          ))}
+        </dl>
+        <div className={styles.actions}>
+          <Button variant="primary" href={`#${PortfolioSection.Projects}`}>
+            {t("cta")}
+            <LuArrowRight size={18} aria-hidden />
+          </Button>
+          <SocialMedia allSecondary />
         </div>
-      </ScrollReveal>
-      <ScrollReveal direction="right" delay={200}>
-        <Image
-          className={styles.profile}
-          src={profile}
-          alt="profile picture"
-          width={350}
-          height={350}
+      </div>
+      <div className={styles.visual}>
+        <NextImage
+          className={styles.photo}
+          src={photo}
+          alt={t("photoAlt")}
+          width={380}
+          height={475}
+          sizes="(max-width: 720px) 100vw, 380px"
           priority
-          fetchPriority="high"
         />
-      </ScrollReveal>
+        {current ? (
+          <p className={styles.now}>
+            <span className={styles.nowDot} aria-hidden="true" />
+            <span className={styles.nowLabel}>{t("now")}</span>
+            <span>{t("at", { role: current.role, company: current.company })}</span>
+          </p>
+        ) : null}
+      </div>
     </Section>
   );
 };

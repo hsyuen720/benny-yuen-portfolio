@@ -1,8 +1,9 @@
 #!/bin/sh
 
-# Revalidate cache script
-# Usage: sh scripts/revalidate.js [path]
-# Example: sh scripts/revalidate.js /en
+# Revalidate cached Firestore content
+# Usage: sh scripts/revalidate.sh [collection]
+# Example: sh scripts/revalidate.sh projects   (one collection)
+#          sh scripts/revalidate.sh            (every collection)
 
 # Load environment variables from .env.local
 if [ -f .env.local ]; then
@@ -19,8 +20,8 @@ if [ -f .env.local ]; then
   done < .env.local
 fi
 
-# Get the path from argument or default to root
-PATH_TO_REVALIDATE=${1:-"/"}
+# Optional collection tag; empty revalidates every collection
+TAG=${1:-""}
 
 # Default to localhost:3000 if NEXT_PUBLIC_URL is not set
 URL=${NEXT_PUBLIC_URL:-"http://localhost:3000"}
@@ -34,10 +35,15 @@ fi
 
 echo "🔄 Revalidating cache..."
 echo "📍 URL: $URL"
-echo "📂 Path: $PATH_TO_REVALIDATE"
+echo "🏷  Tag: ${TAG:-all collections}"
 
-# Make the request using curl
-RESPONSE=$(curl -s -w "\n%{http_code}" "$URL/api/revalidate?secret=$REVALIDATE_SECRET&path=$PATH_TO_REVALIDATE")
+QUERY=""
+if [ -n "$TAG" ]; then
+  QUERY="?tag=$TAG"
+fi
+
+# The secret goes in a header so it never lands in server or proxy logs
+RESPONSE=$(curl -s -w "\n%{http_code}" -X POST -H "x-revalidate-secret: $REVALIDATE_SECRET" "$URL/api/revalidate$QUERY")
 
 # Extract status code (last line)
 HTTP_CODE=$(echo "$RESPONSE" | tail -n1)

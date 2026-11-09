@@ -1,11 +1,10 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Quantico, Syne } from "next/font/google";
+import { Figtree, Instrument_Sans } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, getMessages, setRequestLocale } from "next-intl/server";
 
 import { AppTranslation, Languages } from "~/settings/i18n";
-import BackgroundBlobs from "~/styles/BackgroundBlobs";
 
 import "~/styles/global.css";
 
@@ -30,14 +29,7 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
       default: t("title"),
     },
     description: t("description"),
-    keywords: [
-      "Frontend Developer",
-      "Full Stack Developer",
-      "React",
-      "Next.js",
-      "TypeScript",
-      "NodeJS",
-    ],
+    keywords: ["Software Engineer", "React", "React Native", "Next.js", "TypeScript"],
     authors: [{ name: t("author") }],
     creator: t("author"),
     publisher: t("author"),
@@ -74,23 +66,18 @@ export async function generateMetadata(props: { params: Promise<{ locale: string
   };
 }
 
-const quantico = Quantico({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: true,
-  adjustFontFallback: true,
-  fallback: ["system-ui", "arial"],
-});
-
-const syne = Syne({
-  weight: ["400", "500", "600", "700", "800"],
+const display = Instrument_Sans({
+  weight: ["400", "500"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-display",
-  preload: true,
-  adjustFontFallback: true,
-  fallback: ["system-ui", "arial"],
+});
+
+const body = Figtree({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
 });
 
 type AppLayoutProps = Readonly<{ children: React.ReactNode; params: Promise<{ locale: string }> }>;
@@ -109,12 +96,8 @@ export default async function AppLayout(props: AppLayoutProps) {
           href="https://firebasestorage.googleapis.com"
           crossOrigin="anonymous"
         />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={`${quantico.className} ${syne.variable}`}>
-        <BackgroundBlobs />
+      <body className={`${display.variable} ${body.variable}`}>
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           {children}
           <SpeedInsights />

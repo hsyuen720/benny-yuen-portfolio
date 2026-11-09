@@ -9,7 +9,8 @@ A modern, responsive personal portfolio website showcasing my projects, experien
 - 🔥 **Firebase Integration** - Dynamic content management with Firebase
 - ⚡ **Optimized Performance** - Built with Next.js 15 for fast loading and SEO
 - 📊 **Analytics** - Integrated Vercel Analytics and Speed Insights
-- 🧪 **Tested** - Comprehensive test coverage with Jest and React Testing Library
+- 🧪 **Tested** - Unit tests with Jest and React Testing Library, end-to-end tests with Playwright
+- 🚦 **Gated releases** - Production deploys only after CI passes
 
 ## 🛠️ Tech Stack
 
@@ -35,13 +36,14 @@ A modern, responsive personal portfolio website showcasing my projects, experien
 
 ### Development & Testing
 
-- **Testing:** [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/)
+- **Testing:** [Jest](https://jestjs.io/) + [React Testing Library](https://testing-library.com/), [Playwright](https://playwright.dev/) for e2e
 - **Linting:** [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/)
 - **Git Hooks:** [Husky](https://typicode.github.io/husky/)
 
 ### Deployment & Analytics
 
-- **Hosting:** [Vercel](https://vercel.com/)
+- **Hosting:** [Vercel](https://vercel.com/), deployed by GitHub Actions after CI passes
+- **Revalidation:** Firebase Cloud Functions refresh the site when Firestore content changes
 - **Analytics:** [Vercel Analytics](https://vercel.com/analytics) + [Speed Insights](https://vercel.com/docs/speed-insights)
 
 ## 🚀 Getting Started
@@ -67,6 +69,12 @@ yarn
 yarn dev
 ```
 
+To preview the layout with local seed content instead of Firestore:
+
+```bash
+USE_SEED_DATA=1 yarn dev
+```
+
 ### Available Scripts
 
 | Command | Description |
@@ -78,6 +86,7 @@ yarn dev
 | `yarn test` | Run tests |
 | `yarn test:watch` | Run tests in watch mode |
 | `yarn test:coverage` | Run tests with coverage report |
+| `yarn test:e2e` | Run Playwright end-to-end tests (starts its own seeded dev server) |
 
 ## 📁 Project Structure
 
@@ -94,6 +103,15 @@ src/
 ├── types/            # TypeScript type definitions
 └── utils/            # Utility functions
 ```
+
+## 🚢 Deployment
+
+Every pull request and push to `main` runs lint, type check and unit tests in GitHub Actions.
+On `main`, production deploys through a Vercel Deploy Hook only after those pass.
+
+- [docs/deploy.md](docs/deploy.md) - CI and Vercel setup
+- [docs/revalidation.md](docs/revalidation.md) - Cloud Functions that revalidate on content changes
+- [docs/firestore-content.md](docs/firestore-content.md) - Firestore content schema
 
 ## 📄 License
 

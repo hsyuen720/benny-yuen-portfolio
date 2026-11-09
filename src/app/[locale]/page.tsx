@@ -6,20 +6,21 @@ import HomeProvider from "~/contexts/home/provider";
 import HeroBanner from "~/modules/heroBanner";
 import Navbar from "~/modules/navbar";
 
-// Use revalidation for caching while allowing dynamic components
-export const revalidate = 86400; // 24 hours - optimized for performance
+// Content is cached per Firestore collection and refreshed by /api/revalidate
+export const revalidate = 86400;
 
-// Lazy load below-the-fold components
-const About = lazy(() => import("~/modules/about"));
-const Experiences = lazy(() => import("~/modules/experiences"));
+// Lazy load below-the-fold sections
 const Projects = lazy(() => import("~/modules/projects"));
-const Footer = lazy(() => import("~/modules/footer"));
+const Tools = lazy(() => import("~/modules/tools"));
+const Experiences = lazy(() => import("~/modules/experiences"));
+const Education = lazy(() => import("~/modules/education"));
+const Contact = lazy(() => import("~/modules/contact"));
 
-// Wrap lazy components with suspense and appropriate skeleton configurations
-const LazyAbout = withSuspense(About, { skeletonHeight: "300px", skeletonCount: 1 });
-const LazyExperiences = withSuspense(Experiences, { skeletonHeight: "150px", skeletonCount: 3 });
-const LazyProjects = withSuspense(Projects, { skeletonHeight: "200px", skeletonCount: 2 });
-const LazyFooter = withSuspense(Footer, { skeletonHeight: "80px", skeletonCount: 1 });
+const LazyProjects = withSuspense(Projects, { skeletonHeight: "500px" });
+const LazyTools = withSuspense(Tools, { skeletonHeight: "400px" });
+const LazyExperiences = withSuspense(Experiences, { skeletonHeight: "600px" });
+const LazyEducation = withSuspense(Education, { skeletonHeight: "200px" });
+const LazyContact = withSuspense(Contact, { skeletonHeight: "400px" });
 
 type HomeProps = { params: Promise<{ locale: string }> };
 
@@ -29,11 +30,14 @@ const Home = async (props: HomeProps) => {
   return (
     <HomeProvider>
       <Navbar />
-      <HeroBanner />
-      <LazyAbout />
-      <LazyExperiences />
-      <LazyProjects />
-      <LazyFooter />
+      <main>
+        <HeroBanner />
+        <LazyProjects />
+        <LazyTools />
+        <LazyExperiences />
+        <LazyEducation />
+        <LazyContact />
+      </main>
     </HomeProvider>
   );
 };
