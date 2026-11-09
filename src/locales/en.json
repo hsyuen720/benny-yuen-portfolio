@@ -1,7 +1,7 @@
 {
   "common": {
     "author": "Benny Yuen",
-    "title": "Benny Yuen, software engineer",
+    "title": "Benny Yuen, Software Engineer",
     "description": "Benny Yuen is a software engineer in Copenhagen who builds React, React Native and Next.js apps.",
 
     "date": {
@@ -12,12 +12,12 @@
     "navigation": {
       "label": "Sections",
       "projects": "Projects",
-      "tools": "How I build",
+      "tools": "How I Build",
       "experience": "Experience",
       "contact": "Contact"
     },
     "heroBanner": {
-      "role": "Software engineer, Copenhagen",
+      "role": "Software Engineer, Copenhagen",
       "headline": "I ship mobile and web apps people <em>actually use</em>.",
       "years": "years shipping",
       "teams": "product teams",
@@ -36,7 +36,7 @@
     "projects": {
       "title": "Projects",
       "subtitle": "Apps, libraries and tools I design, build and maintain on my own.",
-      "more": "More projects",
+      "more": "More Projects",
       "showAll": "Show all projects",
       "code": "Code",
       "demo": "Demo",
@@ -45,9 +45,9 @@
       "stack": "Stack"
     },
     "tools": {
-      "title": "How I build",
+      "title": "How I Build",
       "description": "I build with an agentic workflow: agents do the typing, I own the spec and the review, so products ship quickly and correctly.",
-      "ai": "Agentic workflow",
+      "ai": "Agentic Workflow",
       "stack": "Stack"
     },
     "experience": {
@@ -62,7 +62,7 @@
       "stackLabel": "Education drawn as a stack of books, one per degree: {degrees}"
     },
     "contact": {
-      "title": "Get in touch",
+      "title": "Get in Touch",
       "description": "Open to on-site, hybrid and remote roles. Email is the fastest way to reach me.",
       "copyright": "© {year} {name}"
     }
