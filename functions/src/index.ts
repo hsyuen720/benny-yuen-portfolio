@@ -15,7 +15,13 @@ const SITE_URL = defineString("SITE_URL", {
 const trigger = (collection: string) =>
   onDocumentWritten(
     // Our own single retry covers flaky requests; event retries could loop for days
-    { document: `${collection}/{docId}`, secrets: [REVALIDATE_SECRET], retry: false },
+    {
+      document: `${collection}/{docId}`,
+      // Firestore triggers must run in the database's region; the database is in eur3
+      region: "europe-west1",
+      secrets: [REVALIDATE_SECRET],
+      retry: false,
+    },
     async () => {
       await postWithRetry(
         `${SITE_URL.value()}/api/revalidate?tag=${encodeURIComponent(collection)}`,

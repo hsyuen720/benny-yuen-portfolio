@@ -111,9 +111,8 @@ the Actions tab.
 
 ## 7. Firestore region
 
-Firestore triggers default to `us-central1`. If the Firestore database lives elsewhere (for
-example `asia-east2`), add `region: "<database region>"` to the trigger options in
-`functions/src/index.ts` before the first deploy.
+The database is in the `eur3` multi-region, so the triggers in `functions/src/index.ts` set
+`region: "europe-west1"`. Change it there if the database ever moves.
 
 ## Checking it works
 
