@@ -19,10 +19,11 @@ describe("normalize", () => {
       stack: ["React"],
       code: "https://github.com/me/repo",
       demo: "https://demo",
-      image: "https://opengraph.githubassets.com/1/me/repo",
       featured: false,
       status: "live",
     });
+    // No image: the card draws a Hairline figure instead of a generated GitHub card
+    expect(p.image).toBeUndefined();
   });
 
   it("prefers new project fields", () => {

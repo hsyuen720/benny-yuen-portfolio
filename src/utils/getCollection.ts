@@ -10,6 +10,7 @@ import { unstable_cache } from "next/cache";
 import { AppCollection } from "~/settings/constants";
 import type { ValueOf } from "~/types/common";
 import { db } from "~/utils/firebase";
+import { getSeedCollection } from "~/utils/seed";
 
 const getCollection = <T = object>(
   collection: ValueOf<typeof AppCollection>,
@@ -19,6 +20,8 @@ const getCollection = <T = object>(
   } = {},
   revalidateTime: number = 86400,
 ) => {
+  const seeded = getSeedCollection(collection);
+  if (seeded) return Promise.resolve(seeded as Array<T>);
   return unstable_cache(
     async () => {
       const ref = collectionRef(db, collection);

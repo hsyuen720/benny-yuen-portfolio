@@ -24,7 +24,7 @@ If the document is missing, the copy bundled in `src/locales/en.json` is shown.
 | `summary`  | string                                | One or two sentences.                                                                     | `description`         |
 | `stack`    | array of `{label, value}` or strings  | Featured cards show `{label, value}` rows, e.g. `{label: "App", value: "Expo, React Native"}`. Strings are joined into one line. | `technologies`        |
 | `links`    | map `{code?, demo?}`                  | `code`: repository URL. `demo`: live URL.                                                 | `repository`, `url`   |
-| `image`    | string (URL)                          | Full download URL (Firebase Storage). Without it, the GitHub social image of `links.code` is used. | `photo`               |
+| `image`    | string (URL)                          | Full download URL (Firebase Storage). Without it, the card shows the Hairline `Exploded` figure. | `photo`               |
 | `featured` | boolean                               | `true` for at most two projects. The first (by `order`) gets the large card.              | default `false`       |
 | `order`    | number                                | Ascending. Documents without it come last, newest `date` first.                           | `date`                |
 | `status`   | string                                | `live` hides the badge. Any other value is shown as the badge text, e.g. `In development`. | default `live`        |
@@ -101,3 +101,12 @@ In production the site overlays `locales/en.json` from Storage on the bundled
 `src/locales/en.json`. Keys missing from the Storage file now fall back to the bundle, but keys
 present there still win, so the old copy (for example the old projects subtitle and page title)
 keeps showing until you upload the new `src/locales/en.json` to that path.
+
+## Previewing with placeholder content (dev only)
+
+`USE_SEED_DATA=1 yarn dev` serves the sample content in `src/utils/seed.ts` instead of Firestore
+for every collection except `socialMedia`. It only works under `next dev` and never writes to
+Firestore. Delete `src/utils/seed.ts`, its test and its two call sites in `getCollection.ts` and
+`getDocument.ts` once the real content is in.
+
+A project without `image` shows the Hairline `Exploded` figure in its media panel.

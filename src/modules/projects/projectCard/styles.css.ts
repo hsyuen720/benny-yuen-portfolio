@@ -17,6 +17,9 @@ export const small = style({});
 
 export const media = style({
   position: "relative",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
   margin: "12px",
   borderRadius: radii.media,
   backgroundColor: colors.deep,
@@ -34,6 +37,14 @@ export const media = style({
 
 export const image = style({
   objectFit: "cover",
+});
+
+// Stand-in when a project has no screenshot: the Exploded figure on the media panel
+export const figure = style({
+  width: "min(100%, 420px)",
+  selectors: {
+    "&[data-hairline]": { vars: { "--hairline-plate": colors.deep } },
+  },
 });
 
 export const body = style({

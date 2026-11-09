@@ -31,13 +31,6 @@ export type Project = {
   date: number;
 };
 
-const githubOgImage = (repoUrl?: string) => {
-  const match = repoUrl?.match(/github\.com\/([^/]+)\/([^/]+)/);
-  return match
-    ? `https://opengraph.githubassets.com/1/${match[1]}/${match[2].replace(/\.git$/, "")}`
-    : undefined;
-};
-
 export const toProject = (doc: IProject): Project => {
   const code = doc.links?.code ?? doc.repository;
   return {
@@ -47,7 +40,7 @@ export const toProject = (doc: IProject): Project => {
     stack: doc.stack ?? doc.technologies ?? [],
     code,
     demo: doc.links?.demo ?? doc.url,
-    image: doc.image ?? doc.photo ?? githubOgImage(code),
+    image: doc.image ?? doc.photo,
     featured: doc.featured === true,
     order: doc.order ?? Number.MAX_SAFE_INTEGER,
     status: doc.status ?? "live",

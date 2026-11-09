@@ -2,6 +2,7 @@ import clsx from "clsx";
 import NextImage from "next/image";
 import { useTranslations } from "next-intl";
 
+import HairlineFigure from "~/components/hairlineFigure";
 import { AppTranslation } from "~/settings/i18n";
 import type { IStackRow } from "~/types/data";
 import type { Project } from "~/utils/normalize";
@@ -39,9 +40,10 @@ const ProjectCard = (props: ProjectCardProps) => {
             alt=""
             fill
             sizes="(max-width: 720px) 100vw, 560px"
-            unoptimized={image.includes("opengraph.githubassets.com")}
           />
-        ) : null}
+        ) : (
+          <HairlineFigure className={styles.figure} figure="Exploded" label={title} />
+        )}
       </div>
       <div className={styles.body}>
         <div className={styles.titleRow}>
