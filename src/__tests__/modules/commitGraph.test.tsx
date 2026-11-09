@@ -4,36 +4,60 @@ import CommitGraph from "~/modules/experiences/commitGraph";
 
 const commits = (container: HTMLElement) => container.querySelectorAll("[data-commit]");
 
+const job = (company: string, years = "2019 – 2022", current = false) => ({
+  company,
+  years,
+  current,
+});
+
 describe("CommitGraph", () => {
-  it.each([1, 4, 7])("renders %i commits for %i experiences", (count) => {
-    const years = Array.from({ length: count }, (_, i) => String(2019 + i));
-    const { container } = render(<CommitGraph years={years} label="Career" />);
+  it.each([1, 4, 14])("renders %i commits with company and years", (count) => {
+    const jobs = Array.from({ length: count }, (_, i) =>
+      job(`Co ${i}`, `${2000 + i} – ${2001 + i}`),
+    );
+    const { container } = render(<CommitGraph jobs={jobs} label="Career" />);
     expect(commits(container)).toHaveLength(count);
-    years.forEach((year) => expect(screen.getByText(year)).toBeInTheDocument());
+    jobs.forEach(({ company, years }) => {
+      expect(screen.getByText(company)).toBeInTheDocument();
+      expect(screen.getByText(years)).toBeInTheDocument();
+    });
   });
 
-  it("draws the newest commit taller than the others", () => {
-    const { container } = render(<CommitGraph years={["2019", "2022"]} label="Career" />);
-    const [older, newest] = Array.from(commits(container));
-    const height = (g: Element) => {
-      const nums = g
-        .querySelector("path")!
-        .getAttribute("d")!
-        .match(/-?\d+(\.\d+)?/g)!
-        .map(Number);
-      const ys = nums.filter((_, i) => i % 2 === 1);
-      return Math.max(...ys) - Math.min(...ys);
+  it("puts the current job on the main line and every past job on a branch", () => {
+    const { container } = render(
+      <CommitGraph jobs={[job("Old"), job("Now", "2026 – present", true)]} label="Career" />,
+    );
+    const [newest, older] = Array.from(commits(container));
+    expect(newest.querySelector("circle")!.getAttribute("cx")).toBe("12");
+    expect(newest.querySelector("path")).toBeNull();
+    expect(older.querySelector("circle")!.getAttribute("cx")).toBe("40");
+    expect(older.querySelector("path")).not.toBeNull();
+  });
+
+  it("keeps the graph height proportional to the number of jobs, so it never shrinks", () => {
+    const height = (count: number) => {
+      const { container } = render(
+        <CommitGraph jobs={Array.from({ length: count }, (_, i) => job(`C${i}`))} label="x" />,
+      );
+      return Number(container.querySelector("svg")!.getAttribute("viewBox")!.split(" ")[3]);
     };
-    expect(height(newest)).toBeGreaterThan(height(older));
+    expect(height(8) - height(4)).toBe(height(4) - height(0));
+  });
+
+  it("shortens a very long company name and shows the root label", () => {
+    render(
+      <CommitGraph
+        jobs={[job("A company with an exceptionally long legal name Ltd")]}
+        since="Started 2019"
+        label="Career"
+      />,
+    );
+    expect(screen.getByText(/…$/)).toBeInTheDocument();
+    expect(screen.getByText("Started 2019")).toBeInTheDocument();
   });
 
   it("has an accessible name", () => {
-    render(<CommitGraph years={["2019"]} label="Career drawn as a commit graph: 2019" />);
-    expect(screen.getByRole("img", { name: /commit graph/ })).toBeInTheDocument();
-  });
-
-  it("renders nothing but the board with no experiences", () => {
-    const { container } = render(<CommitGraph years={[]} label="Career" />);
-    expect(commits(container)).toHaveLength(0);
+    render(<CommitGraph jobs={[job("Jurnie")]} label="Career drawn as a git branch graph" />);
+    expect(screen.getByRole("img", { name: /branch graph/ })).toBeInTheDocument();
   });
 });

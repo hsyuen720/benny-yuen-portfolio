@@ -55,7 +55,9 @@
     "experience": {
       "title": "Experience",
       "intro": "Four teams since 2019, from a clinic CMS in Hong Kong to meeting notes in Copenhagen.",
-      "graphLabel": "Career drawn as a commit graph: {years}"
+      "graphLabel": "Career drawn as a git branch graph: {jobs}",
+      "since": "Started {year}",
+      "earlier": "{count, plural, one {# earlier role} other {# earlier roles}} since {year}"
     },
     "education": {
       "title": "Education",

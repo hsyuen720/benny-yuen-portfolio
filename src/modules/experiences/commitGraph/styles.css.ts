@@ -11,25 +11,27 @@ export const svg = style({
 
 export const played = style({});
 
-export const plate = style({
-  fill: colors.page,
-  stroke: hairline.mid,
-  strokeWidth: 0.9,
-  strokeLinejoin: "round",
-  vectorEffect: "non-scaling-stroke",
-});
-
-export const line = style({
+// Lines draw themselves in (pathLength=1 makes the dash maths length-independent)
+export const branch = style({
   fill: "none",
-  stroke: hairline.mid,
-  strokeWidth: 0.9,
-  vectorEffect: "non-scaling-stroke",
+  stroke: hairline.edge,
+  strokeWidth: 1.2,
+  strokeDasharray: 1,
+  strokeDashoffset: 1,
+  transition: `stroke-dashoffset 700ms ${ease}`,
+  selectors: {
+    [`${played} &`]: { strokeDashoffset: 0 },
+  },
+  "@media": {
+    [reducedMotion]: { strokeDashoffset: 0, transition: "none" },
+  },
 });
 
-export const commit = style({
+export const node = style({
   opacity: 0,
-  transform: "translateY(14px)",
-  transition: `transform 520ms ${ease}, opacity 520ms ${ease}`,
+  transform: "translateX(-6px)",
+  transition: `opacity 420ms ${ease}, transform 420ms ${ease}`,
+  transitionDelay: "inherit",
   selectors: {
     [`${played} &`]: { opacity: 1, transform: "none" },
   },
@@ -38,32 +40,38 @@ export const commit = style({
   },
 });
 
-export const head = style({});
-
-export const headTop = style({
-  transition: `stroke 300ms ${ease}`,
-  selectors: {
-    [`${played} &`]: { stroke: hairline.hi },
-  },
-  "@media": {
-    [reducedMotion]: { stroke: hairline.hi, transition: "none" },
-  },
+export const dot = style({
+  fill: "var(--band)",
+  stroke: colors.text2,
+  strokeWidth: 1.2,
 });
 
-export const label = style({
-  fill: colors.muted,
-  stroke: "none",
+export const headDot = style({
+  fill: colors.gold,
+  stroke: colors.gold,
+});
+
+export const root = style({
+  fill: "var(--band)",
+  stroke: hairline.mid,
+  strokeWidth: 1.2,
+});
+
+export const name = style({
+  fill: colors.text2,
   fontFamily: fonts.body,
-  fontSize: "9px",
-  textAnchor: "middle",
+  fontSize: "15px",
+  dominantBaseline: "middle",
 });
 
-export const headLabel = style({
-  transition: `fill 300ms ${ease}`,
-  selectors: {
-    [`${played} &`]: { fill: colors.text },
-  },
-  "@media": {
-    [reducedMotion]: { fill: colors.text, transition: "none" },
-  },
+export const headName = style({
+  fill: colors.text,
+});
+
+export const meta = style({
+  fill: colors.muted,
+  fontFamily: fonts.body,
+  fontSize: "12px",
+  dominantBaseline: "middle",
+  fontVariantNumeric: "tabular-nums",
 });

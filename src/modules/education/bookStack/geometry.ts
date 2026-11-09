@@ -1,11 +1,46 @@
-import { box, project } from "~/modules/experiences/commitGraph/geometry";
+const COS = Math.cos(Math.PI / 6);
+
+// Isometric projection: u runs along the main line, v across it, z is height.
+// Screen x = (u - v)·cos30°, y = (u + v)·sin30° − z.
+const project = (u: number, v: number, z: number): [number, number] => [
+  (u - v) * COS,
+  (u + v) * 0.5 - z,
+];
+
+type Point3 = [number, number, number];
+const path = (points: Point3[]) =>
+  `M${points
+    .map((p) => project(...p))
+    .map(([x, y]) => `${x.toFixed(1)} ${y.toFixed(1)}`)
+    .join("L")}Z`;
+
+/** The three faces of a box you can see: +u side, +v side, top. */
+const box = (u0: number, u1: number, v0: number, v1: number, z0: number, z1: number) => ({
+  sideU: path([
+    [u1, v0, z0],
+    [u1, v1, z0],
+    [u1, v1, z1],
+    [u1, v0, z1],
+  ]),
+  sideV: path([
+    [u0, v1, z0],
+    [u1, v1, z0],
+    [u1, v1, z1],
+    [u0, v1, z1],
+  ]),
+  top: path([
+    [u0, v0, z1],
+    [u1, v0, z1],
+    [u1, v1, z1],
+    [u0, v1, z1],
+  ]),
+});
 
 const LENGTH = 230; // along u: long enough for a degree name on the spine
 const DEPTH = 120; // along v
 const THICK = 34; // one book per degree
 const SHIFT = 14; // alternate books slide a little so the pile looks hand-stacked
 const SPINE_CHARS = 21; // what fits on the spine at the label size; the full name is in aria-label
-const COS = Math.cos(Math.PI / 6);
 const fmt = ([x, y]: [number, number]) => `${x.toFixed(1)} ${y.toFixed(1)}`;
 
 const fit = (text: string) =>

@@ -3,7 +3,6 @@
 import clsx from "clsx";
 
 import useInView from "~/hooks/useInView";
-import * as graph from "~/modules/experiences/commitGraph/styles.css";
 
 import { buildBooks } from "./geometry";
 import * as styles from "./styles.css";
@@ -18,7 +17,6 @@ export type BookStackProps = {
   className?: string;
 };
 
-// Same drawing language and entrance as the experience commit graph
 const BookStack = (props: BookStackProps) => {
   const { books: items, label, className } = props;
   const { el, isInView } = useInView({ once: true, threshold: 0.4 });
@@ -28,7 +26,7 @@ const BookStack = (props: BookStackProps) => {
   return (
     <div ref={el} className={className}>
       <svg
-        className={clsx(graph.svg, { [graph.played]: isInView })}
+        className={clsx(styles.svg, { [styles.played]: isInView })}
         viewBox={viewBox}
         role="img"
         aria-label={label}
@@ -37,17 +35,17 @@ const BookStack = (props: BookStackProps) => {
           <g
             key={book.index}
             data-book
-            className={graph.commit}
+            className={styles.book}
             style={{ transitionDelay: `${book.index * STAGGER_MS}ms` }}
           >
-            <path className={graph.plate} d={book.sideU} />
-            <path className={graph.plate} d={book.sideV} />
+            <path className={styles.plate} d={book.sideU} />
+            <path className={styles.plate} d={book.sideV} />
             <path
-              className={clsx(graph.plate, { [graph.headTop]: book.isTop })}
+              className={clsx(styles.plate, { [styles.topEdge]: book.isTop })}
               d={book.top}
               style={book.isTop ? { transitionDelay: `${topDelay}ms` } : undefined}
             />
-            <path className={graph.line} d={book.pages} />
+            <path className={styles.line} d={book.pages} />
             <text className={styles.spine} transform={book.spine.transform}>
               {book.spine.text}
             </text>

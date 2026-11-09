@@ -14,6 +14,8 @@ import * as styles from "./styles.css";
 import Section from "../section";
 import * as sectionStyles from "../section/styles.css";
 
+const GRAPH_JOBS = 5;
+
 const Experiences = async () => {
   const [locale, t, ct, docs, content] = await Promise.all([
     getLocale(),
@@ -25,7 +27,25 @@ const Experiences = async () => {
   ]);
   const experiences = sortExperiences(docs.map(toExperience));
   const formatDate = new Intl.DateTimeFormat(locale, { month: "short", year: "numeric" }).format;
-  const years = experiences.map((e) => (e.start ? String(e.start.getFullYear()) : "")).reverse();
+  // The graph shows the latest few jobs, oldest first; the root node sums up the rest
+  const jobs = experiences
+    .slice(0, GRAPH_JOBS)
+    .map((e, index) => ({
+      company: e.company,
+      years: e.start
+        ? `${e.start.getFullYear()} – ${e.end ? e.end.getFullYear() : ct("date.present")}`
+        : "",
+      current: index === 0 && !e.end,
+    }))
+    .reverse();
+  const earlier = experiences.length - jobs.length;
+  const firstYear = experiences.at(-1)?.start?.getFullYear();
+  const since =
+    firstYear === undefined
+      ? undefined
+      : earlier > 0
+        ? t("earlier", { count: earlier, year: firstYear })
+        : t("since", { year: firstYear });
 
   return (
     <Section
@@ -37,8 +57,11 @@ const Experiences = async () => {
         <Heading title={t("title")} description={content?.experienceIntro || t("intro")} />
         <CommitGraph
           className={styles.graph}
-          years={years}
-          label={t("graphLabel", { years: years.join(", ") })}
+          jobs={jobs}
+          since={since}
+          label={t("graphLabel", {
+            jobs: jobs.map((job) => `${job.company} ${job.years}`).join(", "),
+          })}
         />
       </div>
       <ol className={clsx(sectionStyles.splitMain, styles.timeline)}>

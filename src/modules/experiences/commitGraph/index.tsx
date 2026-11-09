@@ -4,65 +4,89 @@ import clsx from "clsx";
 
 import useInView from "~/hooks/useInView";
 
-import { buildGraph } from "./geometry";
 import * as styles from "./styles.css";
 
-const STAGGER_MS = 260;
-const RISE_MS = 520;
+const ROW = 56; // vertical space per job
+const PAD = 20;
+const MAIN = 12; // x of the main line
+const LANE = 40; // x of the branch commits
+const TEXT = 60; // x where labels start
+const WIDTH = 320;
+const STAGGER_MS = 220;
+const NAME_CHARS = 28; // what fits at WIDTH; the full list is in aria-label
+
+const fit = (text: string) =>
+  text.length > NAME_CHARS ? `${text.slice(0, NAME_CHARS - 1).trimEnd()}…` : text;
 
 export type CommitGraphProps = {
-  /** One label per commit, oldest first (the start year of each job). */
-  years: string[];
+  /** One commit per job, oldest first. `current` puts it on the main line in gold. */
+  jobs: { company: string; years: string; current?: boolean }[];
+  /** Text next to the root node, e.g. "Started 2019". */
+  since?: string;
   label: string;
   className?: string;
 };
 
+// Drawn like `git log --graph`: newest at the top, each past job a branch that forks off the
+// main line and merges back, the current job a gold commit on the main line itself.
 const CommitGraph = (props: CommitGraphProps) => {
-  const { years, label, className } = props;
-  const { el, isInView } = useInView({ once: true, threshold: 0.4 });
-  const { viewBox, floors } = buildGraph(years.length);
-  const headDelay = Math.max(years.length - 1, 0) * STAGGER_MS + RISE_MS;
+  const { jobs, since, label, className } = props;
+  const { el, isInView } = useInView({ once: true, threshold: 0.3 });
+  const rows = [...jobs].reverse();
+  const rootY = PAD + rows.length * ROW;
+  const height = rootY + PAD;
 
   return (
     <div ref={el} className={className}>
       <svg
         className={clsx(styles.svg, { [styles.played]: isInView })}
-        viewBox={viewBox}
+        viewBox={`0 0 ${WIDTH} ${height}`}
         role="img"
         aria-label={label}
       >
-        {floors.map(({ board, line, commits }, f) => (
-          <g key={f}>
-            <path className={styles.plate} d={board.sideU} />
-            <path className={styles.plate} d={board.sideV} />
-            <path className={styles.plate} d={board.top} />
-            {line ? <path className={styles.line} d={line} /> : null}
-            {commits.map((commit) => (
-              <g
-                key={commit.index}
-                data-commit
-                className={clsx(styles.commit, { [styles.head]: commit.isHead })}
-                style={{ transitionDelay: `${commit.index * STAGGER_MS}ms` }}
-              >
-                <path className={styles.plate} d={commit.sideU} />
-                <path className={styles.plate} d={commit.sideV} />
+        {/* Main line grows from the root upward */}
+        <path className={styles.branch} pathLength={1} d={`M${MAIN} ${rootY}V${PAD}`} />
+        {rows.map((job, r) => {
+          const y = PAD + r * ROW;
+          const onMain = job.current && r === 0;
+          const x = onMain ? MAIN : LANE;
+          // Oldest first, so history builds up from the bottom
+          const delay = { transitionDelay: `${(rows.length - 1 - r) * STAGGER_MS}ms` };
+          return (
+            <g key={`${job.company}-${r}`} data-commit>
+              {onMain ? null : (
                 <path
-                  className={clsx(styles.plate, { [styles.headTop]: commit.isHead })}
-                  d={commit.top}
-                  style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
+                  className={styles.branch}
+                  pathLength={1}
+                  style={delay}
+                  d={`M${MAIN} ${y + ROW / 2}C${MAIN} ${y + ROW / 4} ${LANE} ${y + ROW / 3} ${LANE} ${y}C${LANE} ${y - ROW / 3} ${MAIN} ${y - ROW / 4} ${MAIN} ${y - ROW / 2}`}
                 />
-                <text
-                  className={clsx(styles.label, { [styles.headLabel]: commit.isHead })}
-                  x={commit.label.x}
-                  y={commit.label.y}
-                  style={commit.isHead ? { transitionDelay: `${headDelay}ms` } : undefined}
-                >
-                  {years[commit.index]}
+              )}
+              <g className={styles.node} style={delay}>
+                <circle
+                  className={clsx(styles.dot, { [styles.headDot]: onMain })}
+                  cx={x}
+                  cy={y}
+                  r={onMain ? 6 : 5}
+                />
+                <text className={clsx(styles.name, { [styles.headName]: onMain })} x={TEXT} y={y}>
+                  {fit(job.company)}
+                </text>
+                <text className={styles.meta} x={TEXT} y={y + 16}>
+                  {job.years}
                 </text>
               </g>
-            ))}
-          </g>
-        ))}
+            </g>
+          );
+        })}
+        <g className={styles.node}>
+          <circle className={styles.root} cx={MAIN} cy={rootY} r={4} />
+          {since ? (
+            <text className={styles.meta} x={TEXT} y={rootY + 4}>
+              {since}
+            </text>
+          ) : null}
+        </g>
       </svg>
     </div>
   );
